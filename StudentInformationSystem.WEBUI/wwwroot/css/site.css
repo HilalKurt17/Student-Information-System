@@ -1,0 +1,13 @@
+﻿
+.container{
+    position: relative;
+    margin: 70px;
+    padding: 70px;
+}
+
+/*fix navbar on the top of the screen*/
+body, html {
+    margin: 0px !important;
+    padding: 0px !important;
+    color: black;
+}

@@ -1,0 +1,88 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = StudentInformationSystem.WEBUI
+build_property.RootNamespace = StudentInformationSystem.WEBUI
+build_property.ProjectDir = C:\VS_ASP.NET\SIS\StudentInformationSystem.WEBUI\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\VS_ASP.NET\SIS\StudentInformationSystem.WEBUI
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Admin/NewStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTmV3U3R1ZGVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Admin/NewTeacher.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTmV3VGVhY2hlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Shared/_navbar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9uYXZiYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Shared/_navbarTSA.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9uYXZiYXJUU0EuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/SignIn/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2lnbkluXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/SignUp/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2lnblVwXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Student/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Student/ListTeachers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxMaXN0VGVhY2hlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Student/MyAssessments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxNeUFzc2Vzc21lbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Student/MyLessons.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxNeUxlc3NvbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Teacher/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Teacher/ListStudents.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxMaXN0U3R1ZGVudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Teacher/StudentAssessments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxTdHVkZW50QXNzZXNzbWVudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

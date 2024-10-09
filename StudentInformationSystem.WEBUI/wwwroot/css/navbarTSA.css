@@ -1,0 +1,29 @@
+﻿
+/*change color of the navbar content to the white*/
+.btn-close, .navbar-toggler{
+
+    filter: invert(1);
+}
+.navbar, .navbar .nav-link, .navbar-brand, .offcanvas-title{
+    color: white !important;
+}
+
+.bg-navbar-container {
+    background-color:darkslategray !important;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+
+/*fix navbar on the top of the screen*/
+.navbar {
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+}
+
+.gap{
+    margin: 16px;
+    padding: 3px;
+}

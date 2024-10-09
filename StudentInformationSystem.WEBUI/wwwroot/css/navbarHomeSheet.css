@@ -1,0 +1,53 @@
+﻿/*NAVBAR SPECIFICATIONS IN THE HOME PAGE*/
+
+@media (max-width: 900px) { /* show the 'Student Information System' title on large screens*/
+    .v-lg {
+        display: none;
+    }
+}
+
+.navbar {
+    width: auto;
+    padding: 0px;
+    margin: 0px;
+    height: 70px;
+}
+.bg-navbar { /* change background color of the navbar*/
+    background-color:darkslategray !important;
+}
+
+.navbar-titles-color { /*change text colors in the navbar*/
+    color: white;
+}
+
+.navbar-brand-left { /*align brand on the left of the navbar (container-fluid div)*/
+    align-items: flex-start;
+
+}
+
+.brand { /*rearrange the gap between brand and its name ('Student Information System')*/
+    margin-right: 0px;
+    padding-right: 0px;
+}
+
+.navbar-items-right { /*align 'sign in' and 'sign up' links on the right of the navbar*/
+    align-items: flex-end;
+
+}
+
+.sign-in-up { /*change color and decoration of 'sign in' and 'sign up' links*/
+    color: white;
+    text-decoration-line: none;
+}
+
+.brand-name-span { /*change color and other specifications of the brand name*/
+    text-align: center;
+    color: white;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+body, html {
+    margin: 0px;
+    padding: 0px;
+    color: black;
+}

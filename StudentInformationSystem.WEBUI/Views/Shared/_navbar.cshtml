@@ -1,0 +1,25 @@
+﻿@*----------NAVBAR FOR HOME PAGE----------*@
+<link href="@Url.Content("~/css/navbarHomeSheet.css")" rel="stylesheet" />
+
+<nav class="navbar navbar-expand-lg bg-navbar navbar-titles-color">
+  <div class="container-fluid">
+        
+            <div class="navbar-brand-left">
+                @*Brand name and logo is added to the navbar*@
+                <a class="navbar-brand brand" href="#">
+                    <img src="~/images/_SIS.png" width="50"
+                    />      
+                </a>
+                <span class="brand-name-span v-lg">
+                    Student Information System</span>
+            </div>
+            @*sign in and sign up links are added to the navbar*@
+            <div class="navbar-items-right">
+                <a class="sign-in-up" href="#">Sign In</a>
+
+                <span>/</span>
+    
+                <a class="sign-in-up" href="#">Sign Up</a>
+            </div>
+   </div>
+</nav>

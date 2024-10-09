@@ -1,0 +1,94 @@
+﻿
+@*include .css files*@
+<link href="@Url.Content("~/css/navbarHomeSheet.css")" rel="stylesheet" />
+<link href="@Url.Content("~/css/navbarTSA.css")" rel="stylesheet" />
+@*create navbar for student/admin/teacher webpages*@
+<nav class="navbar fixed-top"> 
+  <div class="container-fluid bg-navbar-container">
+            @*show users' full names*@
+            <a class="navbar-brand gap navbar-text-color" href="#">Offcanvas navbar</a>
+            @*create offcanvas toggle button*@
+            <button class="navbar-toggler gap
+            navbar-text-color" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+            aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon navbar-text-color"></span>
+            </button>
+            @*create offcanvas*@
+        <div class=" offcanvas
+bg-navbar-container  offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header navbar-text-color">
+               
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="offcanvas-body navbar-text-color">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 navbar-text-color">
+                    @*assign related links to the offcanvas for each user type*@
+                    @if (ViewBag.UserType == "teacher")
+                    {
+                        <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "Teacher")">
+                            Your Profile
+                        </a>
+                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ListStudents","Teacher")">
+                                Student Assessment
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("StudentAssessments","Teacher")">
+                                List Students
+                            </a>
+                        </li>
+                    }
+                    @if (ViewBag.UserType == "admin")
+                    {
+                         <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Admin")">
+                                Your Profile
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("NewTeacher", "Admin")">
+                                New Teacher
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("NewStudent", "Admin")">
+                                New Student
+                            </a>
+                        </li>                        
+                    }
+                    @if(ViewBag.UserType == "student")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index","Student")">
+                                Your Profile
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("MyAssessments","Student")">
+                                Your Assessments
+                            </a>
+                        </li> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("MyLessons","Student")">
+                                Your Lessons
+                            </a>
+                        </li> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ListTeachers","Student")">
+                                List All Teachers
+                            </a>
+                        </li> 
+                    }
+                </ul> 
+
+            </div>
+        </div>
+   </div>
+</nav>
