@@ -5,7 +5,13 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
 {
     public class EfCoreTeacherRepository : ITeacherRepository
     {
-        private SISContext _context = new SISContext();
+        private SISContext _context;
+
+        public EfCoreTeacherRepository(SISContext context)
+        {
+            _context = context;
+        }
+
         public void Add(Teacher entity) // add new teacher
         {
             _context.Teachers.Add(entity);

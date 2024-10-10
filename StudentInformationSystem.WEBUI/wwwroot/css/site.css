@@ -10,4 +10,59 @@ body, html {
     margin: 0px !important;
     padding: 0px !important;
     color: black;
+    background-color:white;
 }
+
+.btn-features{
+    align-items: center;
+}
+.div-teaching-subjects {
+    border:solid 1px lightgray;
+    border-radius: 9px;
+    display: flex;
+    align-items:flex-start;
+    padding: 10px;
+ 
+
+}
+.card-div{
+    border: solid 1px gray;
+    border-radius: 9px;
+}
+.form-check {
+    display:block;
+    margin: 3px;
+}
+.creditCard-div {
+    display: flex;
+    align-items: flex-start;
+}
+textarea{
+    height: 100px;
+}
+
+.btn-primary{
+    color:white;
+    background-color:darkslategrey;
+    border-style:solid;
+    border-width: 3px;
+    border-color:darkslategray;
+
+}
+.btn-primary:hover {
+    background-color:darkslategray;
+    border-style: solid;
+    border-width: 3px;
+    border-color: darkslategray;
+}
+.btn-primary:active {
+    background-color: darkslategray !important;
+    border-style: solid;
+    border-width: 3px;
+    border-color: darkslategray !important;
+}
+
+.address-div-height{
+    height: 115px !important;
+}
+

@@ -6,7 +6,13 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
 
     public class EfCoreStudentRepository : IStudentRepository
     {
-        private SISContext _context = new SISContext();
+        private SISContext _context;
+
+        public EfCoreStudentRepository(SISContext context)
+        {
+            _context = context;
+        }
+
         public void Add(Student entity) // add new student
         {
             _context.Students.Add(entity);

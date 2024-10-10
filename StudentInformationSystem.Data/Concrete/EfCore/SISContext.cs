@@ -5,7 +5,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
 {
     public class SISContext : DbContext
     {
-        public SISContext() : base() { }
+        public SISContext(DbContextOptions<SISContext> options) : base(options) { }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
 

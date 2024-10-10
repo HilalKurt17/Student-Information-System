@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using StudentInformationSystem.Data.Abstract;
 using StudentInformationSystem.Data.Concrete.EfCore;
 
 
@@ -9,7 +10,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<SISContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.Services.AddScoped<IStudentRepository, EfCoreStudentRepository>();
+builder.Services.AddScoped<ITeacherRepository, EfCoreTeacherRepository>();
 var app = builder.Build();
 
 // add required middlewares to run the MVC
