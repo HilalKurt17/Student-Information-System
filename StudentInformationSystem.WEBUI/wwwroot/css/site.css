@@ -10,7 +10,8 @@ body, html {
     margin: 0px !important;
     padding: 0px !important;
     color: black;
-    background-color:white;
+    background-color: white;
+    font-family: --bs-body-font-family;
 }
 
 .div-teaching-subjects {
@@ -77,5 +78,12 @@ textarea{
 .div-cv{
     padding-top: 30px !important;
 }
+
+.student-registration-div{
+    display: flex;
+    align-content: flex-start;
+    align-items: center;
+}
+
 
 
