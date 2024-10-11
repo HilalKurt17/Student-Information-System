@@ -1,11 +1,69 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
 @section Navbar
 {
     @await Html.PartialAsync("_navbarTSA.cshtml");
 }
 
-<h5>BURASI ÖĞRENCİ SAYFASIDIR.</h5>
+<form method="POST">
+    <div class="row">
+        <div class="student-registration-div mb-5">
+            <img class="me-4" src="~/images/_SIS.png" width=100px; />
+            <h1><b>
+                YOUR PROFILE
+            </b></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group p-2">
+                <label for="Name">Name</label> 
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <div class="form-group p-2">
+                <label for="Surname">Surname</label>
+                <input asp-for="Surname" class="form-control" />
+            </div>
+            <div class="form-group p-2">
+                <label for="Mail">Mail</label>
+                <input asp-for="Mail" class="form-control" />
+            </div>
+            <div class="input-group p-2 mt-4">
+
+                <select class="form-select me-3" id="GenderSelection">
+                    <option selected disabled> Gender </option>
+                    <option value="F">Female</option>
+                    <option value="M">Male</option>
+                </select>
+                <select class="form-select" id="EducationLevel">
+                    <option selected disabled> Education Level </option>
+                    <option value="PS">Primary School</option>
+                    <option value="MS">Middle School</option>
+                    <option value="HS">High School</option>
+                </select>
+
+            </div>
+            <div class="form-group p-2">
+                <label for="Phone">Phone</label>
+                <input asp-for="Phone" class="form-control" />
+            </div>
+            <div class="form-group p-2">
+                <label for="ParentPhone">Parent Phone</label>
+                <input asp-for="ParentPhone" class="form-control" />
+            </div>
+            
+        </div>
+        <div class="col-6">
+            
+            @await Component.InvokeAsync("AddressDetails")
+            @await Component.InvokeAsync("PaymentCreditCardDetails")
+            <div class="form-group p-2 mt-4 d-grid">
+                <button type="submit" class="btn btn-primary btn-features">
+                Edit </button>
+            </div>
+            
+                
+        </div>
+        
+    </div>
+                
+</form>
