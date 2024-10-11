@@ -1,0 +1,12 @@
+C:\VS_ASP.NET\SIS\StudentInformationSystem.Entity\bin\Debug\net6.0\StudentInformationSystem.Entity.deps.json
+C:\VS_ASP.NET\SIS\StudentInformationSystem.Entity\bin\Debug\net6.0\StudentInformationSystem.Entity.dll
+C:\VS_ASP.NET\SIS\StudentInformationSystem.Entity\bin\Debug\net6.0\StudentInformationSystem.Entity.pdb
+C:\VS_ASP.NET\SIS\StudentInformationSystem.Entity\obj\Debug\net6.0\StudentInformationSystem.Entity.csproj.AssemblyReference.cache
+C:\VS_ASP.NET\SIS\StudentInformationSystem.Entity\obj\Debug\net6.0\StudentInformationSystem.Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\VS_ASP.NET\SIS\StudentInformationSystem.Entity\obj\Debug\net6.0\StudentInformationSystem.Entity.AssemblyInfoInputs.cache
+C:\VS_ASP.NET\SIS\StudentInformationSystem.Entity\obj\Debug\net6.0\StudentInformationSystem.Entity.AssemblyInfo.cs
+C:\VS_ASP.NET\SIS\StudentInformationSystem.Entity\obj\Debug\net6.0\StudentInformationSystem.Entity.csproj.CoreCompileInputs.cache
+C:\VS_ASP.NET\SIS\StudentInformationSystem.Entity\obj\Debug\net6.0\StudentInformationSystem.Entity.dll
+C:\VS_ASP.NET\SIS\StudentInformationSystem.Entity\obj\Debug\net6.0\refint\StudentInformationSystem.Entity.dll
+C:\VS_ASP.NET\SIS\StudentInformationSystem.Entity\obj\Debug\net6.0\StudentInformationSystem.Entity.pdb
+C:\VS_ASP.NET\SIS\StudentInformationSystem.Entity\obj\Debug\net6.0\ref\StudentInformationSystem.Entity.dll

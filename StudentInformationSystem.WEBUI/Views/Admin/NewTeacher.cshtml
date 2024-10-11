@@ -26,20 +26,82 @@
                 <label for="Phone">Phone</label>
                 <input asp-for="Phone" class="form-control" />
             </div>
-            <div class="form-group p-2 form-floating">
+            <div class="form-group p-2 form-floating pt-4">
               <textarea class="form-control"  
               id="TeacherExplanation"
               placeholder="Leave a comment here"></textarea>
-              <label for="TeacherExplanation">
+              <label class="p-3 pt-4" for="TeacherExplanation">
                   Details
               </label>
             </div>
+            <div class="form-group p-2">
+                <label>Teaching Areas</label>
+                <div class="div-teaching-subjects">
+                    <div class="m-2 t-subject-div">
+                    <div class="form-check form-switch me-4">
+                        <input class="form-check-input me-2" type="checkbox"
+                        id="lesson1">
+                        <label class="form-check-label" for="lesson1">
+                            Mathematics</label>
+                    </div>
+                    <div class="form-check form-switch me-4">
+                        <input class="form-check-input me-2" type="checkbox"
+                        id="lesson2" />
+                        <label class="form-check-label" for="lesson2">
+                            Turkish
+                        </label>
+                    </div>
+                    <div class="form-check form-switch me-4">
+                        <input class="form-check-input me-2" type="checkbox"
+                        id="lesson3" />
+                        <label class="form-check-label" for="lesson3">
+                            Chemistry
+                        </label>
+                        
+                    </div>
+                    <div class="form-check form-switch me-4">
+                        <input class="form-check-input me-2" type="checkbox"
+                        id ="lesson4" />
+                        <label class="form-check-label" for="lesson4">
+                            Biology
+                        </label>
+                    </div>
+                    <div class="form-check form-switch me-4">
+                        <input class="form-check-input me-2" type="checkbox"
+                        id = "lesson5" />
+                        <label class="form-check-label" for="lesson5">
+                            Physics
+                        </label>
+                    </div>
+                    <div class="form-check form-switch me-4">
+                        <input class="form-check-input me-2" type="checkbox"
+                        id = "lesson6" />
+                        <label class="form-check-label" for="lesson6">
+                            History
+                        </label>
+                   </div>
+                   <div class="form-check form-switch me-4">
+                       <input class="form-check-input me-2" type="checkbox"
+                         id = "lesson7" />
+                         <label class="form-check-label" for="lesson7">
+                             English
+                         </label>
+                     </div>
+                     <div class="form-check form-switch me-4">
+                         <input class="form-check-input me-2" type="checkbox"
+                         id ="lesson8" />
+                         <label class="form-check-label" for="lesson8">
+                             German
+                         </label>
+                     </div>
+                 </div>
+            </div>
+         </div>
             
-            
-        </div>
+    </div>
         <div class="col-6">
             <div class="form-group p-2">
-                <label for="ParentPhone">IBAN</label>
+                <label for="IBAN">IBAN</label>
                 <input asp-for="IBAN" class="form-control" />
             </div>
             <div class="input-group p-2 mt-4">
@@ -58,67 +120,44 @@
                 </select>
 
             </div>
-            <div class="form-group p-2 mt-4 d-grid">
+           <div class="form-group p-2">
+                <label>References</label>
+                <div class="card-div">
+                    <div class="form-group p-2 pt-3">
+                        <label for="ReferenceName">
+                            Name 
+                        </label>
+                        <input asp-for="ReferenceName" class="form-control" />
+                    </div>
+                    <div class="form-group p-2">
+                        <label for="ReferenceMail" >
+                            Mail
+                        </label>
+                        <input asp-for="ReferenceMail" class="form-control" />
+                    </div>
+                    <div class="input-group p-2 pt-4 pb-3">
+                        <label class="form-control" for="ReferenceLetter">
+                            Letter of Recommendation
+                        </label>
+                      <input type="file" class="form-control" 
+                      id="ReferenceLetter" >
+                    </div>
+                </div>
+
+           </div>
+
+           <div class="input-group p-2 div-cv">
+               <label class="form-control" for="TeacherCV">
+                   CV
+               </label>
+               <input type="file" class="form-control" id="TeacherCV" />
+           </div>
+            <div class="form-group p-2 mt-5 d-grid">
                 <button type="submit" class="btn btn-primary btn-features">
                 Add New Teacher </button>
             </div>
             
                 
-        </div>
-        <div class="col-6">
-            <div class="form-group p-2">
-                <label>Teaching Areas</label>
-                <div class="div-teaching-subjects">
-                    <div class="me-4">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox"
-                        id="lesson1">
-                        <label class="form-check-label" for="lesson1">
-                            Mathematics</label>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox"
-                        id="lesson2" />
-                        <label class="form-check-label" for="lesson2">
-                            Turkish
-                        </label>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox"
-                        id="lesson3" />
-                        <label class="form-check-label" for="lesson3">
-                            Chemistry
-                        </label>
-                        
-                    </div>
-                    </div>
-                    <br />
-                    <br />
-                    <div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox"
-                        id ="lesson4" />
-                        <label class="form-check-label" for="lesson4">
-                            Biology
-                        </label>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox"
-                        id = "lesson5" />
-                        <label class="form-check-label" for="lesson5">
-                            Physics
-                        </label>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox"
-                        id = "lesson6" />
-                        <label class="form-check-label" for="lesson6">
-                            History
-                        </label>
-                   </div>
-                   </div>
-                </div>
-            </div>
         </div>
     </div>
 </form>
