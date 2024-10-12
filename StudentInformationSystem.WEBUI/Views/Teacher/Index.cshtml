@@ -1,9 +1,173 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
 @section Navbar{
     @await Html.PartialAsync("_navbarTSA.cshtml")
 }
-<h1>BURASI ÖĞRETMEN PROFİL SAYFASI</h1>
+
+@{
+    Layout = "_Layout";
+}
+
+<form method="POST">
+    <div class="row">
+        <div class="student-registration-div mb-5">
+            <img class="me-4" src="~/images/_SIS.png" width=100px; />
+            <h1><b>
+                TEACHER REGISTRATION PAGE
+            </b></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group p-2">
+                <label for="Name">Name</label> 
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <div class="form-group p-2">
+                <label for="Surname">Surname</label>
+                <input asp-for="Surname" class="form-control" />
+            </div>
+            <div class="form-group p-2">
+                <label for="Mail">Mail</label>
+                <input asp-for="Mail" class="form-control" />
+            </div>
+            <div class="form-group p-2">
+                <label for="Phone">Phone</label>
+                <input asp-for="Phone" class="form-control" />
+            </div>
+            <div class="form-group p-2 form-floating pt-4">
+              <textarea class="form-control"  
+              id="TeacherExplanation"
+              placeholder="Leave a comment here"></textarea>
+              <label class="p-3 pt-4" for="TeacherExplanation">
+                  Details
+              </label>
+            </div>
+            <div class="form-group p-2">
+                <label>Teaching Areas</label>
+                <div class="div-teaching-subjects">
+                    <div class="m-2 t-subject-div">
+                    <div class="form-check form-switch me-4">
+                        <input class="form-check-input me-2" type="checkbox"
+                        id="lesson1">
+                        <label class="form-check-label" for="lesson1">
+                            Mathematics</label>
+                    </div>
+                    <div class="form-check form-switch me-4">
+                        <input class="form-check-input me-2" type="checkbox"
+                        id="lesson2" />
+                        <label class="form-check-label" for="lesson2">
+                            Turkish
+                        </label>
+                    </div>
+                    <div class="form-check form-switch me-4">
+                        <input class="form-check-input me-2" type="checkbox"
+                        id="lesson3" />
+                        <label class="form-check-label" for="lesson3">
+                            Chemistry
+                        </label>
+                        
+                    </div>
+                    <div class="form-check form-switch me-4">
+                        <input class="form-check-input me-2" type="checkbox"
+                        id ="lesson4" />
+                        <label class="form-check-label" for="lesson4">
+                            Biology
+                        </label>
+                    </div>
+                    <div class="form-check form-switch me-4">
+                        <input class="form-check-input me-2" type="checkbox"
+                        id = "lesson5" />
+                        <label class="form-check-label" for="lesson5">
+                            Physics
+                        </label>
+                    </div>
+                    <div class="form-check form-switch me-4">
+                        <input class="form-check-input me-2" type="checkbox"
+                        id = "lesson6" />
+                        <label class="form-check-label" for="lesson6">
+                            History
+                        </label>
+                   </div>
+                   <div class="form-check form-switch me-4">
+                       <input class="form-check-input me-2" type="checkbox"
+                         id = "lesson7" />
+                         <label class="form-check-label" for="lesson7">
+                             English
+                         </label>
+                     </div>
+                     <div class="form-check form-switch me-4">
+                         <input class="form-check-input me-2" type="checkbox"
+                         id ="lesson8" />
+                         <label class="form-check-label" for="lesson8">
+                             German
+                         </label>
+                     </div>
+                 </div>
+            </div>
+         </div>
+            
+    </div>
+        <div class="col-6">
+            <div class="form-group p-2">
+                <label for="IBAN">IBAN</label>
+                <input asp-for="IBAN" class="form-control" />
+            </div>
+            <div class="input-group p-2 mt-4">
+
+                <select class="form-select me-3" id="GenderSelection">
+                    <option selected disabled> Gender </option>
+                    <option value="F">Female</option>
+                    <option value="M">Male</option>
+                </select>
+                <select class="form-select" id="EducationLevel">
+                    <option selected disabled> Education Level </option>
+                    <option value="S">Undergraduate Tutor</option>
+                    <option value="BSc">B.Sc Tutor</option>
+                    <option value="MSc">M.Sc Tutor</option>
+                    <option value="PhD">PhD Tutor</option>
+                </select>
+
+            </div>
+           <div class="form-group p-2">
+                <label>References</label>
+                <div class="card-div">
+                    <div class="form-group p-2 pt-3">
+                        <label for="ReferenceName">
+                            Name 
+                        </label>
+                        <input asp-for="ReferenceName" class="form-control" />
+                    </div>
+                    <div class="form-group p-2">
+                        <label for="ReferenceMail" >
+                            Mail
+                        </label>
+                        <input asp-for="ReferenceMail" class="form-control" />
+                    </div>
+                    <div class="input-group p-2 pt-4 pb-3">
+                        <label class="form-control" for="ReferenceLetter">
+                            Letter of Recommendation
+                        </label>
+                      <input type="file" class="form-control" 
+                      id="ReferenceLetter" >
+                    </div>
+                </div>
+
+           </div>
+
+           <div class="input-group p-2 div-cv">
+               <label class="form-control" for="TeacherCV">
+                   CV
+               </label>
+               <input type="file" class="form-control" id="TeacherCV" />
+           </div>
+            <div class="form-group p-2 mt-5 d-grid">
+                <button type="submit" class="btn btn-primary btn-features">
+                Edit </button>
+            </div>
+            
+                
+        </div>
+    </div>
+</form>
+
+

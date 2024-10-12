@@ -15,5 +15,7 @@
         public DateTime? UnenrollmentDate { get; set; }
         // many to many relation between student and teacher
         public List<StudentTeacher> StudentTeachers { get; } = new List<StudentTeacher>();
+
+        public List<TeacherLesson> TeacherLessons { get; } = new List<TeacherLesson>();
     }
 }

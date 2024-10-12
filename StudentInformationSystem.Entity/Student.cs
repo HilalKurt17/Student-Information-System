@@ -15,6 +15,8 @@
         // many to many relation between student and teacher
         public List<StudentTeacher> StudentTeachers { get; } = new List<StudentTeacher>();
 
+        public List<StudentLesson> StudentLessons { get; } = new List<StudentLesson>();
+
 
 
 

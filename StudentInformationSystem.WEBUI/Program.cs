@@ -12,6 +12,7 @@ builder.Services.AddDbContext<SISContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IStudentRepository, EfCoreStudentRepository>();
 builder.Services.AddScoped<ITeacherRepository, EfCoreTeacherRepository>();
+builder.Services.AddScoped<ILessonRepository, EfCoreLessonRepository>();
 var app = builder.Build();
 
 // add required middlewares to run the MVC

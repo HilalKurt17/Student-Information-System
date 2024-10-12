@@ -16,6 +16,10 @@
     <div class="row">
         <div class="col-6">
             <div class="form-group p-2">
+                <label for="StudentID">ID</label> 
+                <input asp-for="StudentID" class="form-control" />
+            </div>
+            <div class="form-group p-2">
                 <label for="Name">Name</label> 
                 <input asp-for="Name" class="form-control" />
             </div>
@@ -56,7 +60,7 @@
             
             @await Component.InvokeAsync("AddressDetails")
             @await Component.InvokeAsync("PaymentCreditCardDetails")
-            <div class="form-group p-2 mt-4 d-grid">
+            <div class="form-group p-2 student-btn-edit d-grid">
                 <button type="submit" class="btn btn-primary btn-features">
                 Edit </button>
             </div>
