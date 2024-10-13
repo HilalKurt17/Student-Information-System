@@ -61,7 +61,17 @@ bg-navbar-container  offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                             <a class="nav-link" href="@Url.Action("NewStudent", "Admin")">
                                 New Student
                             </a>
-                        </li>                        
+                        </li> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ListStudents","Admin")">
+                                List Students
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ListTeachers","Admin")">
+                                List Teachers
+                            </a>
+                        </li>
                     }
                     @if(ViewBag.UserType == "student")
                     {

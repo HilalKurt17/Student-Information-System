@@ -19,7 +19,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
         }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            ViewBag.UserType = "admin";
+            ViewBag.UserType = "admin"; //  define the user type of the navbar
             base.OnActionExecuting(context);
         }
         public IActionResult Index()
@@ -35,6 +35,16 @@ namespace StudentInformationSystem.WEBUI.Controllers
         public IActionResult NewTeacher()
         {
             return View("NewTeacher");
+        }
+
+        public IActionResult ListStudents()
+        {
+            return View("ListStudents");
+        }
+
+        public IActionResult ListTeachers()
+        {
+            return View("ListTeachers");
         }
     }
 }

@@ -13,7 +13,11 @@ builder.Services.AddDbContext<SISContext>(options =>
 builder.Services.AddScoped<IStudentRepository, EfCoreStudentRepository>();
 builder.Services.AddScoped<ITeacherRepository, EfCoreTeacherRepository>();
 builder.Services.AddScoped<ILessonRepository, EfCoreLessonRepository>();
-
+builder.Services.AddScoped<IAddressRepository, EfCoreAddressRepository>();
+builder.Services.AddScoped<IAssignmentRepository, EfCoreAssignmentRepository>();
+builder.Services.AddScoped<IPaymentDetailsRepository, EfCorePaymentDetailsRepository>();
+builder.Services.AddScoped<IReferencesRepository, EfCoreReferencesRepository>();
+builder.Services.AddScoped<IWorkExperienceRepository, EfCoreWorkExperienceRepository>();
 var app = builder.Build();
 
 // add required middlewares to run the MVC
