@@ -17,6 +17,12 @@
 
         public List<StudentLesson> StudentLessons { get; } = new List<StudentLesson>();
 
+        public Address? Address { get; set; }
+
+        public Payment? PaymentDetails { get; set; }
+        public List<Assignment> Assignments { get; } = new List<Assignment>();
+
+
 
 
 

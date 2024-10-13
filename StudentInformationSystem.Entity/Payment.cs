@@ -7,5 +7,7 @@
         public string CardNumber { get; set; }
         public DateTime ExpirationDate { get; set; }
         public int CVVSecurityCode { get; set; }
+        public int StudentID { get; set; }
+        public Student Student { get; set; }
     }
 }

@@ -1,7 +1,10 @@
-﻿namespace StudentInformationSystem.Entity
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace StudentInformationSystem.Entity
 {
     public class Assignment
     {
+        [Key]
         public int AssignmentID { get; set; }
         public string Type { get; set; }
         public string Subject { get; set; }
@@ -14,6 +17,10 @@
         public DateTime Updated { get; set; }
         public DateTime Submitted { get; set; }
         public DateTime DueTime { get; set; }
+        public int TeacherID { get; set; }
+        public Teacher Teacher { get; set; }
+        public int StudentID { get; set; }
+        public Student Student { get; set; }
 
     }
 }

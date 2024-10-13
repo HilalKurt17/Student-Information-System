@@ -13,6 +13,12 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<Payment> PaymentDetails { get; set; }
+        public DbSet<References> TeacherReferences { get; set; }
+        public DbSet<WorkExperience> WorkExperiences { get; set; }
+
 
         public DbSet<StudentTeacher> StudentTeachers { get; set; }
         public DbSet<StudentLesson> StudentLessons { get; set; }
@@ -70,6 +76,66 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
                 .HasOne(sl => sl.Lesson)
                 .WithMany(s => s.StudentLessons)
                 .HasForeignKey(sl => sl.LessonID);
+            // define relation between student and address
+            modelBuilder.Entity<Student>()
+                .HasOne(s => s.Address)
+                .WithOne(s => s.Student)
+                .HasForeignKey<Student>(s => s.StudentID);
+
+            modelBuilder.Entity<Address>()
+                .HasOne(a => a.Student)
+                .WithOne(a => a.Address)
+                .HasForeignKey<Address>(a => a.StudentID);
+            // define relation between student and payment details
+            modelBuilder.Entity<Student>()
+                .HasOne(s => s.PaymentDetails)
+                .WithOne(s => s.Student)
+                .HasForeignKey<Student>(s => s.StudentID);
+
+            modelBuilder.Entity<Payment>()
+                .HasOne(p => p.Student)
+                .WithOne(p => p.PaymentDetails)
+                .HasForeignKey<Payment>(p => p.StudentID);
+            // define relation between student and assignments
+            modelBuilder.Entity<Student>()
+                .HasMany(s => s.Assignments)
+                .WithOne(s => s.Student)
+                .HasForeignKey(s => s.StudentID);
+
+            modelBuilder.Entity<Assignment>()
+                .HasOne(a => a.Student)
+                .WithMany(a => a.Assignments)
+                .HasForeignKey(a => a.StudentID);
+            // define relation between teacher and references
+            modelBuilder.Entity<Teacher>()
+                .HasMany(t => t.References)
+                .WithOne(t => t.Teacher)
+                .HasForeignKey(t => t.TeacherID);
+
+            modelBuilder.Entity<References>()
+                .HasOne(r => r.Teacher)
+                .WithMany(r => r.References)
+                .HasForeignKey(r => r.TeacherID);
+            // define relation between teacher and work experience
+            modelBuilder.Entity<Teacher>()
+                .HasMany(s => s.WorkExperiences)
+                .WithOne(s => s.Teacher)
+                .HasForeignKey(s => s.TeacherID);
+
+            modelBuilder.Entity<WorkExperience>()
+                .HasOne(a => a.Teacher)
+                .WithMany(a => a.WorkExperiences)
+                .HasForeignKey(a => a.TeacherID);
+            // define relation between teacher and assignment
+            modelBuilder.Entity<Teacher>()
+                .HasMany(s => s.Assignments)
+                .WithOne(s => s.Teacher)
+                .HasForeignKey(s => s.TeacherID);
+
+            modelBuilder.Entity<Assignment>()
+                .HasOne(a => a.Teacher)
+                .WithMany(a => a.Assignments)
+                .HasForeignKey(a => a.TeacherID);
         }
     }
 }
