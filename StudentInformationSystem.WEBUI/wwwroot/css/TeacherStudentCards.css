@@ -66,6 +66,40 @@ li, ol {
 .body{
     background-color:lightgray;
 }
+.card-header{
+    display:flex !important;
+    justify-content:space-between !important;
+    align-items: center !important;
+}
+a.btn{
+    display: inline-flex;
+    flex-wrap: wrap;
+    border: 1px solid;
+    border-color:lightgray;
+    background-color:lightgray;
+    border-radius: 25px;
+    width: 70px;
+    height: 20px;
+    color: black;
+    justify-content:center;
+    align-content: center;
+    text-align: center;
+    padding: 3px;
+}
+h5.card-title{
+    display: inline-flex;
+    padding: 1px;
+    margin-bottom: 0px;
 
 
+}
+a.btn:hover,
+a.btn:active,
+a.btn:focus {
+    border: 1px solid !important;
+    border-color:darkred !important;
+    background-color:darkred !important;
+    border-radius: 25px !important;
+    color:white !important;
+}
 

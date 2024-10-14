@@ -8,10 +8,16 @@
 {
 <div class="card m-4 cards-display">
     <div class="card-header">
+
             <h5 class="card-title">
            <b> @teacher.Name @teacher.Surname
-           </b> 
-           </h5>
+           </b> </h5>
+
+               <a class="btn details-button" 
+                   href="@Url.Action("Index", "Admin", 
+                   new { id = @teacher.TeacherID })">Details</a>
+
+        
     </div>
     <div class="body">
         
