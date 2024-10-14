@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using StudentInformationSystem.Data.Abstract;
+using StudentInformationSystem.Entity;
+using StudentInformationSystem.WEBUI.ViewModels;
 
 namespace StudentInformationSystem.WEBUI.Controllers
 {
@@ -39,12 +41,22 @@ namespace StudentInformationSystem.WEBUI.Controllers
 
         public IActionResult ListStudents()
         {
-            return View("ListStudents");
+            List<Student> _students = _studentRepository.GetAllT();
+            var viewModel = new StudentViewModel
+            {
+                students = _students
+            };
+            return View(viewModel);
         }
 
         public IActionResult ListTeachers()
         {
-            return View("ListTeachers");
+            List<Teacher> _teachers = _teacherRepository.GetAllT();
+            var viewModel = new TeacherViewModel
+            {
+                teachers = _teachers
+            };
+            return View(viewModel);
         }
     }
 }

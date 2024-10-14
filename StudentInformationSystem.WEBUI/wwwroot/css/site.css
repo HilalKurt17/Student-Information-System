@@ -3,6 +3,10 @@
     position: relative;
     margin: 70px;
     padding: 70px;
+   
+    align-content:center;
+    align-items: center;
+    display: flex;
 }
 
 /*fix navbar on the top of the screen*/
