@@ -2,6 +2,14 @@
 @model TeacherViewModel
 
 <link href="~/css/TeacherStudentCards.css" rel="stylesheet" />
+<div class="row">
+        <div class="student-registration-div mb-5">
+            <img class="me-4" src="~/images/_SIS.png" width=100px; />
+            <h1><b>
+                STUDENT INFORMATION SYSTEM - TEACHER LIST
+            </b></h1>
+        </div>
+</div>
 <div class="teacher-card-container-div">
 
 @foreach (var teacher in Model.teachers)
@@ -13,7 +21,7 @@
            <b> @teacher.Name @teacher.Surname
            </b> </h5>
 
-               <a class="btn details-button" 
+               <a class="btn" 
                    href="@Url.Action("Index", "Admin", 
                    new { id = @teacher.TeacherID })">Details</a>
 

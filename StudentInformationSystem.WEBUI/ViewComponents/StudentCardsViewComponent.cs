@@ -5,9 +5,9 @@ namespace StudentInformationSystem.WEBUI.ViewComponents
 {
     public class StudentCardsViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(StudentViewModel studentViewModel)
+        public IViewComponentResult Invoke(StudentViewModel viewModel)
         {
-            return View(studentViewModel);
+            return View(viewModel);
         }
     }
 }

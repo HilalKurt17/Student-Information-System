@@ -1,2 +1,62 @@
-﻿<link href="~/css/TeacherStudentCards.css" rel="stylesheet" />
+﻿@using StudentInformationSystem.Entity
+@model StudentViewModel
+
+<link href="~/css/TeacherStudentCards.css" rel="stylesheet" />
+<div class="row">
+        <div class="student-registration-div mb-5">
+            <img class="me-4" src="~/images/_SIS.png" width=100px; />
+            <h1><b>
+                STUDENT INFORMATION SYSTEM - STUDENT LIST
+            </b></h1>
+        </div>
+</div>
+<div class="teacher-card-container-div">
+
+@foreach (var student in Model.students)
+{
+<div class="card m-4 cards-display">
+    <div class="card-header student-card-header">
+
+            <h5 class="card-title">
+           <b> @student.Name @student.Surname
+           </b> </h5>
+
+               <a class="btn student-btn-details" 
+                   href="@Url.Action("Index", "Admin", 
+                   new { id = student.StudentID })">Details</a>
+
+        
+    </div>
+    <div class="body student-card-body">
+        
+            <div class="container-teacher-summary">
+            <p > <b>Education Level:</b> @*show the education level
+                of the student *@
+                @student.EducationLevel</p>
+            @*show registered lessons of students*@
+            <p class="display-inline">
+                <b>Registered Lessons: </b></p>
+            @if (@student.StudentLessons != null
+            && student.StudentLessons.Count() != 0)
+            {
+                <ol>
+                @foreach(StudentLesson lesson in student.StudentLessons)
+                {
+                    <li>@lesson</li>
+                }
+                </ol>
+            }
+            else
+            {
+                <span>No registered lessons found.</span>
+            }
+            
+            
+            </div>
+       
+    </div>
+    
+</div>
+}
+</div>
 

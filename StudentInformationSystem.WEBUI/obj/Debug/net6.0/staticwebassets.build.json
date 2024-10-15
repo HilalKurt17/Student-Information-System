@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FP2eZ7JJIX+xXw7k9xjScabmPwUz7ye+nt1RAZ+jy7k=",
+  "Hash": "M7dPlW2bKS/C2QOeFNpeLZ+maVaXIy7G/MB3kRx0gNs=",
   "Source": "StudentInformationSystem.WEBUI",
   "BasePath": "_content/StudentInformationSystem.WEBUI",
   "Mode": "Default",
@@ -85,6 +85,23 @@
       "OriginalItemSpec": "wwwroot\\css\\TeacherStudentCards.css"
     },
     {
+      "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\images\\_pphoto.png",
+      "SourceId": "StudentInformationSystem.WEBUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\",
+      "BasePath": "_content/StudentInformationSystem.WEBUI",
+      "RelativePath": "images/_pphoto.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\_pphoto.png"
+    },
+    {
       "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\images\\_SIS.png",
       "SourceId": "StudentInformationSystem.WEBUI",
       "SourceType": "Discovered",
@@ -100,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\_SIS.png"
+    },
+    {
+      "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\images\\_SISpphoto.png",
+      "SourceId": "StudentInformationSystem.WEBUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\",
+      "BasePath": "_content/StudentInformationSystem.WEBUI",
+      "RelativePath": "images/_SISpphoto.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\_SISpphoto.png"
     },
     {
       "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\images\\SIS.png",

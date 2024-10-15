@@ -4,4 +4,9 @@
     @await Html.PartialAsync("_navbarTSA.cshtml")
 }
 
-@await Component.InvokeAsync("TeacherCards",new {viewModel = Model})
+
+<div class="row">
+    @await Component.InvokeAsync("TeacherCards",
+    new {viewModel = Model})
+</div>
+

@@ -1,4 +1,5 @@
-﻿@media screen and (max-width: 600px){
+﻿/*student and teacher card general specifications and teacher card specifications*/
+@media screen and (max-width: 600px){
     .cards-display {
         display: inline-flex;
         width: 50%;
@@ -59,12 +60,12 @@ li, ol {
     display: inline;
 }
 
-.progress-bar, .card-header{
-    background-color:darkslategray;
+.progress-bar, .card-header {
+    background-color: #325f85;
     color: white;
 }
-.body{
-    background-color:lightgray;
+.body {
+    background-color: #A7C7E7;
 }
 .card-header{
     display:flex !important;
@@ -97,9 +98,28 @@ a.btn:hover,
 a.btn:active,
 a.btn:focus {
     border: 1px solid !important;
-    border-color:darkred !important;
-    background-color:darkred !important;
+    border-color: #6495ED !important;
+    background-color: #A7C7E7 !important;
     border-radius: 25px !important;
-    color:white !important;
+    color: black !important;
 }
 
+/*student cards specifications*/
+
+div.body.student-card-body {
+    background-color: #FAA0A0 !important;
+}
+
+div.card-header.student-card-header {
+    background-color: #CA3433 !important;
+}
+
+a.btn.student-btn-details:hover,
+a.btn.student-btn-details:active,
+a.btn.student-btn-details:focus {
+    border: 1px solid !important;
+    border-color: #DE3163 !important;
+    background-color: #FAA0A0 !important;
+    border-radius: 25px !important;
+    color: black !important;
+}
