@@ -35,6 +35,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTmV3VGVhY2hlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Admin/StudentDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU3R1ZGVudERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Admin/TeacherDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVGVhY2hlckRldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -47,12 +55,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUGF5bWVudENyZWRpdENhcmREZXRhaWxzXERlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Shared/Components/ReferenceDetails/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUmVmZXJlbmNlRGV0YWlsc1xEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Shared/Components/StudentCards/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcU3R1ZGVudENhcmRzXERlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Shared/Components/TeacherCards/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcVGVhY2hlckNhcmRzXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Shared/Components/TeachingAreas/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcVGVhY2hpbmdBcmVhc1xEZWZhdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Shared/_Layout.cshtml]

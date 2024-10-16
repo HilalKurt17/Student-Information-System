@@ -1,8 +1,12 @@
-﻿@using StudentInformationSystem.Entity
+﻿@*Teacher cards design page*@
+@using StudentInformationSystem.Entity
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model TeacherViewModel
 
 <link href="~/css/TeacherStudentCards.css" rel="stylesheet" />
 <div class="row">
+    @*show logo and information about page*@
         <div class="student-registration-div mb-5">
             <img class="me-4" src="~/images/_SIS.png" width=100px; />
             <h1><b>
@@ -12,22 +16,25 @@
 </div>
 <div class="teacher-card-container-div">
 
-@foreach (var teacher in Model.teachers)
+@foreach (var teacher in Model.teachers) @*create class for each teacher*@
 {
 <div class="card m-4 cards-display">
-    <div class="card-header">
+    <div class="card-header"> @*card-headers consists of name and surname of the teacher*@
 
             <h5 class="card-title">
            <b> @teacher.Name @teacher.Surname
            </b> </h5>
-
-               <a class="btn" 
-                   href="@Url.Action("Index", "Admin", 
-                   new { id = @teacher.TeacherID })">Details</a>
+            @*direct the admin to the teacher detail page for given id.*@
+               <a class="btn"  
+                   asp-controller="Admin"
+                   asp-action="TeacherDetails"
+                   asp-route-id="@teacher.TeacherID"
+                   >Details</a>
 
         
     </div>
-    <div class="body">
+    <div class="body"> @*create body part of the card. Inform the admin about teacher.
+        Show summary of information about teacher.*@
         
             <div class="container-teacher-summary">
             <p > <b>Education Level:</b> @*show the education level

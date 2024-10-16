@@ -1,0 +1,49 @@
+﻿@*Reference Details design page*@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<References>
+
+<div class="form-group p-2">
+    <label>Reference</label>
+    <div class="card-div">
+        <input type="hidden" asp-for="@Model[0].ReferencesID" />
+        <div class="form-group p-2 pt-3">
+            <label for="ReferenceName">
+                Name 
+            </label>
+            <input asp-for="@Model[0].Name" class="form-control" />
+        </div>
+                    
+        <div class="form-group p-2">
+            <label for="ReferenceCompany">
+                Reference Company 
+            </label>
+            <input asp-for="@Model[0].CompanyName" class="form-control" />
+        </div>
+        <div class="form-group p-2">
+            <label for="ReferenceJobTitle">
+                Job Title 
+            </label>
+            <input asp-for="@Model[0].CurrentPosition" class="form-control" />
+        </div>
+        <div class="form-group p-2">
+            <label for="ReferenceMail" >
+                Mail
+            </label>
+            <input asp-for="@Model[0].Mail" class="form-control" />
+        </div>
+        <div class="form-group p-2">
+            <label for="ReferencePhone" >
+                Phone
+            </label>
+            <input asp-for="@Model[0].Phone" class="form-control" />
+        </div>
+        <div class="input-group p-2 pt-4 pb-3">
+            <label class="form-control" for="ReferenceLetter">
+                Letter of Recommendation
+            </label>
+            <input type="file" class="form-control" 
+            id="ReferenceLetter" asp-for="@Model[0].ReferenceLetterFilePath">
+        </div>
+    </div>
+
+</div>

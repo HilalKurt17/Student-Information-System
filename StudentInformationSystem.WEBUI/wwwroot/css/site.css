@@ -6,7 +6,7 @@
    
     align-content:center;
     align-items: center;
-    display: flex;
+    display: grid;
 }
 
 /*fix navbar on the top of the screen*/
@@ -91,5 +91,7 @@ textarea{
 .student-btn-edit{
     margin-top: 57px;
 }
+
+
 
 

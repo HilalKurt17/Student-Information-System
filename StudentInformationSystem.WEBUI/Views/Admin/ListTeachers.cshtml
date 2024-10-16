@@ -1,10 +1,11 @@
-﻿@model TeacherViewModel
+﻿@*List teacher .cshtml page.*@
+@model TeacherViewModel //get teacher list from database via controller and efcore
 
 @section Navbar{
-    @await Html.PartialAsync("_navbarTSA.cshtml")
+    @await Html.PartialAsync("_navbarTSA.cshtml") @*show navbar of the admin page*@
 }
 
-
+@*show teacher informations using the card of the bootstrap for each teacher.*@
 <div class="row">
     @await Component.InvokeAsync("TeacherCards",
     new {viewModel = Model})

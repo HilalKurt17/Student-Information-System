@@ -182,7 +182,7 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Surname")
+                    b.Property<string>("ReferenceLetterFilePath")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -277,6 +277,12 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<int>("TeacherID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("CVFilePath")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Details")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("EducationLevel")
                         .IsRequired()

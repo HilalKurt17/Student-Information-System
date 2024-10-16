@@ -1,0 +1,91 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@section Navbar{
+    @await Html.PartialAsync("_navbarTSA.cshtml")
+}
+
+@{
+    Layout = "_Layout";
+}
+@model Teacher
+<form asp-action="TeacherDetails" method="GET">
+    <div class="row">
+        <div class="student-registration-div mb-5">
+            <img class="me-4" src="~/images/_SIS.png" width=100px; />
+            <h1><b>
+                TEACHER DETAILS
+            </b></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <input type="hidden" asp-for="TeacherID" />
+            <div class="form-group p-2">
+                <label for="Name">Name</label> 
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <div class="form-group p-2">
+                <label for="Surname">Surname</label>
+                <input asp-for="Surname" class="form-control" />
+            </div>
+            <div class="form-group p-2">
+                <label for="Mail">Mail</label>
+                <input asp-for="Mail" class="form-control" />
+            </div>
+            <div class="form-group p-2">
+                <label for="Phone">Phone</label>
+                <input asp-for="Phone" class="form-control" />
+            </div>
+            <div class="input-group p-2 mt-4">
+
+                <select disabled class="form-select me-3" asp-for="Gender" id="GenderSelection">
+                    <option selected disabled> Gender </option>
+                    <option value="F">Female</option>
+                    <option value="M">Male</option>
+                </select>
+                <select class="form-select" asp-for="EducationLevel" 
+                id="EducationLevel">
+                    <option selected disabled> Education Level </option>
+                    <option value="Undergraduate Student">Undergraduate Tutor</option>
+                    <option value="B.Sc">B.Sc Tutor</option>
+                    <option value="M.Sc">M.Sc Tutor</option>
+                    <option value="PhD">PhD Tutor</option>
+                </select>
+
+            </div>
+            <div class="form-group p-2 form-floating pt-4">
+              <textarea class="form-control"  
+              id="TeacherExplanation" asp-for="Details"
+              placeholder="Leave a comment here"></textarea>
+              <label class="p-3 pt-4" for="TeacherExplanation">
+                  Details
+              </label>
+            </div>
+            @await Component.InvokeAsync("TeachingAreas")
+            
+    </div>
+        <div class="col-6">
+            <div class="form-group p-2">
+                <label for="IBAN">IBAN</label>
+                <input asp-for="IBAN" class="form-control" />
+            </div>
+            
+           @await Component.InvokeAsync("ReferenceDetails")
+
+           <div class="input-group p-2 div-cv">
+               <label class="form-control" for="TeacherCV">
+                   CV
+               </label>
+               <input type="file" class="form-control" id="TeacherCV" asp-for="CVFilePath"/>
+           </div>
+            <div class="form-group p-2 mt-5 d-grid">
+                <button type="submit" class="btn btn-primary btn-features">
+                Edit </button>
+            </div>
+            
+                
+        </div>
+    </div>
+</form>
+
+
+

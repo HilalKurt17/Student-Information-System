@@ -58,5 +58,30 @@ namespace StudentInformationSystem.WEBUI.Controllers
             };
             return View(viewModel);
         }
+
+        [HttpGet]
+        public IActionResult TeacherDetails(int id)
+        {
+            return View(_teacherRepository.GetById(id));
+        }
+
+        [HttpPost]
+        public IActionResult TeacherDetails()
+        {
+            return View("ListTeachers");
+        }
+
+        [HttpGet]
+        public IActionResult StudentDetails(int id)
+        {
+            return View(_studentRepository.GetById(id));
+        }
+
+        [HttpPost]
+        public IActionResult StudentDetails()
+        {
+            return View("StudentList");
+        }
     }
+
 }
