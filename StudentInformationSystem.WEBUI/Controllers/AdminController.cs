@@ -62,6 +62,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
         [HttpGet]
         public IActionResult TeacherDetails(int id)
         {
+
             return View(_teacherRepository.GetById(id));
         }
 

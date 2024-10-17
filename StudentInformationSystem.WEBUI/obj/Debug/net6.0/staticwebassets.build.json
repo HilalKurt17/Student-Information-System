@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "M7dPlW2bKS/C2QOeFNpeLZ+maVaXIy7G/MB3kRx0gNs=",
+  "Hash": "OPrg+HAJZ0LxlfkNysJZDFS6AoHQhmLB3ShhVqF0gqI=",
   "Source": "StudentInformationSystem.WEBUI",
   "BasePath": "_content/StudentInformationSystem.WEBUI",
   "Mode": "Default",
@@ -66,6 +66,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\css\\TeacherDetailsPageDesign.css",
+      "SourceId": "StudentInformationSystem.WEBUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\",
+      "BasePath": "_content/StudentInformationSystem.WEBUI",
+      "RelativePath": "css/TeacherDetailsPageDesign.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\TeacherDetailsPageDesign.css"
     },
     {
       "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\css\\TeacherStudentCards.css",

@@ -27,9 +27,14 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
 
         // get all lessons from database
 
-        public List<Lesson> GetAllT()
+        public List<LessonDTO> GetAllT()
         {
-            return _context.Lessons.ToList();
+            return _context.Lessons.Select(l => new LessonDTO
+            {
+                LessonID = l.LessonID,
+                Name = l.Name
+            })
+                .ToList();
         }
 
         public Lesson? GetById(int id)

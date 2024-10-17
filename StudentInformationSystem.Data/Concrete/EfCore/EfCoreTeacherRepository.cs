@@ -1,4 +1,5 @@
-﻿using StudentInformationSystem.Data.Abstract;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentInformationSystem.Data.Abstract;
 using StudentInformationSystem.Entity;
 
 namespace StudentInformationSystem.Data.Concrete.EfCore
@@ -35,7 +36,11 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
 
         public Teacher? GetById(int id) // get teacher by id
         {
-            Teacher? teacher = _context.Teachers.FirstOrDefault(i => i.TeacherID == id);
+            Teacher? teacher = _context
+                                .Teachers
+                                .Include(t => t.TeacherLessons)
+                                .FirstOrDefault(i => i.TeacherID == id);
+
             return teacher;
 
         }
