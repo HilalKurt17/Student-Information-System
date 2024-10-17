@@ -67,7 +67,7 @@
            
         <div class="form-group p-2" >
             <div class="form-check">
-                <input class="form-check-input me-2" checked type="checkbox" value="" 
+                <input class="form-check-input me-2" type="checkbox" value="" 
                 id="dismissed"/>
                 <label class="form-check-label me-5" for="dismissed">
                     Dismissed
@@ -103,7 +103,8 @@
                <input type="file" class="form-control" id="TeacherCV" asp-for="CVFilePath"/>
            </div>
             <div class="form-group p-2 mt-5 d-grid">
-                <button type="submit" class="btn btn-primary btn-features">
+                <button type="submit" class="btn btn-primary btn-features" 
+                onclick="assignUnenrollmentDate()">
                 Edit </button>
             </div>
             
@@ -122,10 +123,16 @@ document.addEventListener("DOMContentLoaded", function() {
         String(datetime.getMinutes()).padStart(2, "0") + ":" +
         String(datetime.getSeconds()).padStart(2, "0");
     dismissedCheckbox.value = appropriateDateTime;
-
-
-
 });
+
+function assignUnenrollmentDate() {
+    var checkbox = document.getElementById("dismissed");
+    var input = document.getElementById("unemploymentDate");
+    if (!checkbox.checked) {
+        input.value = null;
+    }
+}
+
 </script>
 
 

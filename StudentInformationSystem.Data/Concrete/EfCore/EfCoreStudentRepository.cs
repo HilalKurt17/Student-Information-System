@@ -17,6 +17,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
         {
             _context.Students.Add(entity);
             _context.SaveChanges();
+
         }
 
         public void Delete(int id) // delete student

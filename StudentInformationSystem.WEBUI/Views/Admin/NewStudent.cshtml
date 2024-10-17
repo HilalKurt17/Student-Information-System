@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = "_Layout";
 }
@@ -8,6 +6,7 @@
 @section Navbar{
     @await Html.PartialAsync("_navbarTSA.cshtml")
 }
+@model Student
 
 <form method="POST">
 
@@ -46,16 +45,16 @@
             </div>
             <div class="input-group p-2 mt-4">
 
-                <select class="form-select me-3" id="GenderSelection">
+                <select class="form-select me-3" id="GenderSelection" asp-for="Gender">
                     <option selected disabled> Gender </option>
                     <option value="F">Female</option>
                     <option value="M">Male</option>
                 </select>
-                <select class="form-select" id="EducationLevel">
+                <select class="form-select" id="EducationLevel" asp-for="EducationLevel">
                     <option selected disabled> Education Level </option>
-                    <option value="PS">Primary School</option>
-                    <option value="MS">Middle School</option>
-                    <option value="HS">High School</option>
+                    <option value="Primary School">Primary School</option>
+                    <option value="Middle School">Middle School</option>
+                    <option value="High School">High School</option>
                 </select>
 
             </div>

@@ -24,14 +24,25 @@ namespace StudentInformationSystem.WEBUI.Controllers
             ViewBag.UserType = "admin"; //  define the user type of the navbar
             base.OnActionExecuting(context);
         }
+
+        // index page of the admin
         public IActionResult Index()
         {
             return View("Index");
         }
-
+        // add new student page of the admin
         public IActionResult NewStudent()
         {
-            return View("NewStudent");
+            Student viewModel = new Student();
+            return View("NewStudent", viewModel);
+        }
+
+        // get new student information and add it to the student repository
+        [HttpPost]
+        public IActionResult NewStudent(Student newStudent)
+        {
+            _studentRepository.Add(newStudent);
+            return RedirectToAction("ListStudents");
         }
 
         public IActionResult NewTeacher()
@@ -39,6 +50,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
             return View("NewTeacher");
         }
 
+        // list all students in the student information system to the admin
         public IActionResult ListStudents()
         {
             List<Student> _students = _studentRepository.GetAllT();
@@ -49,6 +61,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
             return View(viewModel);
         }
 
+        // list all teachers in the student information system to the admin
         public IActionResult ListTeachers()
         {
             List<Teacher> _teachers = _teacherRepository.GetAllT();
@@ -59,6 +72,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
             return View(viewModel);
         }
 
+        // show selected teacher information in detail to the admin
         [HttpGet]
         public IActionResult TeacherDetails(int id)
         {
@@ -66,18 +80,21 @@ namespace StudentInformationSystem.WEBUI.Controllers
             return View(_teacherRepository.GetById(id));
         }
 
+        // update selected teacher information
         [HttpPost]
         public IActionResult TeacherDetails()
         {
-            return View("ListTeachers");
+            return RedirectToAction("ListTeachers");
         }
 
+        // show selected student information in detail
         [HttpGet]
         public IActionResult StudentDetails(int id)
         {
             return View(_studentRepository.GetById(id));
         }
 
+        // update selected student information
         [HttpPost]
         public IActionResult StudentDetails()
         {
