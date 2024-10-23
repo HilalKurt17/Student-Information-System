@@ -1,4 +1,4 @@
-﻿
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @section Navbar{
     @await Html.PartialAsync("_navbarTSA.cshtml")
 }
@@ -6,8 +6,11 @@
 @{
     Layout = "_Layout";
 }
-
-<form method="POST">
+@model TeacherDetailsViewModel
+@*since input type = file data is taken from user, enctype is added additional to other 
+    informations 
+*@
+<form method="POST" asp-controller="Admin" asp-action="NewTeacher" enctype="multipart/form-data">
     <div class="row">
         <div class="student-registration-div mb-5">
             <img class="me-4" src="~/images/_SIS.png" width=100px; />
@@ -20,32 +23,34 @@
         <div class="col-6">
             <div class="form-group p-2">
                 <label for="Name">Name</label> 
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="@Model.teacher.Name" class="form-control" />
             </div>
             <div class="form-group p-2">
                 <label for="Surname">Surname</label>
-                <input asp-for="Surname" class="form-control" />
+                <input asp-for="@Model.teacher.Surname" class="form-control" />
             </div>
             <div class="form-group p-2">
                 <label for="Mail">Mail</label>
-                <input asp-for="Mail" class="form-control" />
+                <input asp-for="@Model.teacher.Mail" class="form-control" />
             </div>
             <div class="form-group p-2">
                 <label for="Phone">Phone</label>
-                <input asp-for="Phone" class="form-control" />
+                <input asp-for="@Model.teacher.Phone" class="form-control" />
             </div>
             <div class="input-group p-2 mt-4">
 
-                <select class="form-select me-3" id="GenderSelection">
+                <select class="form-select me-3" id="GenderSelection" 
+                asp-for="@Model.teacher.Gender">
                     <option selected disabled> Gender </option>
                     <option value="F">Female</option>
                     <option value="M">Male</option>
                 </select>
-                <select class="form-select" id="EducationLevel">
+                <select class="form-select" id="EducationLevel" 
+                asp-for="@Model.teacher.EducationLevel">
                     <option selected disabled> Education Level </option>
-                    <option value="S">Undergraduate Tutor</option>
-                    <option value="BSc">B.Sc Tutor</option>
-                    <option value="MSc">M.Sc Tutor</option>
+                    <option value="Undergraduate Student">Undergraduate Tutor</option>
+                    <option value="B.Sc">B.Sc Tutor</option>
+                    <option value="M.Sc">M.Sc Tutor</option>
                     <option value="PhD">PhD Tutor</option>
                 </select>
 
@@ -53,27 +58,29 @@
             <div class="form-group p-2 form-floating pt-4">
               <textarea class="form-control"  
               id="TeacherExplanation"
-              placeholder="Leave a comment here"></textarea>
+              placeholder="Leave a comment here" asp-for="@Model.teacher.Details"></textarea>
               <label class="p-3 pt-4" for="TeacherExplanation">
                   Details
               </label>
             </div>
-            @await Component.InvokeAsync("TeachingAreas")
             
     </div>
         <div class="col-6">
             <div class="form-group p-2">
                 <label for="IBAN">IBAN</label>
-                <input asp-for="IBAN" class="form-control" />
+                <input asp-for="@Model.teacher.IBAN" class="form-control" />
             </div>
             
-           @await Component.InvokeAsync("ReferenceDetails")
+           @await Component.InvokeAsync("ReferenceDetails",
+           new {referenceModel = Model.teacher.References, 
+               referenceUploadFile=Model.ReferenceLetterFile})
 
            <div class="input-group p-2 div-cv">
                <label class="form-control" for="TeacherCV">
                    CV
                </label>
-               <input type="file" class="form-control" id="TeacherCV" />
+               <input type="file" class="form-control" id="TeacherCV" 
+               asp-for="@Model.CVFile"/>
            </div>
             <div class="form-group p-2 mt-5 d-grid">
                 <button type="submit" class="btn btn-primary btn-features">

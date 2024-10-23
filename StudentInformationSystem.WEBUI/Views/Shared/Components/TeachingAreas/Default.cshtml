@@ -3,20 +3,56 @@
 @{
     List<LessonDTO> lessons = Model.lessons;
 }
+
 <div class="form-group p-2">
     <label>Teaching Areas</label>
     <div class="div-teaching-subjects">
         <div class="m-2 t-subject-div">
-            @foreach (TeacherLesson lesson in Model.teacherLesson)
+            @for (int i = 0; i < Model.teacherLesson.Count(); i++)
             {
-                int lesson_id = lesson.LessonID;
+                <input type="hidden" name="TeacherLessons[@i].LessonID" value="@Model.teacherLesson[i].LessonID">
+                <input type="hidden" name="TeacherLessons[@i].TeacherID" value="@Model.teacherLesson[i].TeacherID">
+                int lesson_id = Model.teacherLesson[i].LessonID;
+
                 <div class="form-check form-switch me-4">
                     <input class="form-check-input me-2" type="checkbox"
-                    id="@lesson.LessonID" asp-for="@lesson.IsChecked">
-                    <label class="form-check-label" for="@lesson.LessonID">
+                    id="TeacherLessons_@lesson_id" name="TeacherLessons[@i].IsChecked"
+                    value="@Model.teacherLesson[i].IsChecked">
+                    <label class="form-check-label" for="TeacherLessons_@lesson_id">
                         @lessons[lesson_id-1].Name</label>
                 </div>
+                List<TeacherLesson> tll = Model.teacherLesson;
             }
         </div>
     </div>
+    <textarea name="name"></textarea>
+    <button id="teachingAreasForm" type="button">Submit</button>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+        $(document).ready(function() {
+        $('#teachingAreasForm').click('submit', function(e) {
+            e.preventDefault(); // Formun normal gönderimini engelle
+
+            // Form verilerini al
+            var formData = $(this).serialize();
+
+            // Ajax isteği gönder
+            $.ajax({
+                url: '@Url.Action("GetTeacherAreas", "Admin")', // Ana kontrolcüdeki aksiyon
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    console.log("Veri başarıyla gönderildi!");
+                    // Başka bir işlem yapmanız gerekiyorsa burada yapabilirsiniz
+                },
+                error: function(xhr, status, error) {
+                    console.error("Bir hata oluştu: " + error);
+                }
+            });
+        });
+    });
+</script>
+
+

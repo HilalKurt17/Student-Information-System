@@ -279,11 +279,9 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("CVFilePath")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Details")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("EducationLevel")
@@ -299,11 +297,12 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("IBAN")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsApproved")
-                        .HasColumnType("INTEGER");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Mail")
                         .IsRequired()
@@ -322,7 +321,9 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("TeacherScore")
-                        .HasColumnType("INTEGER");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(0);
 
                     b.Property<DateTime?>("UnenrollmentDate")
                         .HasColumnType("TEXT");

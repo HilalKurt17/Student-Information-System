@@ -37,6 +37,12 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             modelBuilder.Entity<Teacher>()
                 .Property(t => t.EnrollmentDate)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP");
+            modelBuilder.Entity<Teacher>()
+                .Property(t => t.IsApproved)
+                .HasDefaultValue(false);
+            modelBuilder.Entity<Teacher>()
+                .Property(t => t.TeacherScore)
+                .HasDefaultValue(0);
 
             // define relation between teacher and student
             modelBuilder.Entity<StudentTeacher>()

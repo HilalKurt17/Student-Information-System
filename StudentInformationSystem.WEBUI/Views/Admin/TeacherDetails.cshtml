@@ -2,14 +2,16 @@
 @section Navbar{
     @await Html.PartialAsync("_navbarTSA.cshtml")
 }
-
-@{
+@model TeacherDetailsViewModel
+    @{
     Layout = "_Layout";
+    List<LessonDTO> lessons = Model.lessons;
 }
-@model Teacher
+
+
 
 <link href="~/css/TeacherDetailsPageDesign.css" rel="stylesheet"/>
-<form asp-action="TeacherDetails" method="POST">
+<form asp-controller="Admin" asp-action="TeacherDetails" method="POST" enctype="multipart/form-data">
     <div class="row">
         <div class="student-registration-div mb-5">
             <img class="me-4" src="~/images/_SIS.png" width=100px; />
@@ -20,31 +22,32 @@
     </div>
     <div class="row">
         <div class="col-6">
-            <input type="hidden" asp-for="TeacherID" />
+            <input type="hidden" asp-for="@Model.teacher.TeacherID" />
             <div class="form-group p-2">
                 <label for="Name">Name</label> 
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="@Model.teacher.Name" class="form-control" />
             </div>
             <div class="form-group p-2">
                 <label for="Surname">Surname</label>
-                <input asp-for="Surname" class="form-control" />
+                <input asp-for="@Model.teacher.Surname" class="form-control" />
             </div>
             <div class="form-group p-2">
                 <label for="Mail">Mail</label>
-                <input asp-for="Mail" class="form-control" />
+                <input asp-for="@Model.teacher.Mail" class="form-control" />
             </div>
             <div class="form-group p-2">
                 <label for="Phone">Phone</label>
-                <input asp-for="Phone" class="form-control" />
+                <input asp-for="@Model.teacher.Phone" class="form-control" />
             </div>
             <div class="input-group p-2 mt-4">
 
-                <select disabled class="form-select me-3" asp-for="Gender" id="GenderSelection">
+                <select disabled class="form-select me-3" asp-for="@Model.teacher.Gender"
+                id="GenderSelection">
                     <option selected disabled> Gender </option>
                     <option value="F">Female</option>
                     <option value="M">Male</option>
                 </select>
-                <select class="form-select" asp-for="EducationLevel" 
+                <select class="form-select" asp-for="@Model.teacher.EducationLevel" 
                 id="EducationLevel">
                     <option selected disabled> Education Level </option>
                     <option value="Undergraduate Student">Undergraduate Tutor</option>
@@ -56,14 +59,37 @@
             </div>
             <div class="form-group p-2 form-floating pt-4">
               <textarea class="form-control"  
-              id="TeacherExplanation" asp-for="Details"
+              id="TeacherExplanation" asp-for="@Model.teacher.Details"
               placeholder="Leave a comment here"></textarea>
               <label class="p-3 pt-4" for="TeacherExplanation">
                   Details
               </label>
             </div>
 
-           @await Component.InvokeAsync("TeachingAreas", new {teacherLessons = Model.TeacherLessons})
+           <div class="form-group p-2">
+    <label>Teaching Areas</label>
+    <div class="div-teaching-subjects">
+        <div class="m-2 t-subject-div">
+            @for (int i = 0; i < Model.teacher.TeacherLessons.Count(); i++)
+            {
+                <input type="hidden" 
+                asp-for="@Model.teacher.TeacherLessons[i].LessonID">
+                <input type="hidden" 
+                asp-for="@Model.teacher.TeacherLessons[i].TeacherID">
+                int lesson_id = Model.teacher.TeacherLessons[i].LessonID;
+
+                <div class="form-check form-switch me-4">
+                    <input class="form-check-input me-2" type="checkbox"
+                    id="TeacherLessons_@lesson_id" 
+                    asp-for="@Model.teacher.TeacherLessons[i].IsChecked">
+                    <label class="form-check-label" for="TeacherLessons_@lesson_id">
+                        @lessons[lesson_id-1].Name</label>
+                </div>
+                List<TeacherLesson> tll = Model.teacher.TeacherLessons;
+            }
+        </div>
+    </div>
+</div>
            
         <div class="form-group p-2" >
             <div class="form-check">
@@ -72,8 +98,8 @@
                 <label class="form-check-label me-5" for="dismissed">
                     Dismissed
                 </label>
-                <input type="datetime-local" id="unemploymentDate" 
-                asp-for="UnenrollmentDate" />
+              @* <input type="datetime-local" id="unemploymentDate" 
+                asp-for="@Model.teacher.UnenrollmentDate" />*@ 
             </div>
             
         </div>
@@ -81,7 +107,7 @@
             <div class="form-check">
                 <input class="form-check-input me-2" type="checkbox" value="" 
                 id="isApproved"
-                asp-for="IsApproved" />
+                asp-for="@Model.teacher.IsApproved" />
                 <label class="form-check-label" for="isApproved">
                     Confirm the Teacher
                 </label>
@@ -91,16 +117,19 @@
         <div class="col-6">
             <div class="form-group p-2">
                 <label for="IBAN">IBAN</label>
-                <input asp-for="IBAN" class="form-control" />
+                <input asp-for="@Model.teacher.IBAN" class="form-control" />
             </div>
             
-           @await Component.InvokeAsync("ReferenceDetails", new {referenceModel = Model.References})
+           @await Component.InvokeAsync("ReferenceDetails", 
+           new {referenceModel = @Model.teacher.References, 
+               referenceUploadFile = @Model.ReferenceLetterFile})
            
            <div class="input-group p-2 div-cv">
                <label class="form-control" for="TeacherCV">
                    CV
                </label>
-               <input type="file" class="form-control" id="TeacherCV" asp-for="CVFilePath"/>
+               <input type="file" class="form-control" id="TeacherCV" 
+               asp-for="@Model.teacher.CVFilePath"/>
            </div>
             <div class="form-group p-2 mt-5 d-grid">
                 <button type="submit" class="btn btn-primary btn-features" 

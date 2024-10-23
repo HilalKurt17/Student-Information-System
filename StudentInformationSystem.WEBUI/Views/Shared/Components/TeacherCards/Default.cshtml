@@ -46,12 +46,17 @@
             @if (@teacher.TeacherLessons != null
             && @teacher.TeacherLessons.Count() != 0)
             {
-                <ol>
                 @foreach(TeacherLesson lesson in @teacher.TeacherLessons)
                 {
-                    <li>@lesson</li>
+                    
+                    if (lesson.IsChecked)
+                    {
+                       int lessonID = lesson.LessonID;
+                       LessonDTO _lesson = Model.lessons.FirstOrDefault(l => l.LessonID == lessonID);
+                       <p class="display-inline" style="display:inline-block;">• @_lesson.Name</p>
+                    }
+                    
                 }
-                </ol>
             }
             else
             {

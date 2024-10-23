@@ -11,13 +11,17 @@ namespace StudentInformationSystem.WEBUI.Controllers
     {
         private IStudentRepository _studentRepository;
         private ITeacherRepository _teacherRepository;
+        private ILessonRepository _lessonRepository;
+        private List<LessonDTO> _lessonDTOList;
 
         // get student and teacher repositories using Dependency Injection method
         public AdminController(IStudentRepository studentRepository,
-            ITeacherRepository teacherRepository)
+            ITeacherRepository teacherRepository, ILessonRepository lessonRepository)
         {
             _studentRepository = studentRepository;
             _teacherRepository = teacherRepository;
+            _lessonRepository = lessonRepository;
+            _lessonDTOList = _lessonRepository.GetAllT();
         }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
@@ -44,10 +48,22 @@ namespace StudentInformationSystem.WEBUI.Controllers
             _studentRepository.Add(newStudent);
             return RedirectToAction("ListStudents");
         }
-
+        // add new teacher page of the admin
         public IActionResult NewTeacher()
         {
-            return View("NewTeacher");
+            TeacherDetailsViewModel teacherDetails = new TeacherDetailsViewModel
+            {
+                teacher = new Teacher()
+            };
+            return View("NewTeacher", teacherDetails);
+        }
+        // get new teacher information and add it to the teacher repository
+        [HttpPost]
+        public IActionResult NewTeacher(TeacherDetailsViewModel newTeacher)
+        {
+            _teacherRepository.Add(newTeacher.teacher);
+
+            return RedirectToAction("ListTeachers");
         }
 
         // list all students in the student information system to the admin
@@ -67,6 +83,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
             List<Teacher> _teachers = _teacherRepository.GetAllT();
             var viewModel = new TeacherViewModel
             {
+                lessons = _lessonDTOList,
                 teachers = _teachers
             };
             return View(viewModel);
@@ -76,16 +93,25 @@ namespace StudentInformationSystem.WEBUI.Controllers
         [HttpGet]
         public IActionResult TeacherDetails(int id)
         {
-
-            return View(_teacherRepository.GetById(id));
+            Teacher teacher = _teacherRepository.GetById(id);
+            TeacherDetailsViewModel teacherDetails = new TeacherDetailsViewModel
+            {
+                teacher = teacher,
+                lessons = _lessonDTOList
+            };
+            return View(teacherDetails);
         }
 
         // update selected teacher information
         [HttpPost]
-        public IActionResult TeacherDetails()
+        public IActionResult TeacherDetails(TeacherDetailsViewModel updatedTeacher)
         {
+            _teacherRepository.Update(updatedTeacher.teacher);
+
             return RedirectToAction("ListTeachers");
         }
+
+
 
         // show selected student information in detail
         [HttpGet]
