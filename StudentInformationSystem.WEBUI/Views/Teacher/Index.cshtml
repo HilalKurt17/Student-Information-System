@@ -1,13 +1,19 @@
 ﻿
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @section Navbar{
     @await Html.PartialAsync("_navbarTSA.cshtml")
 }
-
-@{
+@model TeacherDetailsViewModel
+    @{
     Layout = "_Layout";
+    List<LessonDTO> lessons = Model.lessons;
 }
 
-<form method="POST">
+
+
+<link href="~/css/TeacherDetailsPageDesign.css" rel="stylesheet"/>
+@*show teacher details and update if required. To get IFormFile from the form, add enctype*@
+<form asp-controller="Teacher" asp-action="Index" method="POST" enctype="multipart/form-data">
     <div class="row">
         <div class="student-registration-div mb-5">
             <img class="me-4" src="~/images/_SIS.png" width=100px; />
@@ -17,73 +23,242 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-6"> @*add teacher id as a hidden layer for model binding operation*@
+            <input type="hidden" asp-for="@Model.teacher.TeacherID" />
             <div class="form-group p-2">
                 <label for="Name">Name</label> 
-                <input asp-for="Name" class="form-control" />
+                @*show teacher name - updatable (using model binding with asp-for)*@
+                <input asp-for="@Model.teacher.Name" class="form-control" />
             </div>
             <div class="form-group p-2">
-                <label for="Surname">Surname</label>
-                <input asp-for="Surname" class="form-control" />
+                <label for="Surname">Surname</label> 
+                @*show teacher surname - updatable (using model binding with asp-for)*@
+                <input asp-for="@Model.teacher.Surname" class="form-control" />
             </div>
             <div class="form-group p-2">
                 <label for="Mail">Mail</label>
-                <input asp-for="Mail" class="form-control" />
+                @*show teacher mail - updatable (using model binding with asp-for)*@
+                <input asp-for="@Model.teacher.Mail" class="form-control" />
             </div>
             <div class="form-group p-2">
                 <label for="Phone">Phone</label>
-                <input asp-for="Phone" class="form-control" />
+                @*show teacher phone - updatable (using model binding with asp-for)*@
+                <input asp-for="@Model.teacher.Phone" class="form-control" />
             </div>
             <div class="input-group p-2 mt-4">
-
-                <select class="form-select me-3" id="GenderSelection">
+                @*show teacher gender (using model binding with asp-for)*@
+                <select disabled class="form-select me-3" asp-for="@Model.teacher.Gender"
+                id="GenderSelection">
                     <option selected disabled> Gender </option>
                     <option value="F">Female</option>
                     <option value="M">Male</option>
                 </select>
-                <select class="form-select" id="EducationLevel">
+                @*show teacher education level - updatable (using model binding with asp-for)*@
+                <select class="form-select" asp-for="@Model.teacher.EducationLevel" 
+                id="EducationLevel">
                     <option selected disabled> Education Level </option>
-                    <option value="S">Undergraduate Tutor</option>
-                    <option value="BSc">B.Sc Tutor</option>
-                    <option value="MSc">M.Sc Tutor</option>
+                    <option value="Undergraduate Student">Undergraduate Tutor</option>
+                    <option value="B.Sc">B.Sc Tutor</option>
+                    <option value="M.Sc">M.Sc Tutor</option>
                     <option value="PhD">PhD Tutor</option>
                 </select>
 
             </div>
             <div class="form-group p-2 form-floating pt-4">
+                @*show teacher details - updatable (using model binding with asp-for)*@
               <textarea class="form-control"  
-              id="TeacherExplanation"
+              id="TeacherExplanation" asp-for="@Model.teacher.Details"
               placeholder="Leave a comment here"></textarea>
               <label class="p-3 pt-4" for="TeacherExplanation">
                   Details
               </label>
             </div>
-            @await Component.InvokeAsync("TeachingAreas")
+
+           <div class="form-group p-2">
+                <label>Teaching Areas</label>
+                @*show teacher teaching areas - updatable (using model binding with asp-for)*@
+                <div class="div-teaching-subjects">
+                    <div class="m-2 t-subject-div">
+                        @for (int i = 0; i < Model.teacher.TeacherLessons.Count(); i++)
+                        {
+                            <input type="hidden" 
+                            asp-for="@Model.teacher.TeacherLessons[i].LessonID">
+                            <input type="hidden" 
+                            asp-for="@Model.teacher.TeacherLessons[i].TeacherID">
+                            int lesson_id = Model.teacher.TeacherLessons[i].LessonID;
+
+                            <div class="form-check form-switch me-4">
+                                <input class="form-check-input me-2" type="checkbox"
+                                id="TeacherLessons_@lesson_id" 
+                                asp-for="@Model.teacher.TeacherLessons[i].IsChecked">
+                                <label class="form-check-label" for="TeacherLessons_@lesson_id">
+                                    @lessons[lesson_id-1].Name</label>
+                            </div>
+                            List<TeacherLesson> tll = Model.teacher.TeacherLessons;
+                        }
+                    </div>
+                </div>
+            </div>
+           
+        <div class="form-group p-2" >
+            <div class="form-check">
+                @*if teacher dismissed click and delete the teacher from teacher list*@
+                <input class="form-check-input me-2" type="checkbox"
+                id="dismissed"
+                asp-for="@Model.teacher.UnenrollmentState"/>
+                <label class="form-check-label" for="dismissed">
+                    Dismissed
+                </label>
+            </div>
             
+        </div>
+        <div class="form-group p-2">
+            <div class="form-check">
+                @*if teacher CV and teacher Reference Mail is approved, click approved. Then teacher
+                    can begin the private lessons.
+                *@
+                <input class="form-check-input me-2" type="checkbox" 
+                id="isApproved"
+                asp-for="@Model.teacher.IsApproved" />
+                <label class="form-check-label" for="isApproved">
+                    Confirm the Teacher
+                </label>
+            </div>
+        </div>
     </div>
         <div class="col-6">
             <div class="form-group p-2">
+                @*add teacher IBAN for student payments for private lessons.*@
                 <label for="IBAN">IBAN</label>
-                <input asp-for="IBAN" class="form-control" />
+                <input asp-for="@Model.teacher.IBAN" class="form-control" />
             </div>
+            
+           <div class="form-group p-2">
+                <label>Reference</label>
+                @*add teacher Reference*@
+                <div class="card-div">
+                    <input type="hidden" asp-for="@Model.teacher.References[0].ReferencesID" />
+                    <div class="form-group p-2 pt-3">
+                        <label for="ReferenceName">
+                            Name 
+                        </label>
+                        <input asp-for="@Model.teacher.References[0].Name" class="form-control" />
+                    </div>
+                    
+                    <div class="form-group p-2">
+                        <label for="ReferenceCompany">
+                            Reference Company 
+                        </label>
+                        <input asp-for="@Model.teacher.References[0].CompanyName" class="form-control" />
+                    </div>
+                    <div class="form-group p-2">
+                        <label for="ReferenceJobTitle">
+                            Job Title 
+                        </label>
+                        <input asp-for="@Model.teacher.References[0].CurrentPosition" class="form-control" />
+                    </div>
+                    <div class="form-group p-2">
+                        <label for="ReferenceMail" >
+                            Mail
+                        </label>
+                        <input asp-for="@Model.teacher.References[0].Mail" class="form-control" />
+                    </div>
+                    <div class="form-group p-2">
+                        <label for="ReferencePhone" >
+                            Phone
+                        </label>
+                        <input asp-for="@Model.teacher.References[0].Phone" class="form-control" />
+                    </div>
+                    <div class="input-group p-2 pt-4 pb-3">
+                        <label class="form-control" for="ReferenceLetter">
+                            Letter of Recommendation
+                        </label>
+                        <input type="hidden" value="@Model.teacher.References[0].ReferenceLetterFilePath" 
+                        id="SendToScriptReferenceLetterFilePath"/>
+                        <input type="file" class="form-control" 
+                        id="ReferenceLetter" asp-for="@Model.ReferenceLetterFile">
+                        
+                    </div>
+                    <div class="form-group p-2 pt-0" id="ReferenceFileOpenTag" 
+                    style="margin-bottom: 5px; justify-content:center; align-items:center;">
+                        <a class="btn btn-primary me-3" style="border-radius:5px;"
+                    target="_blank"> Open Reference Letter </a>
+                    <label>@((Model.teacher.References[0].ReferenceLetterFilePath != null && 
+                        Model.teacher.References[0].ReferenceLetterFilePath != "")  ? 
+                        Model.teacher.References[0].ReferenceLetterFilePath.Substring(9):"")</label>
+                    </div>
+                </div>
 
-           @await Component.InvokeAsync("ReferenceDetails")
-              
+            </div>
+           
            <div class="input-group p-2 div-cv">
                <label class="form-control" for="TeacherCV">
                    CV
                </label>
-               <input type="file" class="form-control" id="TeacherCV" />
+               @*get teacher cv file*@
+               <input type="hidden" value="@Model.teacher.CVFilePath" id="SendToScriptCVFilePath"/>
+               <input type="file" class="form-control" id="TeacherCV"
+               asp-for="@Model.CVFile"/>
+               
+           </div>
+           <div class="form-group p-2" id="CVFileOpenTag">
+               <a class="btn btn-primary me-3" style="border-radius:5px;" 
+               target="_blank"> Open CV </a>
+               <label>@((Model.teacher.CVFilePath != null && Model.teacher.CVFilePath != "") 
+                   ? Model.teacher.CVFilePath.Substring(9):"")</label>
            </div>
             <div class="form-group p-2 mt-5 d-grid">
-                <button type="submit" class="btn btn-primary btn-features">
-                Edit </button>
+                <button type="submit" class="btn btn-primary btn-features" 
+                onclick="assignUnenrollmentDate()">
+                Update </button>
             </div>
             
                 
         </div>
     </div>
 </form>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    
+    var ReferenceLetterFilePath = document.getElementById("SendToScriptReferenceLetterFilePath").value;
+    var CVFilePath = document.getElementById("SendToScriptCVFilePath").value;
+
+    var RLInput = document.getElementById("ReferenceLetter");
+    var CVInput = document.getElementById("TeacherCV");
+
+    var CVhrefATag = document.getElementById("CVFileOpenTag");
+    var RLhrefATag = document.getElementById("ReferenceFileOpenTag");
+
+    if (!ReferenceLetterFilePath) {
+        
+        RLInput.disabled = false;
+        RLhrefATag.style.display = "none";
+    }
+    else {
+        RLInput.disabled = true;
+        RLhrefATag.href = ReferenceLetterFilePath;
+        RLhrefATag.style.display = "inline-flex";
+        
+    }
+    if (!CVFilePath) {
+        
+        CVInput.disabled = false;
+        CVhrefATag.style.display = "none";
+    }
+    else{
+        
+        CVInput.disabled = true;
+        CVhrefATag.href = CVFilePath;
+        CVhrefATag.style.display = "inline";
+    }
+});
+
+</script>
+
+
+
 
 
 

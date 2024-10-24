@@ -48,8 +48,8 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             {
                 List<TeacherLesson> tl = new List<TeacherLesson>
                 {
-                    new TeacherLesson{ TeacherID = teacher.TeacherID, LessonID=1,IsChecked=false},
-                    new TeacherLesson{ TeacherID = teacher.TeacherID, LessonID=2, IsChecked=false },
+                    new TeacherLesson{TeacherID = teacher.TeacherID, LessonID=1,IsChecked=false},
+                    new TeacherLesson{TeacherID = teacher.TeacherID, LessonID=2, IsChecked=false },
                     new TeacherLesson{TeacherID = teacher.TeacherID, LessonID=3, IsChecked=false },
                     new TeacherLesson{TeacherID = teacher.TeacherID, LessonID=4, IsChecked=false },
                     new TeacherLesson{TeacherID = teacher.TeacherID, LessonID=5, IsChecked=false },
@@ -100,7 +100,8 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
                 foreach (References reference in existingTeacher.References)
                 {
                     int index = existingTeacher.References.IndexOf(reference);
-                    existingTeacher.References[index] = entity.References[index];
+                    if (entity.References[index] != null)
+                        existingTeacher.References[index] = entity.References[index];
                 }
             }
             // update surname

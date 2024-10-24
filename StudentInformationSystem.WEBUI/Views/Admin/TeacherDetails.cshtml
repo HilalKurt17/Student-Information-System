@@ -26,23 +26,23 @@
             <input type="hidden" asp-for="@Model.teacher.TeacherID" />
             <div class="form-group p-2">
                 <label for="Name">Name</label> 
-                @*show teacher name - updatable (using model binding with asp-for)*@
-                <input asp-for="@Model.teacher.Name" class="form-control" />
+                @*show teacher name (using model binding with asp-for)*@
+                <input disabled asp-for="@Model.teacher.Name" class="form-control" />
             </div>
             <div class="form-group p-2">
                 <label for="Surname">Surname</label> 
-                @*show teacher surname - updatable (using model binding with asp-for)*@
-                <input asp-for="@Model.teacher.Surname" class="form-control" />
+                @*show teacher surname (using model binding with asp-for)*@
+                <input disabled asp-for="@Model.teacher.Surname" class="form-control" />
             </div>
             <div class="form-group p-2">
                 <label for="Mail">Mail</label>
-                @*show teacher mail - updatable (using model binding with asp-for)*@
-                <input asp-for="@Model.teacher.Mail" class="form-control" />
+                @*show teacher mail (using model binding with asp-for)*@
+                <input disabled asp-for="@Model.teacher.Mail" class="form-control" />
             </div>
             <div class="form-group p-2">
                 <label for="Phone">Phone</label>
-                @*show teacher phone - updatable (using model binding with asp-for)*@
-                <input asp-for="@Model.teacher.Phone" class="form-control" />
+                @*show teacher phone (using model binding with asp-for)*@
+                <input disabled asp-for="@Model.teacher.Phone" class="form-control" />
             </div>
             <div class="input-group p-2 mt-4">
                 @*show teacher gender (using model binding with asp-for)*@
@@ -52,8 +52,8 @@
                     <option value="F">Female</option>
                     <option value="M">Male</option>
                 </select>
-                @*show teacher education level - updatable (using model binding with asp-for)*@
-                <select class="form-select" asp-for="@Model.teacher.EducationLevel" 
+                @*show teacher education level (using model binding with asp-for)*@
+                <select disabled class="form-select" asp-for="@Model.teacher.EducationLevel" 
                 id="EducationLevel">
                     <option selected disabled> Education Level </option>
                     <option value="Undergraduate Student">Undergraduate Tutor</option>
@@ -64,8 +64,8 @@
 
             </div>
             <div class="form-group p-2 form-floating pt-4">
-                @*show teacher details - updatable (using model binding with asp-for)*@
-              <textarea class="form-control"  
+                @*show teacher details (using model binding with asp-for)*@
+              <textarea disabled class="form-control"  
               id="TeacherExplanation" asp-for="@Model.teacher.Details"
               placeholder="Leave a comment here"></textarea>
               <label class="p-3 pt-4" for="TeacherExplanation">
@@ -75,7 +75,7 @@
 
            <div class="form-group p-2">
                 <label>Teaching Areas</label>
-                @*show teacher teaching areas - updatable (using model binding with asp-for)*@
+                @*show teacher teaching areas (using model binding with asp-for)*@
                 <div class="div-teaching-subjects">
                     <div class="m-2 t-subject-div">
                         @for (int i = 0; i < Model.teacher.TeacherLessons.Count(); i++)
@@ -87,7 +87,7 @@
                             int lesson_id = Model.teacher.TeacherLessons[i].LessonID;
 
                             <div class="form-check form-switch me-4">
-                                <input class="form-check-input me-2" type="checkbox"
+                                <input disabled class="form-check-input me-2" type="checkbox"
                                 id="TeacherLessons_@lesson_id" 
                                 asp-for="@Model.teacher.TeacherLessons[i].IsChecked">
                                 <label class="form-check-label" for="TeacherLessons_@lesson_id">
@@ -101,8 +101,8 @@
            
         <div class="form-group p-2" >
             <div class="form-check">
-                @*if teacher dismissed click and delete the teacher from teacher list*@
-                <input class="form-check-input me-2" type="checkbox" value="" 
+                @*if teacher dismissed checkbox is clicked, delete the teacher from database*@
+                <input class="form-check-input me-2" type="checkbox"
                 id="dismissed"
                 asp-for="@Model.teacher.UnenrollmentState"/>
                 <label class="form-check-label" for="dismissed">
@@ -116,9 +116,12 @@
                 @*if teacher CV and teacher Reference Mail is approved, click approved. Then teacher
                     can begin the private lessons.
                 *@
-                <input class="form-check-input me-2" type="checkbox" value="" 
+                <input type="hidden" id="IsApprovedStatusSendToScript" 
+                    value="@Model.teacher.IsApproved.ToString().ToLower()" />
+                <input class="form-check-input me-2" type="checkbox" 
                 id="isApproved"
                 asp-for="@Model.teacher.IsApproved" />
+                
                 <label class="form-check-label" for="isApproved">
                     Confirm the Teacher
                 </label>
@@ -126,88 +129,90 @@
         </div>
     </div>
         <div class="col-6">
-            <div class="form-group p-2">
-                @*add teacher IBAN for student payments for private lessons.*@
-                <label for="IBAN">IBAN</label>
-                <input asp-for="@Model.teacher.IBAN" class="form-control" />
-            </div>
             
            <div class="form-group p-2">
                 <label>Reference</label>
-                @*add teacher Reference*@
+                @*show teacher Reference information*@
                 <div class="card-div">
                     <input type="hidden" asp-for="@Model.teacher.References[0].ReferencesID" />
                     <div class="form-group p-2 pt-3">
                         <label for="ReferenceName">
                             Name 
                         </label>
-                        <input asp-for="@Model.teacher.References[0].Name" class="form-control" />
+                        <input disabled asp-for="@Model.teacher.References[0].Name" class="form-control" />
                     </div>
                     
                     <div class="form-group p-2">
                         <label for="ReferenceCompany">
                             Reference Company 
                         </label>
-                        <input asp-for="@Model.teacher.References[0].CompanyName" class="form-control" />
+                        <input disabled asp-for="@Model.teacher.References[0].CompanyName" class="form-control" />
                     </div>
                     <div class="form-group p-2">
                         <label for="ReferenceJobTitle">
                             Job Title 
                         </label>
-                        <input asp-for="@Model.teacher.References[0].CurrentPosition" class="form-control" />
+                        <input disabled asp-for="@Model.teacher.References[0].CurrentPosition" class="form-control" />
                     </div>
                     <div class="form-group p-2">
                         <label for="ReferenceMail" >
                             Mail
                         </label>
-                        <input asp-for="@Model.teacher.References[0].Mail" class="form-control" />
+                        <input disabled asp-for="@Model.teacher.References[0].Mail" class="form-control" />
                     </div>
                     <div class="form-group p-2">
                         <label for="ReferencePhone" >
                             Phone
                         </label>
-                        <input asp-for="@Model.teacher.References[0].Phone" class="form-control" />
+                        <input disabled asp-for="@Model.teacher.References[0].Phone" class="form-control" />
                     </div>
-                    <div class="input-group p-2 pt-4 pb-3">
-                        <label class="form-control" for="ReferenceLetter">
-                            Letter of Recommendation
-                        </label>
-                        <input type="hidden" value="@Model.teacher.References[0].ReferenceLetterFilePath" 
-                        id="SendToScriptReferenceLetterFilePath"/>
-                        <input type="file" class="form-control" 
-                        id="ReferenceLetter" asp-for="@Model.ReferenceLetterFile">
-                        
+                    @*if reference letter is not provided, inform admin*@
+                    <div class="alert alert-info p-2 mb-3 m-2" id="ReferenceLetterEmptyInfo"
+                    style="padding-left: 10px;">
+                        Reference Letter is not provided.
                     </div>
-                    <div class="form-group p-2 pt-0" id="ReferenceFileOpenTag" 
+                        @*if reference letter is provided, admin can open the CV on a new web page and examine the CV
+                            or download it
+                        *@
+                    <div class="form-group p-2 pt-4 pb-3" id="ReferenceFileOpenTag" 
                     style="margin-bottom: 5px; justify-content:center; align-items:center;">
-                        <a class="btn btn-primary me-3" style="border-radius:5px;"
-                    target="_blank"> Open Reference Letter </a>
-                    <label>@(Model.teacher.References[0].ReferenceLetterFilePath != null ? 
-                        Model.teacher.References[0].ReferenceLetterFilePath.Substring(9):"")</label>
+                    @*add a hidden input for model binding with asp-for*@
+                        <input type="hidden" class="form-control" 
+                        id="ReferenceLetter" asp-for="@Model.ReferenceLetterFile">
+                        @*add a hidden input to send the reference letter file path to the script*@
+                        <input type="hidden" value="@Model.teacher.References[0].ReferenceLetterFilePath" 
+                            id="SendToScriptReferenceLetterFilePath"/>
+                            <a class="btn btn-primary me-3" style="border-radius:5px;
+                        border-color:darkslategray !important; color:darkslategray; background-color:white !important; "
+                        target="_blank"> Open Reference Letter </a>
+                        <label>@((Model.teacher.References[0].ReferenceLetterFilePath != null && 
+                            Model.teacher.References[0].ReferenceLetterFilePath != "")  ? 
+                            Model.teacher.References[0].ReferenceLetterFilePath.Substring(9):"")
+                        </label>
                     </div>
                 </div>
 
             </div>
-           
-           <div class="input-group p-2 div-cv">
-               <label class="form-control" for="TeacherCV">
-                   CV
-               </label>
-               @*get teacher cv file*@
-               <input type="hidden" value="@Model.teacher.CVFilePath" id="SendToScriptCVFilePath"/>
-               <input type="file" class="form-control" id="TeacherCV"
-               asp-for="@Model.CVFile"/>
-               
-           </div>
+            <div class="alert alert-info p-2 m-2" id="CVFileEmptyInfo">
+                CV is not provided.
+            </div>
+           @*if CV file is provided, open it in new web page*@
            <div class="form-group p-2" id="CVFileOpenTag">
-               <a class="btn btn-primary me-3" style="border-radius:5px;" 
+               @*add a hidden input for model binding*@
+               <input type="hidden" class="form-control" id="TeacherCV"
+               asp-for="@Model.CVFile"/>
+               @*add a hidden input to send CV file path to the script*@
+               <input type="hidden" value="@Model.teacher.CVFilePath" id="SendToScriptCVFilePath"/>
+               <a class="btn btn-primary me-3" style="border-radius:5px; 
+                border-color:darkslategray !important; color:darkslategray; background-color:white !important;" 
                target="_blank"> Open CV </a>
-               <label>@(Model.teacher.CVFilePath != null ? Model.teacher.CVFilePath.Substring(9):"")</label>
+               <label>@((Model.teacher.CVFilePath != null && Model.teacher.CVFilePath != "") 
+                   ? Model.teacher.CVFilePath.Substring(9):"")</label>
            </div>
             <div class="form-group p-2 mt-5 d-grid">
                 <button type="submit" class="btn btn-primary btn-features" 
                 onclick="assignUnenrollmentDate()">
-                Edit </button>
+                Update </button>
             </div>
             
                 
@@ -222,6 +227,9 @@ document.addEventListener("DOMContentLoaded", function() {
     var ReferenceLetterFilePath = document.getElementById("SendToScriptReferenceLetterFilePath").value;
     var CVFilePath = document.getElementById("SendToScriptCVFilePath").value;
 
+    var RLEmptyInfo = document.getElementById("ReferenceLetterEmptyInfo");
+    var CVEmptyInfo = document.getElementById("CVFileEmptyInfo");
+
     var RLInput = document.getElementById("ReferenceLetter");
     var CVInput = document.getElementById("TeacherCV");
 
@@ -232,24 +240,33 @@ document.addEventListener("DOMContentLoaded", function() {
         
         RLInput.disabled = false;
         RLhrefATag.style.display = "none";
+        RLEmptyInfo.style.display = "block";
     }
     else {
         RLInput.disabled = true;
         RLhrefATag.href = ReferenceLetterFilePath;
         RLhrefATag.style.display = "inline-flex";
-        
+        RLEmptyInfo.style.display = "none";
     }
     if (!CVFilePath) {
         
         CVInput.disabled = false;
         CVhrefATag.style.display = "none";
+        CVEmptyInfo.style.display = "block";
     }
     else{
         
         CVInput.disabled = true;
         CVhrefATag.href = CVFilePath;
         CVhrefATag.style.display = "inline";
+        CVEmptyInfo.style.display = "none";
     }
+    var isApprovedStatusInput = document.getElementById("IsApprovedStatusSendToScript");
+    var isApprovedCheckbox = document.getElementById("isApproved");
+    console.log(isApprovedStatusInput);
+    if (isApprovedStatusInput.value == "true") {
+        isApprovedCheckbox.disabled = true;
+    };
 });
 
 </script>
