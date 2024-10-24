@@ -68,6 +68,15 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
 
         }
 
+        public void ConfirmTeacher(Teacher entity)
+        {
+            Teacher? existingTeacher = _context
+                                        .Teachers
+                                        .FirstOrDefault(t => t.TeacherID == entity.TeacherID);
+            existingTeacher.IsApproved = true;
+            _context.SaveChanges();
+        }
+
         public void Update(Teacher entity) // update teacher
         {
             Teacher? existingTeacher = _context
@@ -129,11 +138,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             {
                 existingTeacher.IBAN = entity.IBAN;
             }
-            // update Teacher score
-            if (entity.TeacherScore != null && entity.TeacherScore != existingTeacher.TeacherScore)
-            {
-                existingTeacher.TeacherScore = entity.TeacherScore;
-            }
+
             // update cv file path if there is no existing cv for the teacher and new cv filepath is not null
             if (entity.CVFilePath != null && existingTeacher.CVFilePath == null)
             {

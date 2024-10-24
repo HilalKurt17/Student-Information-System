@@ -12,8 +12,8 @@ namespace StudentInformationSystem.Entity
         public string Phone { get; set; }
         public string EducationLevel { get; set; }
         public char Gender { get; set; }
-        public string? IBAN { get; set; }
         public int TeacherScore { get; set; }
+        public string? IBAN { get; set; }
         public string? CVFilePath { get; set; }
         public string? Details { get; set; }
         public bool IsApproved { get; set; }

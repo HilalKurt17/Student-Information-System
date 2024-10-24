@@ -37,14 +37,21 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             modelBuilder.Entity<Teacher>()
                 .Property(t => t.EnrollmentDate)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP");
+            // assign false to the IsApproved 
             modelBuilder.Entity<Teacher>()
                 .Property(t => t.IsApproved)
                 .HasDefaultValue(false);
+            // assign 0 to teacher score 
             modelBuilder.Entity<Teacher>()
                 .Property(t => t.TeacherScore)
                 .HasDefaultValue(0);
+            // assign false to teacher unenrollment state
             modelBuilder.Entity<Teacher>()
                 .Property(t => t.UnenrollmentState)
+                .HasDefaultValue(false);
+            // assign false to student unenrollment state 
+            modelBuilder.Entity<Student>()
+                .Property(s => s.UnenrollmentState)
                 .HasDefaultValue(false);
 
             // define relation between teacher and student

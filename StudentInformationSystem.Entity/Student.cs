@@ -9,9 +9,10 @@
         public string Phone { get; set; }
         public string ParentPhone { get; set; }
         public string EducationLevel { get; set; }
+
         public char Gender { get; set; }
         public DateTime EnrollmentDate { get; set; }
-        public DateTime? UnenrollmentDate { get; set; }
+        public bool UnenrollmentState { get; set; }
         // many to many relation between student and teacher
         public List<StudentTeacher> StudentTeachers { get; } = new List<StudentTeacher>();
 

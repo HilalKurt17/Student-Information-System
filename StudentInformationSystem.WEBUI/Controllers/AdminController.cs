@@ -111,9 +111,9 @@ namespace StudentInformationSystem.WEBUI.Controllers
             {
                 _teacherRepository.Delete(updatedTeacher.teacher.TeacherID);
             }
-            else
+            else if (updatedTeacher.teacher.IsApproved == true)
             {
-                _teacherRepository.Update(updatedTeacher.teacher);
+                _teacherRepository.ConfirmTeacher(updatedTeacher.teacher);
             }
 
 

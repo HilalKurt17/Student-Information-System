@@ -225,8 +225,10 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("UnenrollmentDate")
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("UnenrollmentState")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(false);
 
                     b.HasKey("StudentID");
 
