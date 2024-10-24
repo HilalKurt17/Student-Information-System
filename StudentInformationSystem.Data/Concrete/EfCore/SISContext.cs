@@ -43,6 +43,9 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             modelBuilder.Entity<Teacher>()
                 .Property(t => t.TeacherScore)
                 .HasDefaultValue(0);
+            modelBuilder.Entity<Teacher>()
+                .Property(t => t.UnenrollmentState)
+                .HasDefaultValue(false);
 
             // define relation between teacher and student
             modelBuilder.Entity<StudentTeacher>()

@@ -160,30 +160,21 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("CompanyName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CurrentPosition")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsApproved")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Mail")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ReferenceLetterFilePath")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("TeacherID")
@@ -325,8 +316,10 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("INTEGER")
                         .HasDefaultValue(0);
 
-                    b.Property<DateTime?>("UnenrollmentDate")
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("UnenrollmentState")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(false);
 
                     b.HasKey("TeacherID");
 

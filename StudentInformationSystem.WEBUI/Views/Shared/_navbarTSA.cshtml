@@ -10,22 +10,22 @@
 
             @if (ViewBag.UserType == "admin")
             {
-                <span>ADMIN</span>
+                <span style="margin-left: 20px;">ADMIN</span>
             }
             @if (ViewBag.UserType == "teacher")
             {
-                <span>PERSONNEL</span>
+                <span style="margin-left: 20px;">PERSONNEL</span>
             }
             @if (ViewBag.UserType == "student")
             {
-                <span>STUDENT</span>
+                <span style="margin-left: 20px;">STUDENT</span>
             }
 
 
             </a>
             @*create offcanvas toggle button*@
             <button class="navbar-toggler gap
-            navbar-text-color" type="button" data-bs-toggle="offcanvas"
+            navbar-text-color me-4" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
             aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon navbar-text-color"></span>

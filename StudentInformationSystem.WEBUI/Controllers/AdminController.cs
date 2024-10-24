@@ -104,9 +104,41 @@ namespace StudentInformationSystem.WEBUI.Controllers
 
         // update selected teacher information
         [HttpPost]
-        public IActionResult TeacherDetails(TeacherDetailsViewModel updatedTeacher)
+        public async Task<IActionResult> TeacherDetails(TeacherDetailsViewModel updatedTeacher)
         {
-            _teacherRepository.Update(updatedTeacher.teacher);
+            if (updatedTeacher.CVFile != null && updatedTeacher.CVFile.Length > 0)
+            {
+                // copy the cv file in the wwwroot/uploads folder
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads",
+                    updatedTeacher.CVFile.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await updatedTeacher.CVFile.CopyToAsync(stream);
+                }
+                var CVFileUrl = Url.Content($"~/uploads/{updatedTeacher.CVFile.FileName}");
+                updatedTeacher.teacher.CVFilePath = CVFileUrl.ToString();
+            }
+            if (updatedTeacher.ReferenceLetterFile != null && updatedTeacher.ReferenceLetterFile.Length > 0)
+            {
+                // copy the reference letter file in the wwwroot/uploads folder
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads",
+                    updatedTeacher.ReferenceLetterFile.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await updatedTeacher.ReferenceLetterFile.CopyToAsync(stream);
+                }
+                var ReferenceLetterFileUrl = Url.Content($"~/uploads/{updatedTeacher.ReferenceLetterFile.FileName}");
+                updatedTeacher.teacher.References[0].ReferenceLetterFilePath = ReferenceLetterFileUrl.ToString();
+            }
+            if (updatedTeacher.teacher.UnenrollmentState == true)
+            {
+                _teacherRepository.Delete(updatedTeacher.teacher.TeacherID);
+            }
+            else
+            {
+                _teacherRepository.Update(updatedTeacher.teacher);
+            }
+
 
             return RedirectToAction("ListTeachers");
         }

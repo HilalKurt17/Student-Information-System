@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OPrg+HAJZ0LxlfkNysJZDFS6AoHQhmLB3ShhVqF0gqI=",
+  "Hash": "Hp8YeANL2LxmhpzgEL0xa9ZaatfLiJfEIzXttDKkS1w=",
   "Source": "StudentInformationSystem.WEBUI",
   "BasePath": "_content/StudentInformationSystem.WEBUI",
   "Mode": "Default",
@@ -185,6 +185,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\uploads\\N_ILGINCV.pdf",
+      "SourceId": "StudentInformationSystem.WEBUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\",
+      "BasePath": "_content/StudentInformationSystem.WEBUI",
+      "RelativePath": "uploads/N_ILGINCV.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\N_ILGINCV.pdf"
+    },
+    {
+      "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\uploads\\N_ILGINReferenceLetter.pdf",
+      "SourceId": "StudentInformationSystem.WEBUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\",
+      "BasePath": "_content/StudentInformationSystem.WEBUI",
+      "RelativePath": "uploads/N_ILGINReferenceLetter.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\N_ILGINReferenceLetter.pdf"
     }
   ]
 }

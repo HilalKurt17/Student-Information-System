@@ -6,13 +6,12 @@ namespace StudentInformationSystem.Entity
     {
         [Key]
         public int ReferencesID { get; set; }
-        public string Name { get; set; }
-        public string Mail { get; set; }
-        public string Phone { get; set; }
-        public string CompanyName { get; set; }
-        public string CurrentPosition { get; set; }
-        public string ReferenceLetterFilePath { get; set; }
-        public bool IsApproved { get; set; }
+        public string? Name { get; set; }
+        public string? Mail { get; set; }
+        public string? Phone { get; set; }
+        public string? CompanyName { get; set; }
+        public string? CurrentPosition { get; set; }
+        public string? ReferenceLetterFilePath { get; set; }
         public int TeacherID { get; set; }
         public Teacher Teacher { get; set; }
 
