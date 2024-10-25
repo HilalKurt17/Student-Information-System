@@ -24,7 +24,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
         }
         public IActionResult Index() // home-profile get teacher information by teacher id
         {
-            Teacher _teacher = _teacherRepository.GetById(0);
+            Teacher _teacher = _teacherRepository.GetById(17);
             List<LessonDTO> _lessons = _lessonRepository.GetAllT();
             TeacherDetailsViewModel teacherDetails = new TeacherDetailsViewModel
             {
@@ -44,12 +44,19 @@ namespace StudentInformationSystem.WEBUI.Controllers
                 if (updatedTeacherDetails.CVFile != null && updatedTeacherDetails.CVFile.Length > 0)
                 {
                     // copy the cv file in the wwwroot/uploads folder
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads",
-                        updatedTeacherDetails.CVFile.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", updatedTeacherDetails.CVFile.FileName);
+                    // if a file with the same name exists, delete existing file
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                    // add new file to the "wwwroot/uploads" directory
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await updatedTeacherDetails.CVFile.CopyToAsync(stream);
                     }
+
+                    // save CV url in the teacher CVFilePath property
                     var CVFileUrl = Url.Content($"~/uploads/{updatedTeacherDetails.CVFile.FileName}");
                     updatedTeacherDetails.teacher.CVFilePath = CVFileUrl.ToString();
                 }
@@ -58,17 +65,30 @@ namespace StudentInformationSystem.WEBUI.Controllers
                     // copy the reference letter file in the wwwroot/uploads folder
                     var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads",
                         updatedTeacherDetails.ReferenceLetterFile.FileName);
+                    // if a file with the same name exists, delete it
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                    // copy the reference letter file
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await updatedTeacherDetails.ReferenceLetterFile.CopyToAsync(stream);
                     }
+                    // save Reference letter file url
                     var ReferenceLetterFileUrl = Url.Content($"~/uploads/{updatedTeacherDetails.ReferenceLetterFile.FileName}");
                     updatedTeacherDetails.teacher.References[0].ReferenceLetterFilePath = ReferenceLetterFileUrl.ToString();
                 }
             }
             _teacherRepository.Update(updatedTeacherDetails.teacher);
 
-            return View("Index");
+            TeacherDetailsViewModel model = new TeacherDetailsViewModel
+            {
+                lessons = _lessonRepository.GetAllT(),
+                teacher = updatedTeacherDetails.teacher
+            };
+
+            return View("Index", updatedTeacherDetails);
 
 
         }

@@ -106,11 +106,40 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             }
             else
             {
-                foreach (References reference in existingTeacher.References)
+                for (int index = 0; index < existingTeacher.References.Count(); index++)
                 {
-                    int index = existingTeacher.References.IndexOf(reference);
-                    if (entity.References[index] != null)
-                        existingTeacher.References[index] = entity.References[index];
+                    // update reference name if required
+                    if (entity.References[index].Name != null && entity.References[index].Name != existingTeacher.References[index].Name)
+                    {
+                        existingTeacher.References[index].Name = entity.References[index].Name;
+                    }
+                    // update reference company if required
+                    if (entity.References[index].CompanyName != null && entity.References[index].CompanyName != existingTeacher.References[index].CompanyName)
+                    {
+                        existingTeacher.References[index].CompanyName = entity.References[index].CompanyName;
+                    }
+                    // update reference mail if required
+                    if (entity.References[index].Mail != null && entity.References[index].Mail != existingTeacher.References[index].Mail)
+                    {
+                        existingTeacher.References[index].Mail = entity.References[index].Mail;
+
+                    }
+                    // update reference current position if required (job title)
+                    if (entity.References[index].CurrentPosition != null && entity.References[index].CurrentPosition != existingTeacher.References[index].CurrentPosition)
+                    {
+                        existingTeacher.References[index].CurrentPosition = entity.References[index].CurrentPosition;
+                    }
+                    // update reference phone if required
+                    if (entity.References[index].Phone != null && entity.References[index].Phone != existingTeacher.References[index].Phone)
+                    {
+                        existingTeacher.References[index].Phone = entity.References[index].Phone;
+                    }
+                    // update reference letter file path if required
+                    if (entity.References[index].ReferenceLetterFilePath != null && entity.References[index].ReferenceLetterFilePath != existingTeacher.References[index].ReferenceLetterFilePath)
+                    {
+                        existingTeacher.References[index].ReferenceLetterFilePath = entity.References[index].ReferenceLetterFilePath;
+                    }
+
                 }
             }
             // update surname
@@ -139,8 +168,8 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
                 existingTeacher.IBAN = entity.IBAN;
             }
 
-            // update cv file path if there is no existing cv for the teacher and new cv filepath is not null
-            if (entity.CVFilePath != null && existingTeacher.CVFilePath == null)
+            // update cv file path if required
+            if (entity.CVFilePath != null && existingTeacher.CVFilePath != entity.CVFilePath)
             {
                 existingTeacher.CVFilePath = entity.CVFilePath;
             }
@@ -148,16 +177,6 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             if (entity.Details != null && existingTeacher.Details != entity.Details)
             {
                 existingTeacher.Details = entity.Details;
-            }
-            // update approvement status of teacher
-            if (entity.IsApproved != existingTeacher.IsApproved && existingTeacher.IsApproved == false)
-            {
-                existingTeacher.IsApproved = entity.IsApproved;
-            }
-            // update unenrollment state of the teacher
-            if (entity.UnenrollmentState != existingTeacher.UnenrollmentState)
-            {
-                existingTeacher.UnenrollmentState = entity.UnenrollmentState;
             }
 
 

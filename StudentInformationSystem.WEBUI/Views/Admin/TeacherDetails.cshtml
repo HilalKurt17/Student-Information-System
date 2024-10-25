@@ -174,7 +174,7 @@
                         @*if reference letter is provided, admin can open the CV on a new web page and examine the CV
                             or download it
                         *@
-                    <div class="form-group p-2 pt-4 pb-3" id="ReferenceFileOpenTag" 
+                    <div class="form-group p-2 pt-4 pb-3"  id="ReferenceFileExists"
                     style="margin-bottom: 5px; justify-content:center; align-items:center;">
                     @*add a hidden input for model binding with asp-for*@
                         <input type="hidden" class="form-control" 
@@ -182,13 +182,16 @@
                         @*add a hidden input to send the reference letter file path to the script*@
                         <input type="hidden" value="@Model.teacher.References[0].ReferenceLetterFilePath" 
                             id="SendToScriptReferenceLetterFilePath"/>
-                            <a class="btn btn-primary me-3" style="border-radius:5px;
+                       
+                        <a class="btn btn-primary me-3"  id="ReferenceFileOpenTag"  
+                            style="border-radius:5px;
                         border-color:darkslategray !important; color:darkslategray; background-color:white !important; "
                         target="_blank"> Open Reference Letter </a>
                         <label>@((Model.teacher.References[0].ReferenceLetterFilePath != null && 
                             Model.teacher.References[0].ReferenceLetterFilePath != "")  ? 
                             Model.teacher.References[0].ReferenceLetterFilePath.Substring(9):"")
                         </label>
+                           
                     </div>
                 </div>
 
@@ -197,7 +200,7 @@
                 CV is not provided.
             </div>
            @*if CV file is provided, open it in new web page*@
-           <div class="form-group p-2" id="CVFileOpenTag">
+           <div class="form-group p-2" id="CVFileExists">
                @*add a hidden input for model binding*@
                <input type="hidden" class="form-control" id="TeacherCV"
                asp-for="@Model.CVFile"/>
@@ -205,13 +208,12 @@
                <input type="hidden" value="@Model.teacher.CVFilePath" id="SendToScriptCVFilePath"/>
                <a class="btn btn-primary me-3" style="border-radius:5px; 
                 border-color:darkslategray !important; color:darkslategray; background-color:white !important;" 
-               target="_blank"> Open CV </a>
+               target="_blank"  id="CVFileOpenTag"> Open CV </a>
                <label>@((Model.teacher.CVFilePath != null && Model.teacher.CVFilePath != "") 
                    ? Model.teacher.CVFilePath.Substring(9):"")</label>
            </div>
             <div class="form-group p-2 mt-5 d-grid">
-                <button type="submit" class="btn btn-primary btn-features" 
-                onclick="assignUnenrollmentDate()">
+                <button type="submit" class="btn btn-primary btn-features">
                 Update </button>
             </div>
             
@@ -230,6 +232,9 @@ document.addEventListener("DOMContentLoaded", function() {
     var RLEmptyInfo = document.getElementById("ReferenceLetterEmptyInfo");
     var CVEmptyInfo = document.getElementById("CVFileEmptyInfo");
 
+    var ReferenceFileExists = document.getElementById("ReferenceFileExists");
+    var CVFileExists = document.getElementById("CVFileExists");
+
     var RLInput = document.getElementById("ReferenceLetter");
     var CVInput = document.getElementById("TeacherCV");
 
@@ -239,31 +244,31 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!ReferenceLetterFilePath) {
         
         RLInput.disabled = false;
-        RLhrefATag.style.display = "none";
+        ReferenceFileExists.style.display = "none";
         RLEmptyInfo.style.display = "block";
     }
     else {
         RLInput.disabled = true;
         RLhrefATag.href = ReferenceLetterFilePath;
-        RLhrefATag.style.display = "inline-flex";
+        ReferenceFileExists.style.display = "inline-flex";
         RLEmptyInfo.style.display = "none";
     }
     if (!CVFilePath) {
         
         CVInput.disabled = false;
-        CVhrefATag.style.display = "none";
+        CVFileExists.style.display = "none";
         CVEmptyInfo.style.display = "block";
     }
     else{
         
         CVInput.disabled = true;
         CVhrefATag.href = CVFilePath;
-        CVhrefATag.style.display = "inline";
+        CVFileExists.style.display = "inline";
         CVEmptyInfo.style.display = "none";
     }
     var isApprovedStatusInput = document.getElementById("IsApprovedStatusSendToScript");
     var isApprovedCheckbox = document.getElementById("isApproved");
-    console.log(isApprovedStatusInput);
+
     if (isApprovedStatusInput.value == "true") {
         isApprovedCheckbox.disabled = true;
     };

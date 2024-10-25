@@ -27,8 +27,8 @@
             <input type="hidden" asp-for="@Model.teacher.TeacherID" />
             <div class="form-group p-2">
                 <label for="Name">Name</label> 
-                @*show teacher name - updatable (using model binding with asp-for)*@
-                <input asp-for="@Model.teacher.Name" class="form-control" />
+                @*show teacher name (using model binding with asp-for)*@
+                <input disabled asp-for="@Model.teacher.Name" class="form-control" />
             </div>
             <div class="form-group p-2">
                 <label for="Surname">Surname</label> 
@@ -100,31 +100,16 @@
                 </div>
             </div>
            
-        <div class="form-group p-2" >
-            <div class="form-check">
-                @*if teacher dismissed click and delete the teacher from teacher list*@
-                <input class="form-check-input me-2" type="checkbox"
-                id="dismissed"
-                asp-for="@Model.teacher.UnenrollmentState"/>
-                <label class="form-check-label" for="dismissed">
-                    Dismissed
-                </label>
-            </div>
-            
-        </div>
-        <div class="form-group p-2">
-            <div class="form-check">
-                @*if teacher CV and teacher Reference Mail is approved, click approved. Then teacher
-                    can begin the private lessons.
-                *@
-                <input class="form-check-input me-2" type="checkbox" 
-                id="isApproved"
-                asp-for="@Model.teacher.IsApproved" />
-                <label class="form-check-label" for="isApproved">
-                    Confirm the Teacher
-                </label>
-            </div>
-        </div>
+            @*add teacher dismissed input for model binding*@
+            <input class="form-check-input me-2" type="hidden"
+            id="dismissed"
+            asp-for="@Model.teacher.UnenrollmentState"/>
+
+            @*add teacher approvement input for model binding*@
+            <input class="form-check-input me-2" type="hidden" 
+            id="isApproved"
+            asp-for="@Model.teacher.IsApproved" value="@Model.teacher.IsApproved.ToString().ToLower()"/>
+
     </div>
         <div class="col-6">
             <div class="form-group p-2">
@@ -137,52 +122,55 @@
                 <label>Reference</label>
                 @*add teacher Reference*@
                 <div class="card-div">
-                    <input type="hidden" asp-for="@Model.teacher.References[0].ReferencesID" />
+                    <input type="hidden" asp-for="@Model.teacher.References[0].ReferencesID"/>
                     <div class="form-group p-2 pt-3">
                         <label for="ReferenceName">
                             Name 
                         </label>
-                        <input asp-for="@Model.teacher.References[0].Name" class="form-control" />
+                        <input asp-for="@Model.teacher.References[0].Name" class="form-control" id="referenceName"/>
                     </div>
                     
                     <div class="form-group p-2">
                         <label for="ReferenceCompany">
                             Reference Company 
                         </label>
-                        <input asp-for="@Model.teacher.References[0].CompanyName" class="form-control" />
+                        <input asp-for="@Model.teacher.References[0].CompanyName" class="form-control" id="referenceCompany" />
                     </div>
                     <div class="form-group p-2">
                         <label for="ReferenceJobTitle">
                             Job Title 
                         </label>
-                        <input asp-for="@Model.teacher.References[0].CurrentPosition" class="form-control" />
+                        <input asp-for="@Model.teacher.References[0].CurrentPosition" class="form-control" id="referenceJobTitle"/>
                     </div>
                     <div class="form-group p-2">
                         <label for="ReferenceMail" >
                             Mail
                         </label>
-                        <input asp-for="@Model.teacher.References[0].Mail" class="form-control" />
+                        <input asp-for="@Model.teacher.References[0].Mail" class="form-control" id="referenceMail"/>
                     </div>
                     <div class="form-group p-2">
                         <label for="ReferencePhone" >
                             Phone
                         </label>
-                        <input asp-for="@Model.teacher.References[0].Phone" class="form-control" />
+                        <input asp-for="@Model.teacher.References[0].Phone" class="form-control" id="referencePhone"/>
                     </div>
-                    <div class="input-group p-2 pt-4 pb-3">
+                    <div class="input-group p-2 pt-4 pb-3" id="ReferenceLetterDiv">
                         <label class="form-control" for="ReferenceLetter">
                             Letter of Recommendation
                         </label>
                         <input type="hidden" value="@Model.teacher.References[0].ReferenceLetterFilePath" 
                         id="SendToScriptReferenceLetterFilePath"/>
                         <input type="file" class="form-control" 
-                        id="ReferenceLetter" asp-for="@Model.ReferenceLetterFile">
+                        id="ReferenceLetter" asp-for="@Model.ReferenceLetterFile"/>
                         
                     </div>
-                    <div class="form-group p-2 pt-0" id="ReferenceFileOpenTag" 
+                    @*teacher can open reference letter file*@
+                    <div class="form-group p-2 pt-0" id="ReferenceFileExists" 
                     style="margin-bottom: 5px; justify-content:center; align-items:center;">
-                        <a class="btn btn-primary me-3" style="border-radius:5px;"
-                    target="_blank"> Open Reference Letter </a>
+                        <a class="btn btn-primary me-3" style="border-radius:5px; 
+                border-color:darkslategray !important; color:darkslategray; background-color:white !important;"
+                        id="ReferenceFileOpenTag"
+                        target="_blank"> Open Reference Letter </a>
                     <label>@((Model.teacher.References[0].ReferenceLetterFilePath != null && 
                         Model.teacher.References[0].ReferenceLetterFilePath != "")  ? 
                         Model.teacher.References[0].ReferenceLetterFilePath.Substring(9):"")</label>
@@ -191,25 +179,25 @@
 
             </div>
            
-           <div class="input-group p-2 div-cv">
+           <div class="input-group p-2 div-cv" id="CVDiv">
                <label class="form-control" for="TeacherCV">
                    CV
                </label>
-               @*get teacher cv file*@
+               @* teacher can upload cv file*@
                <input type="hidden" value="@Model.teacher.CVFilePath" id="SendToScriptCVFilePath"/>
                <input type="file" class="form-control" id="TeacherCV"
                asp-for="@Model.CVFile"/>
                
            </div>
-           <div class="form-group p-2" id="CVFileOpenTag">
-               <a class="btn btn-primary me-3" style="border-radius:5px;" 
-               target="_blank"> Open CV </a>
+           <div class="form-group p-2" id="CVFileExists">
+               <a class="btn btn-primary me-3" style="border-radius:5px; 
+                border-color:darkslategray !important; color:darkslategray; background-color:white !important;" 
+               target="_blank"  id="CVFileOpenTag"> Open CV </a>
                <label>@((Model.teacher.CVFilePath != null && Model.teacher.CVFilePath != "") 
                    ? Model.teacher.CVFilePath.Substring(9):"")</label>
            </div>
             <div class="form-group p-2 mt-5 d-grid">
-                <button type="submit" class="btn btn-primary btn-features" 
-                onclick="assignUnenrollmentDate()">
+                <button type="submit" class="btn btn-primary btn-features">
                 Update </button>
             </div>
             
@@ -225,33 +213,54 @@ document.addEventListener("DOMContentLoaded", function() {
     var ReferenceLetterFilePath = document.getElementById("SendToScriptReferenceLetterFilePath").value;
     var CVFilePath = document.getElementById("SendToScriptCVFilePath").value;
 
+    var TeacherApprovement = document.getElementById("isApproved");
+
     var RLInput = document.getElementById("ReferenceLetter");
     var CVInput = document.getElementById("TeacherCV");
 
     var CVhrefATag = document.getElementById("CVFileOpenTag");
     var RLhrefATag = document.getElementById("ReferenceFileOpenTag");
 
+    var CVFileExists = document.getElementById("CVFileExists");
+    var ReferenceFileExists = document.getElementById("ReferenceFileExists");
+  
+    if (TeacherApprovement.value == "true") {
+        var referenceName = document.getElementById("referenceName");
+        var referenceCompany = document.getElementById("referenceCompany");
+        var referenceJobTitle = document.getElementById("referenceJobTitle");
+        var referencePhone = document.getElementById("referencePhone");
+        var referenceMail = document.getElementById("referenceMail");
+        var referenceLetterDiv = document.getElementById("ReferenceLetterDiv");
+        var CVDiv = document.getElementById("CVDiv");
+    
+        referenceName.disabled = true;
+        referenceCompany.disabled = true;
+        referenceJobTitle.disabled = true;
+        referencePhone.disabled = true;
+        referenceMail.disabled = true;
+        referenceLetterDiv.style.display = "none";
+        CVDiv.style.display = "none";
+    }
     if (!ReferenceLetterFilePath) {
         
         RLInput.disabled = false;
-        RLhrefATag.style.display = "none";
+        ReferenceFileExists.style.display = "none";
     }
     else {
-        RLInput.disabled = true;
+     
         RLhrefATag.href = ReferenceLetterFilePath;
-        RLhrefATag.style.display = "inline-flex";
+        ReferenceFileExists.style.display = "inline-flex";
         
     }
     if (!CVFilePath) {
         
         CVInput.disabled = false;
-        CVhrefATag.style.display = "none";
+        CVFileExists.style.display = "none";
     }
     else{
         
-        CVInput.disabled = true;
         CVhrefATag.href = CVFilePath;
-        CVhrefATag.style.display = "inline";
+        CVFileExists.style.display = "inline";
     }
 });
 
