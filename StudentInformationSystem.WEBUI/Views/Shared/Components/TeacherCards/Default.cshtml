@@ -4,6 +4,7 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model TeacherViewModel
 
+
 <link href="~/css/TeacherStudentCards.css" rel="stylesheet" />
 <div class="row">
     @*show logo and information about page*@
@@ -16,10 +17,17 @@
 </div>
 <div class="teacher-card-container-div">
 
-@foreach (var teacher in Model.teachers) @*create class for each teacher*@
-{
-<div class="card m-4 cards-display">
-    <div class="card-header"> @*card-headers consists of name and surname of the teacher*@
+    @foreach (var teacher in Model.teachers) @*create class for each teacher*@
+    {
+        var isTeacherApproved = teacher.IsApproved;
+        var cardColorClass = "approved";
+        if(isTeacherApproved == false)
+        {
+            cardColorClass = "notApproved";
+        }
+ 
+        <div class="card m-4 cards-display">
+    <div class="card-header @cardColorClass"> @*card-headers consists of name and surname of the teacher*@
 
             <h5 class="card-title">
            <b> @teacher.Name @teacher.Surname
@@ -33,7 +41,7 @@
 
         
     </div>
-    <div class="body"> @*create body part of the card. Inform the admin about teacher.
+    <div class="body @cardColorClass"> @*create body part of the card. Inform the admin about teacher.
         Show summary of information about teacher.*@
         
             <div class="container-teacher-summary">
@@ -74,7 +82,7 @@
             } 
             <p><b>Teacher Score:</b>
             <div class="progress">
-                <div class="progress-bar
+                <div class="progress-bar @cardColorClass
                 progress-bar-striped
                 progress-bar-animated" role="progressbar"
                 style="width:@width%" aria-valuenow="75" 

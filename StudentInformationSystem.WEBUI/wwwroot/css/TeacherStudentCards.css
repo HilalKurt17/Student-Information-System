@@ -59,13 +59,22 @@ li, ol {
 .display-inline{
     display: inline;
 }
-
-.progress-bar, .card-header {
+/*if teacher is approved show teacher cards in blue*/
+div.progress-bar.approved, div.card-header.approved {
     background-color: #325f85;
     color: white;
 }
-.body {
+div.body.approved {
     background-color: #A7C7E7;
+}
+/*if teacher is not approved show teacher cards in red*/
+div.progress-bar.notApproved, div.card-header.notApproved {
+    background-color: #A42A04;
+    color: white;
+}
+
+div.body.notApproved {
+    background-color: #DAA99A;
 }
 .card-header{
     display:flex !important;
@@ -98,8 +107,8 @@ a.btn:hover,
 a.btn:active,
 a.btn:focus {
     border: 1px solid !important;
-    border-color: #6495ED !important;
-    background-color: #A7C7E7 !important;
+    border-color: #cabba9 !important;
+    background-color: bisque !important;
     border-radius: 25px !important;
     color: black !important;
 }
@@ -107,19 +116,20 @@ a.btn:focus {
 /*student cards specifications*/
 
 div.body.student-card-body {
-    background-color: #FAA0A0 !important;
+    background-color: #7FBFBF !important;
 }
 
 div.card-header.student-card-header {
-    background-color: #CA3433 !important;
+    background-color: #004040 !important;
+    color: white;
 }
 
 a.btn.student-btn-details:hover,
 a.btn.student-btn-details:active,
 a.btn.student-btn-details:focus {
     border: 1px solid !important;
-    border-color: #DE3163 !important;
-    background-color: #FAA0A0 !important;
+    border-color: #cabba9 !important;
+    background-color: bisque !important;
     border-radius: 25px !important;
     color: black !important;
 }

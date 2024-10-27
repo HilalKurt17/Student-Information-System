@@ -131,9 +131,13 @@ namespace StudentInformationSystem.WEBUI.Controllers
 
         // update selected student information
         [HttpPost]
-        public IActionResult StudentDetails()
+        public IActionResult StudentDetails(Student student)
         {
-            return View("StudentList");
+            if (student.UnenrollmentState == true)
+            {
+                _studentRepository.Delete(student.StudentID);
+            }
+            return RedirectToAction("ListStudents");
         }
     }
 
