@@ -142,16 +142,6 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
 
                 }
             }
-            // update surname
-            if (entity.Surname != null && entity.Surname != existingTeacher.Surname)
-            {
-                existingTeacher.Surname = entity.Surname;
-            }
-            // update mail
-            if (entity.Mail != null && entity.Mail != existingTeacher.Mail)
-            {
-                existingTeacher.Mail = entity.Mail;
-            }
             // update phone
             if (entity.Phone != null && entity.Phone != existingTeacher.Phone)
             {

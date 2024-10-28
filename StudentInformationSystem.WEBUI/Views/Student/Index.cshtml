@@ -1,10 +1,14 @@
-﻿
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
 @section Navbar
 {
     @await Html.PartialAsync("_navbarTSA.cshtml");
 }
+@model Student
 
-<form method="POST">
+<form method="POST" asp-controller="Student" asp-action="Index"> @*student profile page*@
     <div class="row">
         <div class="student-registration-div mb-5">
             <img class="me-4" src="~/images/_SIS.png" width=100px; />
@@ -15,42 +19,42 @@
     </div>
     <div class="row">
         <div class="col-6">
-            <div class="form-group p-2">
-                <label for="StudentID">ID</label> 
-                <input asp-for="StudentID" class="form-control" />
+            <div class="form-group p-2">  @*add student id for model binding*@
+                <input type="hidden" asp-for="StudentID"/>
             </div>
             <div class="form-group p-2">
-                <label for="Name">Name</label> 
-                <input asp-for="Name" class="form-control" />
+                <label for="Name">Name</label>  @*show student name*@
+                <input disabled asp-for="Name" class="form-control" />
             </div>
             <div class="form-group p-2">
-                <label for="Surname">Surname</label>
-                <input asp-for="Surname" class="form-control" />
+                <label for="Surname">Surname</label> @* show student surname*@
+                <input disabled asp-for="Surname" class="form-control" />
             </div>
             <div class="form-group p-2">
-                <label for="Mail">Mail</label>
-                <input asp-for="Mail" class="form-control" />
+                <label for="Mail">Mail</label> @*show student mail*@
+                <input disabled asp-for="Mail" class="form-control" />
             </div>
             <div class="input-group p-2 mt-4">
-
-                <select class="form-select me-3" id="GenderSelection">
+                @*show student gender*@
+                <select disabled class="form-select me-3" id="GenderSelection" asp-for="Gender">
                     <option selected disabled> Gender </option>
                     <option value="F">Female</option>
                     <option value="M">Male</option>
                 </select>
-                <select class="form-select" id="EducationLevel">
+                @*show student education level - updatable*@
+                <select class="form-select" id="EducationLevel" asp-for="EducationLevel">
                     <option selected disabled> Education Level </option>
-                    <option value="PS">Primary School</option>
-                    <option value="MS">Middle School</option>
-                    <option value="HS">High School</option>
+                    <option value="Elementary School">Elementary School</option>
+                    <option value="Middle School">Middle School</option>
+                    <option value="High School">High School</option>
                 </select>
 
             </div>
-            <div class="form-group p-2">
+            <div class="form-group p-2"> @*show student phone - updatable*@
                 <label for="Phone">Phone</label>
                 <input asp-for="Phone" class="form-control" />
             </div>
-            <div class="form-group p-2">
+            <div class="form-group p-2"> @*show student parent phone - updatable*@
                 <label for="ParentPhone">Parent Phone</label>
                 <input asp-for="ParentPhone" class="form-control" />
             </div>
@@ -58,11 +62,93 @@
         </div>
         <div class="col-6">
             
-            @await Component.InvokeAsync("AddressDetails")
-            @await Component.InvokeAsync("PaymentCreditCardDetails")
+           
+            <div class="form-group p-2">
+                <label>Address Details</label> @* get address details of the student*@
+                <div class="card-div">
+                    <input type="hidden" asp-for="@Model.Address.AddressID" /> @*add address id for model binding operation*@
+                    <div class="form-group p-2">
+                        <label for="country">
+                            Country
+                        </label> @*show country of the student - updatable*@
+                        <input class="form-control" id="country" asp-for="@Model.Address.Country" />
+                       
+                    </div>
+                    <div class="form-group p-2">
+                        <label for="city">
+                            City
+                        </label> @*show city of the student - updatable*@
+                        <input class="form-control" id="city" asp-for="@Model.Address.City" />
+                        
+                    </div>
+                    <div class="form-group p-2">
+                        <label for="zipCode">
+                            ZipCode
+                        </label> @*show zip code of the student address - updatable*@
+                        <input class="form-control" id="zipCode" asp-for="@Model.Address.ZipCode"/>
+                        
+                    </div>
+                    <div class="form-group p-2 mb-2 mt-2">
+                        <div class="form-floating">  @*show address details of the student - updatable*@
+                            <textarea class="form-control address-div-height"  
+                            id="StudentAddress" asp-for="@Model.Address.AddressDetails"
+                            placeholder="Leave a comment here"></textarea>
+                            <label for="StudentAddress">
+                                Address
+                            </label>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+
+
+            <div class="form-group p-2">
+                @* get student payment details*@
+                <label>Payment Card Details</label>
+                <div class="card-div">
+                    <div class="form-group p-2"> @*add payment details id for model binding operation*@
+                        <input type="hidden" asp-for="@Model.PaymentDetails.PaymentId" />
+                        <label for="Cardholder Name">
+                            Cardholder Name
+                        </label> @*show cardholder name - updatable*@
+                        <input asp-for="@Model.PaymentDetails.CardholderName" 
+                        class="form-control"/>
+                    </div>
+                    <div class="form-group p-2">
+                        <label for="CardNumber">
+                            Card Number
+                        </label> @*show card number - updatable*@
+                        <input asp-for="@Model.PaymentDetails.CardNumber" class="form-control"/>
+                    </div>
+                    <div class="creditCard-div">
+                        <div class="form-group p-2 me-auto mb-2">
+                            <label for="ExpirationDate">
+                                Expiration Date
+                            </label> @*show expiration date - updatable*@
+                            <input 
+                                asp-for="@Model.PaymentDetails.ExpirationDate" 
+                                type="text"
+                                placeholder="MM/YY"
+                                maxlength="5"
+                                pattern="(0[1-9]|1[0-2])\/\d{2}"
+                                class="form-control" />
+                        </div>
+                        <div class="form-group p-2 mb-2">
+                            <label for="SecurityCode">
+                                CVV
+                            </label> @*show CVV - updatable*@
+                            <input asp-for="@Model.PaymentDetails.CVVSecurityCode" 
+                            class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group p-2 student-btn-edit d-grid">
                 <button type="submit" class="btn btn-primary btn-features">
-                Edit </button>
+                Update </button>
             </div>
             
                 

@@ -139,7 +139,8 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("ExpirationDate")
+                    b.Property<string>("ExpirationDate")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("StudentID")
