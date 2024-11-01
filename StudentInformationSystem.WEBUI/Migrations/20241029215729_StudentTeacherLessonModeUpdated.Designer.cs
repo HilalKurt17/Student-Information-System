@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentInformationSystem.Data.Concrete.EfCore;
 
@@ -10,9 +11,11 @@ using StudentInformationSystem.Data.Concrete.EfCore;
 namespace StudentInformationSystem.Data.Migrations
 {
     [DbContext(typeof(SISContext))]
-    partial class SISContextModelSnapshot : ModelSnapshot
+    [Migration("20241029215729_StudentTeacherLessonModeUpdated")]
+    partial class StudentTeacherLessonModeUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.20");
@@ -260,21 +263,19 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<string>("ELClassification")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("EnrollmentState")
+                    b.Property<bool?>("EnrollmentState")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LessonDate")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LessonDetails")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("LessonEndDate")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("LessonDuration")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("LessonEndTime")
-                        .IsRequired()
+                    b.Property<DateOnly?>("LessonEndDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LessonMode")
@@ -286,16 +287,20 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<double>("LessonPrice")
                         .HasColumnType("REAL");
 
-                    b.Property<string>("LessonStartDate")
-                        .IsRequired()
+                    b.Property<DateOnly>("LessonStartDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("LessonStartTime")
-                        .IsRequired()
+                    b.Property<TimeOnly>("LessonTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("StudentID")
                         .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("StudentRequest")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("StudentRequestDetails")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("StudentTeacherComment")
                         .HasColumnType("TEXT");
@@ -305,6 +310,12 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.Property<int?>("TeacherLessonScore")
                         .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("TeacherRespond")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TeacherRespondDetails")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("PrivateLessonID");
 

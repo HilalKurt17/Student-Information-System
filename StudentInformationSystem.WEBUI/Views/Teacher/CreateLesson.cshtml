@@ -1,0 +1,108 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "_Layout";
+}
+@section Navbar{
+    @await Html.PartialAsync("_navbarTSA.cshtml");
+}
+
+@model StudentTeacher
+
+<form method="post" asp-controller="Teacher" asp-action="CreateLesson">
+    <div class="row">
+        <div class="student-registration-div mb-5">
+            <img class="me-4" src="~/images/_SIS.png" width=100px/>
+            <h1>
+                <b>NEW PRIVATE LESSON</b>
+            </h1>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-6">@*add Private Lesson ID, Student ID and Teacher ID for model binding*@
+            <input type="hidden" asp-for="PrivateLessonID" />
+            <input type="hidden" asp-for="StudentID" />
+            <input type="hidden" asp-for="TeacherID" />
+            <div class="form-group p-2">
+                <label for="Name">
+                    Lesson Name
+                </label>
+                <input id="Name" type="text" asp-for="LessonName" class="form-control"/>
+            </div>
+            
+            @*get lesson mode and education level using model binding*@
+            <div class="input-group p-2 mt-4">
+                <select class="form-select me-3" asp-for="ELClassification">
+                <option disabled selected>Education Level</option>
+                <option value="Elementary School">Elementary School</option>
+                <option value="Middle School">Middle School</option>
+                <option value="High School">High School</option>
+                </select>
+
+                <select class="form-select" asp-for="LessonMode">
+                <option disabled selected>Lesson Mode</option>
+                <option value="on-site">On-Site</option>
+                <option value="online">Online</option>
+                </select>
+            </div>
+            <div class="form-group p-2">
+                <label for="LessonDate"> @*get lesson day(s) using model binding*@
+                    Lesson Day(s)
+                </label>
+                <input type="text" id="LessonDate"  class="form-control" asp-for="LessonDate"/>
+                
+            </div>
+            <div class="form-group p-2">
+                <label for="LessonTime"> @*get lesson start time using model binding*@
+                    Lesson Start Time
+                </label>
+                <input id="LessonTime" type="time"  class="form-control" asp-for="LessonStartTime"/> 
+            </div>
+            <div class="form-group p-2">
+                <label for="LessonEndTime" > @*get lesson end time using model binding*@
+                    Lesson End Time
+                </label>
+                <input type="time" id="LessonEndTime" 
+                 class="form-control" asp-for="LessonEndTime"> 
+            </div>
+            
+
+        </div>
+        <div class="col-6">
+            <div class="form-group p-2">
+                <label for="LessonStartDate">
+                    Lesson Start Date
+                </label> @*get lesson start date using model binding*@
+                <input type="date" id="LessonStartDate"  class="form-control" asp-for="LessonStartDate"/>
+            </div>
+            <div class="form-group p-2">
+                <label for="LessonEndDate">
+                    Lesson End Date
+                </label> @*get lesson end date using model binding*@
+                <input type="date" id="LessonEndDate"  class="form-control" asp-for="LessonEndDate"/>
+            </div>
+            <div class="form-group p-2">
+                <label for="LessonPrice">
+                    Lesson Price
+                </label> @*get lesson price using model binding*@
+                <input type="number" id="LessonPrice" asp-for="LessonPrice" class="form-control">
+            </div>
+            <div class="form-group p-2 mt-4">
+                @*get lesson details using model binding*@
+                <textarea id="LessonDetails" asp-for="LessonDetails" 
+                placeholder="Lesson Details" class="form-control" style="height:120px">
+
+                </textarea>
+            </div>
+            <div class="form-group p-2 mt-4 d-grid">
+                <button class="btn btn-primary btn-features"  type="submit" 
+                style="display:block; width:auto">
+            Add Lesson</button>
+            </div>
+            
+        </div>
+        
+    </div>
+</form>
+

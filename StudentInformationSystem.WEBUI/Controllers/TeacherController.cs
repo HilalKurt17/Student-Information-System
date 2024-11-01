@@ -11,20 +11,26 @@ namespace StudentInformationSystem.WEBUI.Controllers
         IStudentRepository _studentRepository;
         ITeacherRepository _teacherRepository;
         ILessonRepository _lessonRepository;
-        public TeacherController(IStudentRepository studentRepository, ITeacherRepository teacherRepository, ILessonRepository lessonRepository)
+        IPrivateLessonRepository _privateLessonRepository;
+        public Teacher _teacher;
+        // implement repositories using dependency injection
+        public TeacherController(IStudentRepository studentRepository, ITeacherRepository teacherRepository, ILessonRepository lessonRepository, IPrivateLessonRepository privateLessonRepository)
         {
             _studentRepository = studentRepository;
             _teacherRepository = teacherRepository;
             _lessonRepository = lessonRepository;
+            _privateLessonRepository = privateLessonRepository;
+            _teacher = new Teacher();
         }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            ViewBag.UserType = "teacher";
+            ViewBag.UserType = "teacher"; // define user type for navbar
             base.OnActionExecuting(context);
         }
         public IActionResult Index() // home-profile get teacher information by teacher id
         {
-            Teacher _teacher = _teacherRepository.GetById(17);
+
+            _teacher = _teacherRepository.GetById(17);
             List<LessonDTO> _lessons = _lessonRepository.GetAllT();
             TeacherDetailsViewModel teacherDetails = new TeacherDetailsViewModel
             {
@@ -91,6 +97,36 @@ namespace StudentInformationSystem.WEBUI.Controllers
             return View("Index", updatedTeacherDetails);
 
 
+        }
+        // new private lesson creation page
+        public IActionResult CreateLesson()
+        {
+            StudentTeacher privateLesson = new StudentTeacher();
+            return View(privateLesson);
+        }
+
+        // create new private lesson
+        [HttpPost]
+        public IActionResult CreateLesson(StudentTeacher newPrivateLesson)
+        {
+            int ID = 17;
+            newPrivateLesson.TeacherID = _teacher.TeacherID;
+            _privateLessonRepository.Add(newPrivateLesson);
+            StudentTeacher pLesson = _privateLessonRepository.GetById(newPrivateLesson.PrivateLessonID);
+            return View(pLesson);
+        }
+
+        // show lesson details
+        public IActionResult LessonDetails(int id)
+        {
+            return View();
+        }
+
+        // update lesson details
+        [HttpPost]
+        public IActionResult LessonDetails(Lesson updatedLesson)
+        {
+            return View();
         }
 
         public IActionResult ListStudents() // list all students 

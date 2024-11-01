@@ -20,7 +20,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
         public DbSet<WorkExperience> WorkExperiences { get; set; }
 
 
-        public DbSet<StudentTeacher> StudentTeachers { get; set; }
+        public DbSet<StudentTeacher> StudentTeachers { get; set; } // used to store private lessons
         public DbSet<StudentLesson> StudentLessons { get; set; }
         public DbSet<TeacherLesson> TeacherLessons { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -56,7 +56,10 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
 
             // define relation between teacher and student
             modelBuilder.Entity<StudentTeacher>()
-                .HasKey(st => new { st.StudentID, st.TeacherID });
+                .HasKey(st => st.PrivateLessonID);
+
+            modelBuilder.Entity<StudentTeacher>()
+                .HasIndex(st => new { st.StudentID, st.TeacherID });
 
             modelBuilder.Entity<StudentTeacher>()
                 .HasOne(st => st.Student)

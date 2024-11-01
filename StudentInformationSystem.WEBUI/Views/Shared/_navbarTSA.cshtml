@@ -49,12 +49,19 @@ bg-navbar-container  offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                         
                         <li class="nav-item">
                             <hr>
-                        <a class="nav-link" href="@Url.Action("Index", "Teacher")">
-                            Your Profile
-                        </a>
-                        <hr>
+                                <a class="nav-link" href="@Url.Action("Index", "Teacher")">
+                                    Your Profile
+                                </a>
+                            <hr>
                         
-                    </li>
+                        </li>
+                        <li class="nav-item">
+                       
+                                <a class="nav-link" href="@Url.Action("CreateLesson","Teacher")">
+                                    New Private Lesson
+                                </a>
+                            <hr>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("ListStudents","Teacher")">
                                 Student Assessment
@@ -67,6 +74,8 @@ bg-navbar-container  offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                             </a>
                             <hr>
                         </li>
+                        
+                        
                     }
                     @if (ViewBag.UserType == "admin")
                     {
