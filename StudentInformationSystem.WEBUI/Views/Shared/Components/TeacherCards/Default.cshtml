@@ -17,7 +17,7 @@
 </div>
 <div class="teacher-card-container-div">
 
-    @foreach (var teacher in Model.teachers) @*create class for each teacher*@
+    @foreach (var teacher in Model.teachers) @*create card for each teacher*@
     {
         var isTeacherApproved = teacher.IsApproved;
         var cardColorClass = "approved";

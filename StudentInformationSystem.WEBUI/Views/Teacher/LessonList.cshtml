@@ -1,0 +1,60 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model List<StudentTeacher>
+@{
+    Layout = "_Layout";
+}
+@section Navbar{
+    @await Html.PartialAsync("_navbarTSA.cshtml");
+}
+
+<link href="~/css/TeacherStudentCards.css" rel="stylesheet"/>
+<div class="row">
+    <div class="student-registration-div mb-5">
+        <img class="me-4" src="~/images/_SIS.png" width=100px;/>
+        <h1>
+            <b>Student Information System - Private Lessons</b>
+        </h1>
+    </div>
+</div>
+
+<div class="teacher-card-container-div">
+    @foreach(StudentTeacher privateLesson in Model)
+    {
+        <div class="card m-4 cards-display">
+            <div class="card-header lesson-card-header-color">
+                <h5 class="card-title"><b>
+                    @privateLesson.LessonName
+                </b></h5>
+                <a class="btn" asp-controller="Teacher" asp-action="LessonDetails" 
+                asp-route-id="@privateLesson.PrivateLessonID">Details</a>
+            </div>
+            <div class="body lesson-card-body-color">
+                <div class="container-teacher-summary">
+                    <p><b>Education Level:</b>
+                        @privateLesson.ELClassification    
+                    </p>
+                    <p><b>Lesson Day(s):</b>
+                        @privateLesson.LessonDate    
+                    </p>
+                    <p><b>Lesson Date:</b>
+                        @(privateLesson.LessonStartDate.Substring(8)+"."+
+                        privateLesson.LessonStartDate.Substring(5,2)+"."+
+                        privateLesson.LessonStartDate.Substring(0,4))
+                        - 
+                        @(privateLesson.LessonEndDate.Substring(8)+"."+
+                        privateLesson.LessonEndDate.Substring(5,2)+"."+
+                        privateLesson.LessonEndDate.Substring(0,4))
+                    </p>
+                    <p><b>Lesson Time:</b>
+                        @privateLesson.LessonStartTime - @privateLesson.LessonEndTime
+                    </p>
+                    <p><b>Lesson Price:</b>
+                        @privateLesson.LessonPrice TL   
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

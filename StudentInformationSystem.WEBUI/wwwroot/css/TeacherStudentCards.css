@@ -133,3 +133,15 @@ a.btn.student-btn-details:focus {
     border-radius: 25px !important;
     color: black !important;
 }
+
+/*lesson card specifications*/
+.lesson-card-header-color {
+    color: white;
+    background-color: #4d3564;
+}
+
+.lesson-card-body-color {
+    color: black;
+    background-color: #E6E6FA;
+}
+

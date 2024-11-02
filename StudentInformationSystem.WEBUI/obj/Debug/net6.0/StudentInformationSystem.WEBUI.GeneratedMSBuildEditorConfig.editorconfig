@@ -103,6 +103,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxMZXNzb25EZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Teacher/LessonList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxMZXNzb25MaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Teacher/ListStudents.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxMaXN0U3R1ZGVudHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

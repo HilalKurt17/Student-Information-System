@@ -14,6 +14,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
         public void Add(StudentTeacher entity)
         {
             _context.StudentTeachers.Add(entity);
+            _context.SaveChanges();
         }
 
         public void Delete(int id)
@@ -38,6 +39,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
         public void Update(StudentTeacher entity)
         {
             _context.StudentTeachers.Update(entity);
+            _context.SaveChanges();
         }
     }
 }

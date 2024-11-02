@@ -43,6 +43,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
                                 .Teachers
                                 .Include(r => r.References)
                                 .Include(t => t.TeacherLessons)
+                                .Include(st => st.StudentTeachers)
                                 .FirstOrDefault(i => i.TeacherID == id);
             if (teacher.TeacherLessons == null || teacher.TeacherLessons.Count() == 0)
             {
