@@ -10,10 +10,10 @@
 
 <link href="~/css/TeacherStudentCards.css" rel="stylesheet"/>
 <div class="row">
-    <div class="student-registration-div mb-5">
-        <img class="me-4" src="~/images/_SIS.png" width=100px;/>
+    <div class="student-registration-div mb-5"> @*show SIS logo and page title*@
+      
         <h1>
-            <b>Student Information System - Private Lessons</b>
+            <b>Private Lessons</b>
         </h1>
     </div>
 </div>
@@ -23,21 +23,21 @@
     {
         <div class="card m-4 cards-display">
             <div class="card-header lesson-card-header-color">
-                <h5 class="card-title"><b>
+                <h5 class="card-title"><b> @*show name of the private lesson*@
                     @privateLesson.LessonName
                 </b></h5>
                 <a class="btn" asp-controller="Teacher" asp-action="LessonDetails" 
-                asp-route-id="@privateLesson.PrivateLessonID">Details</a>
+                asp-route-id="@privateLesson.PrivateLessonID">Details</a> @*create button for lesson details page*@
             </div>
             <div class="body lesson-card-body-color">
                 <div class="container-teacher-summary">
-                    <p><b>Education Level:</b>
+                    <p><b>Education Level:</b> @*show required education level of students to take the lesson*@
                         @privateLesson.ELClassification    
                     </p>
-                    <p><b>Lesson Day(s):</b>
+                    <p><b>Lesson Day(s):</b> @*show lesson day(s)*@
                         @privateLesson.LessonDate    
                     </p>
-                    <p><b>Lesson Date:</b>
+                    <p><b>Lesson Date:</b> @*show lesson start date and end date*@
                         @(privateLesson.LessonStartDate.Substring(8)+"."+
                         privateLesson.LessonStartDate.Substring(5,2)+"."+
                         privateLesson.LessonStartDate.Substring(0,4))
@@ -46,10 +46,10 @@
                         privateLesson.LessonEndDate.Substring(5,2)+"."+
                         privateLesson.LessonEndDate.Substring(0,4))
                     </p>
-                    <p><b>Lesson Time:</b>
+                    <p><b>Lesson Time:</b> @*show lesson start time and end time*@
                         @privateLesson.LessonStartTime - @privateLesson.LessonEndTime
                     </p>
-                    <p><b>Lesson Price:</b>
+                    <p><b>Lesson Price:</b> @*show lesson price*@
                         @privateLesson.LessonPrice TL   
                     </p>
                 </div>

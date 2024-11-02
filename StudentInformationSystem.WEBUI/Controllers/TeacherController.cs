@@ -90,10 +90,10 @@ namespace StudentInformationSystem.WEBUI.Controllers
             TeacherDetailsViewModel model = new TeacherDetailsViewModel
             {
                 lessons = _lessonRepository.GetAllT(),
-                teacher = updatedTeacherDetails.teacher
+                teacher = _teacherRepository.GetById(updatedTeacherDetails.teacher.TeacherID)
             };
 
-            return View("Index", updatedTeacherDetails);
+            return View("Index", model);
 
 
         }
@@ -128,16 +128,27 @@ namespace StudentInformationSystem.WEBUI.Controllers
         // show lesson details
         public IActionResult LessonDetails(int id)
         {
-            StudentTeacher lessonDetails = _privateLessonRepository.GetById(id);
-            return View(lessonDetails);
+            StudentTeacher? lessonDetails = _privateLessonRepository.GetById(id);
+            List<LessonDTO> allLessonsList = _lessonRepository.GetAllT();
+            Teacher teacher = _teacherRepository.GetById(lessonDetails.TeacherID);
+
+
+            LessonDetailsViewModel model = new LessonDetailsViewModel
+            {
+                allLessons = allLessonsList,
+                privateLessonDetails = lessonDetails,
+                teacher = teacher
+            };
+            return View(model);
         }
 
 
         // update lesson details
         [HttpPost]
-        public IActionResult LessonDetails(StudentTeacher updatedLesson)
+        public IActionResult LessonDetails(LessonDetailsViewModel updatedLesson)
         {
-            _privateLessonRepository.Update(updatedLesson);
+
+            _privateLessonRepository.Update(updatedLesson.privateLessonDetails); // update the lesson
             return RedirectToAction("LessonList");
         }
 

@@ -11,13 +11,13 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             _context = context;
         }
 
-        public void Add(StudentTeacher entity)
+        public void Add(StudentTeacher entity) // add new private lesson
         {
             _context.StudentTeachers.Add(entity);
             _context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(int id) // delete private lesson by id
         {
             StudentTeacher? privateLesson = _context.StudentTeachers.FirstOrDefault(i => i.PrivateLessonID == id);
             if (privateLesson != null)
@@ -26,19 +26,19 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             }
         }
 
-        public List<StudentTeacher> GetAllT()
+        public List<StudentTeacher> GetAllT() // get all private lessons
         {
             return _context.StudentTeachers.ToList();
         }
 
-        public StudentTeacher? GetById(int id)
+        public StudentTeacher? GetById(int id) // get private lesson by id
         {
             return _context.StudentTeachers.FirstOrDefault(i => i.PrivateLessonID == id);
         }
 
-        public void Update(StudentTeacher entity)
+        public void Update(StudentTeacher updatedEntity) // update private lesson information
         {
-            _context.StudentTeachers.Update(entity);
+            _context.StudentTeachers.Update(updatedEntity);
             _context.SaveChanges();
         }
     }
