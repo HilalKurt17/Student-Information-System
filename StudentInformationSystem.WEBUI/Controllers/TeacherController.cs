@@ -154,8 +154,15 @@ namespace StudentInformationSystem.WEBUI.Controllers
         [HttpPost]
         public IActionResult LessonDetails(LessonDetailsViewModel updatedLesson)
         {
+            if (updatedLesson.privateLessonDetails.RemoveLesson != null && updatedLesson.privateLessonDetails.RemoveLesson == true)
+            {
+                _privateLessonRepository.Delete(updatedLesson.privateLessonDetails.PrivateLessonID); // delete the lesson
+            }
+            else
+            {
+                _privateLessonRepository.Update(updatedLesson.privateLessonDetails); // update the lesson
+            }
 
-            _privateLessonRepository.Update(updatedLesson.privateLessonDetails); // update the lesson
             return RedirectToAction("LessonList");
         }
 

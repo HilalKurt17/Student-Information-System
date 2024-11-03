@@ -24,6 +24,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             {
                 _context.StudentTeachers.Remove(privateLesson);
             }
+            _context.SaveChanges();
         }
 
         public List<StudentTeacher> GetAllT() // get all private lessons

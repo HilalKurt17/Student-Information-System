@@ -53,6 +53,10 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             modelBuilder.Entity<Student>()
                 .Property(s => s.UnenrollmentState)
                 .HasDefaultValue(false);
+            // assign false to private lesson(StudentTeachers) remove state
+            modelBuilder.Entity<StudentTeacher>()
+                .Property(st => st.RemoveLesson)
+                .HasDefaultValue(false);
 
             // define relation between teacher and student
             modelBuilder.Entity<StudentTeacher>()

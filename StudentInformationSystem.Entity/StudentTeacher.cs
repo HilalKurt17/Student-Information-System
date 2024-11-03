@@ -21,7 +21,7 @@ namespace StudentInformationSystem.Entity
         public bool EnrollmentState { get; set; }
         public int? TeacherLessonScore { get; set; }
         public string? StudentTeacherComment { get; set; }
-        public bool? RemoveLesson { get; set; }
+        public bool RemoveLesson { get; set; }
         public Teacher? Teacher { get; set; }
         public Student? Student { get; set; }
     }
