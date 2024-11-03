@@ -7,7 +7,7 @@
     @await Html.PartialAsync("_navbarTSA.cshtml");
 }
 
-@model StudentTeacher
+@model LessonDetailsViewModel
 
 <form method="post" asp-controller="Teacher" asp-action="CreateLesson">
     <div class="row">
@@ -21,26 +21,32 @@
     </div>
     <div class="row">
         <div class="col-6">@*add Private Lesson ID, Student ID and Teacher ID for model binding*@
-            <input type="hidden" asp-for="PrivateLessonID" />
-            <input type="hidden" asp-for="StudentID" />
-            <input type="hidden" asp-for="TeacherID" />
+            <input type="hidden" asp-for="@Model.privateLessonDetails.PrivateLessonID" />
+            <input type="hidden" asp-for="@Model.privateLessonDetails.StudentID" />
+            <input type="hidden" asp-for="@Model.privateLessonDetails.TeacherID" />
             <div class="form-group p-2">
-                <label for="Name">
-                    Lesson Name
-                </label>
-                <input id="Name" type="text" asp-for="LessonName" class="form-control"/>
+                <select class="form-select mt-4" id="Name" asp-for="@Model.privateLessonDetails.LessonName">
+                    @foreach (TeacherLesson _lesson in @Model.teacher.TeacherLessons)
+                    {
+                        LessonDTO? getLessonName = Model.allLessons.FirstOrDefault(i => i.LessonID == _lesson.LessonID);
+                        if(getLessonName != null && _lesson.IsChecked)
+                        {
+                            <option value="@getLessonName.Name">@getLessonName.Name</option>
+                        }
+                    }
+                </select>
             </div>
             
             @*get lesson mode and education level using model binding*@
             <div class="input-group p-2 mt-4">
-                <select class="form-select me-3" asp-for="ELClassification">
+                <select class="form-select me-3" asp-for="@Model.privateLessonDetails.ELClassification">
                 <option disabled selected>Education Level</option>
                 <option value="Elementary School">Elementary School</option>
                 <option value="Middle School">Middle School</option>
                 <option value="High School">High School</option>
                 </select>
 
-                <select class="form-select" asp-for="LessonMode">
+                <select class="form-select" asp-for="@Model.privateLessonDetails.LessonMode">
                 <option disabled selected>Lesson Mode</option>
                 <option value="on-site">On-Site</option>
                 <option value="online">Online</option>
@@ -50,21 +56,21 @@
                 <label for="LessonDate"> @*get lesson day(s) using model binding*@
                     Lesson Day(s)
                 </label>
-                <input type="text" id="LessonDate"  class="form-control" asp-for="LessonDate"/>
+                <input type="text" id="LessonDate"  class="form-control" asp-for="@Model.privateLessonDetails.LessonDate"/>
                 
             </div>
             <div class="form-group p-2">
                 <label for="LessonTime"> @*get lesson start time using model binding*@
                     Lesson Start Time
                 </label>
-                <input id="LessonTime" type="time"  class="form-control" asp-for="LessonStartTime"/> 
+                <input id="LessonTime" type="time"  class="form-control" asp-for="@Model.privateLessonDetails.LessonStartTime"/> 
             </div>
             <div class="form-group p-2">
                 <label for="LessonEndTime" > @*get lesson end time using model binding*@
                     Lesson End Time
                 </label>
                 <input type="time" id="LessonEndTime" 
-                 class="form-control" asp-for="LessonEndTime"> 
+                 class="form-control" asp-for="@Model.privateLessonDetails.LessonEndTime"> 
             </div>
             
 
@@ -74,23 +80,23 @@
                 <label for="LessonStartDate">
                     Lesson Start Date
                 </label> @*get lesson start date using model binding*@
-                <input type="date" id="LessonStartDate"  class="form-control" asp-for="LessonStartDate"/>
+                <input type="date" id="LessonStartDate"  class="form-control" asp-for="@Model.privateLessonDetails.LessonStartDate"/>
             </div>
             <div class="form-group p-2">
                 <label for="LessonEndDate">
                     Lesson End Date
                 </label> @*get lesson end date using model binding*@
-                <input type="date" id="LessonEndDate"  class="form-control" asp-for="LessonEndDate"/>
+                <input type="date" id="LessonEndDate"  class="form-control" asp-for="@Model.privateLessonDetails.LessonEndDate"/>
             </div>
             <div class="form-group p-2">
                 <label for="LessonPrice">
                     Lesson Price
                 </label> @*get lesson price using model binding*@
-                <input type="number" id="LessonPrice" asp-for="LessonPrice" class="form-control">
+                <input type="number" id="LessonPrice" asp-for="@Model.privateLessonDetails.LessonPrice" class="form-control">
             </div>
             <div class="form-group p-2 mt-4">
                 @*get lesson details using model binding*@
-                <textarea id="LessonDetails" asp-for="LessonDetails" 
+                <textarea id="LessonDetails" asp-for="@Model.privateLessonDetails.LessonDetails" 
                 placeholder="Lesson Details" class="form-control" style="height:120px">
 
                 </textarea>

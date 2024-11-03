@@ -26,13 +26,13 @@
             <input type="hidden" asp-for="@Model.privateLessonDetails.TeacherID" />
             <div class="form-group p-2">
    
-                <select class="form-select me-3 mt-4" asp-for="@Model.privateLessonDetails.LessonName">
+                <select class="form-select mt-4" asp-for="@Model.privateLessonDetails.LessonName">
                 <option disabled selected>Lesson Name</option>
                 @foreach (TeacherLesson _lesson in Model.teacher.TeacherLessons)
                 {
                     LessonDTO? getLessonName = Model.allLessons
                     .FirstOrDefault(i => i.LessonID == _lesson.LessonID);
-                    if(getLessonName != null)
+                    if(getLessonName != null && _lesson.IsChecked)
                     {
                         <option value="@getLessonName.Name">@getLessonName.Name</option>
                     }
@@ -74,6 +74,14 @@
                 </label>
                 <input type="time" id="LessonEndTime" 
                  class="form-control" asp-for="@Model.privateLessonDetails.LessonEndTime"> 
+            </div>
+            <div class="form-check p-2">
+                
+                <input type="checkbox" id="RemoveLesson" class="form-check me-3" 
+                            asp-for="@Model.privateLessonDetails.RemoveLesson"/>
+                <label for="RemoveLesson">
+                    Delete Lesson
+                </label>
             </div>
             
 

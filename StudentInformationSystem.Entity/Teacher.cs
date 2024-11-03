@@ -19,6 +19,7 @@ namespace StudentInformationSystem.Entity
         public bool IsApproved { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public bool UnenrollmentState { get; set; }
+
         // many to many relation between student and teacher
         public List<StudentTeacher> StudentTeachers { get; } = new List<StudentTeacher>();
 

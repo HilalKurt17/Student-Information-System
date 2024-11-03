@@ -29,7 +29,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
         public IActionResult Index() // home-profile get teacher information by teacher id
         {
 
-            Teacher _teacher = _teacherRepository.GetById(17);
+            Teacher _teacher = _teacherRepository.GetById(17)!;
             List<LessonDTO> _lessons = _lessonRepository.GetAllT();
             TeacherDetailsViewModel teacherDetails = new TeacherDetailsViewModel
             {
@@ -90,7 +90,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
             TeacherDetailsViewModel model = new TeacherDetailsViewModel
             {
                 lessons = _lessonRepository.GetAllT(),
-                teacher = _teacherRepository.GetById(updatedTeacherDetails.teacher.TeacherID)
+                teacher = _teacherRepository.GetById(updatedTeacherDetails.teacher.TeacherID)!
             };
 
             return View("Index", model);
@@ -101,18 +101,25 @@ namespace StudentInformationSystem.WEBUI.Controllers
         public IActionResult CreateLesson()
         {
             StudentTeacher privateLesson = new StudentTeacher();
-            return View(privateLesson);
+            LessonDetailsViewModel model = new LessonDetailsViewModel
+            {
+                allLessons = _lessonRepository.GetAllT(),
+                teacher = _teacherRepository.GetById(17)!,
+                privateLessonDetails = privateLesson
+
+            };
+            return View(model);
         }
 
         // create new private lesson
         [HttpPost]
-        public IActionResult CreateLesson(StudentTeacher newPrivateLesson)
+        public IActionResult CreateLesson(LessonDetailsViewModel newPrivateLesson)
         {
             int ID = 17;
-            Teacher _teacher = _teacherRepository.GetById(ID);
-            newPrivateLesson.TeacherID = _teacher.TeacherID;
-            _privateLessonRepository.Add(newPrivateLesson);
-            StudentTeacher pLesson = _privateLessonRepository.GetById(newPrivateLesson.PrivateLessonID);
+            Teacher _teacher = _teacherRepository.GetById(ID)!;
+            newPrivateLesson.privateLessonDetails.TeacherID = _teacher.TeacherID;
+            _privateLessonRepository.Add(newPrivateLesson.privateLessonDetails);
+            StudentTeacher pLesson = _privateLessonRepository.GetById(newPrivateLesson.privateLessonDetails.PrivateLessonID)!;
             return RedirectToAction("LessonList");
         }
 
@@ -120,7 +127,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
         public IActionResult LessonList()
         {
             int id = 17;
-            Teacher teacher = _teacherRepository.GetById(id);
+            Teacher teacher = _teacherRepository.GetById(id)!;
             List<StudentTeacher> privateLessons = teacher.StudentTeachers;
             return View(privateLessons);
         }
@@ -130,7 +137,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
         {
             StudentTeacher? lessonDetails = _privateLessonRepository.GetById(id);
             List<LessonDTO> allLessonsList = _lessonRepository.GetAllT();
-            Teacher teacher = _teacherRepository.GetById(lessonDetails.TeacherID);
+            Teacher teacher = _teacherRepository.GetById(lessonDetails!.TeacherID)!;
 
 
             LessonDetailsViewModel model = new LessonDetailsViewModel
