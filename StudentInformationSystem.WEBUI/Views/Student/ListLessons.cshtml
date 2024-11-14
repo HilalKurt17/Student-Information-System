@@ -3,41 +3,44 @@
 @section Navbar{
     @await Html.PartialAsync("_navbarTSA.cshtml");
 }
-@model StudentTeachersViewModel
+@model StudentLessonListViewModel
 
 <link href="~/css/TeacherStudentCards.css" rel="stylesheet" />
 <div class="row">
     <div class="student-registration-div mb-5">
         <h1>
             <b>
-                Enrolled Lessons
+                Private Lesson List
             </b>
         </h1>
     </div>
 </div>
 <div class="teacher-card-container-div">
-    @foreach (StudentTeacher privateLesson in Model.student.StudentTeachers)
+    @foreach (Teacher teacher in Model.teachers)
     {
-            <div class="card m-4 cards-display">
-                <div class="card-header student-mylessons-header-color">
-                    <h5 class="card-title">
-                        <b>
-                            @privateLesson.LessonName
-                        </b>
-                    </h5>
-                    <a class="btn" asp-controller="Student" asp-action="LessonDetails" 
-                    asp-route-id="@privateLesson.PrivateLessonID">Details</a>
-                </div>
-                <div class="body student-mylessons-body-color">
-                    <div class="container-teacher-summary">
-                        <p>
-                            <b>Teacher:</b>
-                        @{
-                            Teacher teacher = Model.teachers.FirstOrDefault(i => i.TeacherID == privateLesson.TeacherID)!;
-                        }
-                            @(teacher.Name + " " + teacher.Surname)
-                        </p>
-                        <p>
+       
+        @foreach (StudentTeacher privateLesson in teacher.StudentTeachers)
+        {
+            if(Model.student.EducationLevel == privateLesson.ELClassification && 
+            privateLesson.StudentID == null)
+            {
+                <div class="card m-4 cards-display">
+                   <div class="card-header lesson-card-header-color">
+                       <h5>
+                           <b>
+                                @privateLesson.LessonName
+                           </b>
+                       </h5>
+                       <a class="btn" asp-controller="Student" asp-action="LessonDetails" 
+                       asp-route-id="@privateLesson.PrivateLessonID">Details</a>
+                   </div>
+                   <div class="body lesson-card-body-color">
+                        <div class="container-teacher-summary">
+                            <p>
+                                <b>Teacher:</b>
+                                @(privateLesson.Teacher.Name + " " + privateLesson.Teacher.Surname)
+                            </p>
+                            <p>
                             <b>Lesson Day(s):</b>
                             @privateLesson.LessonDate
                         </p>
@@ -59,10 +62,12 @@
                             <b>Lesson Price:</b>
                             @privateLesson.LessonPrice TL
                         </p>
-                    </div>
-                </div>
-            </div>   
+                        </div>
+                   </div>
+                </div> 
+            }  
+              
+        }
     }
     
 </div>
-

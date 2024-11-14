@@ -34,6 +34,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             return _context.Teachers
                 .Include(r => r.References)
                 .Include(t => t.TeacherLessons)
+                .Include(st => st.StudentTeachers)
                 .ToList();
         }
 

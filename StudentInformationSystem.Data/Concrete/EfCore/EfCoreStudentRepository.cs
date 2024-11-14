@@ -41,6 +41,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             Student? student = _context.Students
                 .Include(i => i.Address)
                 .Include(i => i.PaymentDetails)
+                .Include(i => i.StudentTeachers)
                 .FirstOrDefault(i => i.StudentID == id);
             return student;
         }

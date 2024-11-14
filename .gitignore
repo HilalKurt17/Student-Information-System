@@ -1,0 +1,41 @@
+# Visual Studio temporary files, build results, and files
+.vs/
+.vscode/
+.idea/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows Installer files
+*.pdb
+
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# .NET Core build files
+*.dll
+*.pdb
+*.exe
+
+# ASP.NET temporary files
+*/bin/
+*/obj/
+
+# Rider IDE
+.idea/
+
+# Exclude Node.js dependencies if working with Node.js
+node_modules/
+# .cache ve .sentinel uzantılı dosyalar
+*.cache
+*.sentinel

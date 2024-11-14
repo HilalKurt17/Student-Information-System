@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using StudentInformationSystem.Data.Abstract;
 using StudentInformationSystem.Entity;
+using StudentInformationSystem.WEBUI.ViewModels;
 
 namespace StudentInformationSystem.WEBUI.Controllers
 {
@@ -10,11 +11,13 @@ namespace StudentInformationSystem.WEBUI.Controllers
         private IStudentRepository _studentRepository;
         private ITeacherRepository _teacherRepository;
         private ILessonRepository _lessonRepository;
-        public StudentController(IStudentRepository studentRepository, ITeacherRepository teacherRepository, ILessonRepository lessonRepository)
+        private IPrivateLessonRepository _privateLessonRepository;
+        public StudentController(IStudentRepository studentRepository, ITeacherRepository teacherRepository, ILessonRepository lessonRepository, IPrivateLessonRepository privateLessonRepository)
         {
             _studentRepository = studentRepository;
             _teacherRepository = teacherRepository;
             _lessonRepository = lessonRepository;
+            _privateLessonRepository = privateLessonRepository;
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
@@ -25,7 +28,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
         [HttpGet] // show student profile in the index page
         public IActionResult Index()
         {
-            Student student = _studentRepository.GetById(5);
+            Student student = _studentRepository.GetById(5)!;
             return View(student);
         }
         // get updated student information from index page and update student
@@ -33,12 +36,35 @@ namespace StudentInformationSystem.WEBUI.Controllers
         public IActionResult Index(Student updatedStudent)
         {
             _studentRepository.Update(updatedStudent);
-            Student student = _studentRepository.GetById(updatedStudent.StudentID);
+            Student student = _studentRepository.GetById(updatedStudent.StudentID)!;
             return View(student);
         }
-        public IActionResult ListTeachers()
+
+        public IActionResult ListLessons() // list all private lessons according to education level of the student
         {
-            return View();
+            List<Teacher> allTeachers = _teacherRepository.GetAllT();
+            List<LessonDTO> allLessons = _lessonRepository.GetAllT();
+            StudentLessonListViewModel model = new StudentLessonListViewModel
+            {
+                teachers = allTeachers,
+                lessons = allLessons,
+                student = _studentRepository.GetById(5)!
+            };
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult LessonDetails(int id) // show lesson details to the student and send request to enroll the course
+        {
+            StudentTeacher privateLesson = _privateLessonRepository.GetById(id)!;
+            return View(privateLesson);
+        }
+
+        [HttpPost]
+        public IActionResult LessonDetails(StudentTeacher privateLesson)
+        {
+            privateLesson.StudentID = 5;
+            _privateLessonRepository.NewEnrollment(privateLesson);
+            return RedirectToAction("MyLessons");
         }
 
         public IActionResult MyAssessments()
@@ -48,7 +74,13 @@ namespace StudentInformationSystem.WEBUI.Controllers
 
         public IActionResult MyLessons()
         {
-            return View();
+            Student student = _studentRepository.GetById(5);
+            StudentTeachersViewModel model = new StudentTeachersViewModel
+            {
+                teachers = _teacherRepository.GetAllT(),
+                student = student
+            };
+            return View(model);
         }
     }
 }

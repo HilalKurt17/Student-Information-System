@@ -145,3 +145,13 @@ a.btn.student-btn-details:focus {
     background-color: #E6E6FA;
 }
 
+.student-mylessons-header-color {
+    color: white;
+    background-color: #366268 !important;
+}
+
+.student-mylessons-body-color {
+    color: black;
+    background-color: #c4e7ec !important;
+}
+

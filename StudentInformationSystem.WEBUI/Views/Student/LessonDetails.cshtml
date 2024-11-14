@@ -1,0 +1,114 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+
+@section Navbar{
+    @await Html.PartialAsync("_navbarTSA.cshtml");
+}
+
+@model StudentTeacher
+
+<form method="post" asp-controller="Student" asp-action="LessonDetails">
+    <div class="row">
+        <div class="student-registration-div mb-5">
+            <img class="me-4" src="~/images/_SIS.png" width=100px/>
+            <h1>
+                <b>LESSON DETAILS</b>
+            </h1>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-6">@*add Private Lesson ID, Student ID and Teacher ID for model binding*@
+            <input type="hidden" asp-for="@Model.PrivateLessonID" />
+            <input type="hidden" asp-for="@Model.StudentID" />
+            <input type="hidden" asp-for="@Model.TeacherID" />
+            <div class="form-group p-2">
+                <label for="LessonName">
+                    Lesson Name
+                </label>
+                <input disabled type="text" asp-for="@Model.LessonName" 
+                id="LessonName" class="form-control"/>
+            </div>
+            
+            @*get lesson mode and education level using model binding*@
+            <div class="form-group p-2">
+                <label for="ELClassification">
+                    Education Level
+                </label>
+                <input disabled class="form-control" type="text"  
+                id="ELClassification" asp-for="@Model.ELClassification">
+            </div>
+            <div class="form-group p-2">
+                <label for="LessonMode">
+                    Lesson Mode
+                </label>
+                <input disabled type="text" asp-for="@Model.LessonMode" class="form-control"
+                 id="LessonMode"/>
+            </div>
+            <div class="form-group p-2">
+                <label for="LessonDate"> @*get lesson day(s) using model binding*@
+                    Lesson Day(s)
+                </label>
+                <input type="text" id="LessonDate"  
+                   disabled class="form-control" asp-for="@Model.LessonDate"/>
+            </div>
+            <div class="form-group p-2">
+                <label for="LessonTime"> @*get lesson start time using model binding*@
+                    Lesson Start Time
+                </label>
+                <input id="LessonTime" type="time"  
+                   disabled class="form-control" asp-for="@Model.LessonStartTime"/> 
+            </div>
+            <div class="form-group p-2">
+                <label class="form-check-label" for="LessonEndTime" > @*get lesson end time using model binding*@
+                    Lesson End Time
+                </label>
+                <input type="time" id="LessonEndTime" 
+                 disabled class="form-control" asp-for="@Model.LessonEndTime"> 
+            </div>
+
+        </div>
+        <div class="col-6">
+            <div class="form-group p-2">
+                <label for="LessonStartDate">
+                    Lesson Start Date
+                </label> @*get lesson start date using model binding*@
+                <input type="date" id="LessonStartDate"  class="form-control" 
+                disabled asp-for="@Model.LessonStartDate"/>
+            </div>
+            <div class="form-group p-2">
+                <label for="LessonEndDate">
+                    Lesson End Date
+                </label> @*get lesson end date using model binding*@
+                <input type="date" id="LessonEndDate"  class="form-control" 
+                 disabled asp-for="@Model.LessonEndDate"/>
+            </div>
+            <div class="form-group p-2">
+                <label for="LessonPrice">
+                    Lesson Price
+                </label> @*get lesson price using model binding*@
+                <input type="number" id="LessonPrice" 
+                   disabled asp-for="@Model.LessonPrice" class="form-control">
+            </div>
+            <div class="form-group p-2 mt-4">
+                @*get lesson details using model binding*@
+                <label for="LessonDetails">
+                    Lesson Details
+                </label>
+                <textarea id="LessonDetails" asp-for="@Model.LessonDetails" disabled
+                placeholder="Lesson Details" class="form-control" style="height:120px">
+                </textarea>
+            </div>
+            <div class="form-group p-2 mt-4 d-grid">
+                <button class="btn btn-primary btn-features"  type="submit" 
+                style="display:block; width:auto">
+                    Enroll Lesson
+                </button>
+            </div>
+            
+        </div>
+        
+    </div>
+</form>

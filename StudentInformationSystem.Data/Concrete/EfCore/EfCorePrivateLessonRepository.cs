@@ -36,11 +36,19 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
         {
             return _context.StudentTeachers.FirstOrDefault(i => i.PrivateLessonID == id);
         }
+        public void NewEnrollment(StudentTeacher newEnrollment) // student enrollment
+        {
+            StudentTeacher oldEnrollment = GetById(newEnrollment.PrivateLessonID)!;
+            oldEnrollment.StudentID = newEnrollment.StudentID;
+            _context.SaveChanges();
+        }
 
         public void Update(StudentTeacher updatedEntity) // update private lesson information
         {
             _context.StudentTeachers.Update(updatedEntity);
             _context.SaveChanges();
         }
+
+
     }
 }
