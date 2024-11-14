@@ -154,7 +154,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
         [HttpPost]
         public IActionResult LessonDetails(LessonDetailsViewModel updatedLesson)
         {
-            if (updatedLesson.privateLessonDetails.RemoveLesson != null && updatedLesson.privateLessonDetails.RemoveLesson == true)
+            if (updatedLesson.privateLessonDetails.RemoveLesson == true)
             {
                 _privateLessonRepository.Delete(updatedLesson.privateLessonDetails.PrivateLessonID); // delete the lesson
             }
@@ -171,7 +171,15 @@ namespace StudentInformationSystem.WEBUI.Controllers
             return View();
         }
 
-        public IActionResult StudentAssessments() // assign new assessment to the students or view the assigned assessments and grade them
+        [HttpGet]
+        public IActionResult NewAssignment() // assign new assessment to the students 
+        {
+            Assignment model = new Assignment();
+            return View("StudentAssignments", model);
+        }
+
+        [HttpGet]
+        public IActionResult NewAssignments(Assignment newAssignment)
         {
             return View();
         }

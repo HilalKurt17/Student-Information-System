@@ -23,6 +23,8 @@ namespace StudentInformationSystem.Entity
         public string? DueDate { get; set; }
         public string? DueTime { get; set; }
         // ----------------------------------------------------------------------------------------
+        public string? TeacherAssignmentFilePath { get; set; }
+        public string? StudentAssignmentFilePath { get; set; }
         public int TeacherID { get; set; }
         public Teacher Teacher { get; set; }
         public int StudentID { get; set; }
