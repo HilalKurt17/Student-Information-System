@@ -12,14 +12,16 @@ namespace StudentInformationSystem.WEBUI.Controllers
         ITeacherRepository _teacherRepository;
         ILessonRepository _lessonRepository;
         IPrivateLessonRepository _privateLessonRepository;
+        IAssignmentRepository _assignmentRepository;
 
         // implement repositories using dependency injection
-        public TeacherController(IStudentRepository studentRepository, ITeacherRepository teacherRepository, ILessonRepository lessonRepository, IPrivateLessonRepository privateLessonRepository)
+        public TeacherController(IStudentRepository studentRepository, ITeacherRepository teacherRepository, ILessonRepository lessonRepository, IPrivateLessonRepository privateLessonRepository, IAssignmentRepository assignmentRepository)
         {
             _studentRepository = studentRepository;
             _teacherRepository = teacherRepository;
             _lessonRepository = lessonRepository;
             _privateLessonRepository = privateLessonRepository;
+            _assignmentRepository = assignmentRepository;
         }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
@@ -174,14 +176,35 @@ namespace StudentInformationSystem.WEBUI.Controllers
         [HttpGet]
         public IActionResult NewAssignment() // assign new assessment to the students 
         {
-            Assignment model = new Assignment();
+            TeacherAssignmentViewModel model = new TeacherAssignmentViewModel
+            {
+                teacher = _teacherRepository.GetById(17),
+                students = _studentRepository.GetAllT(),
+                assignment = new Assignment()
+            };
             return View("StudentAssignments", model);
         }
 
-        [HttpGet]
-        public IActionResult NewAssignments(Assignment newAssignment)
+        [HttpPost]
+        public async Task<IActionResult> NewAssignment(TeacherAssignmentViewModel newAssignment)
         {
-            return View();
+            if (newAssignment.TeacherAssignmentFile != null && newAssignment.TeacherAssignmentFile.Length > 0)
+            {
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", newAssignment.TeacherAssignmentFile.FileName);
+
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await newAssignment.TeacherAssignmentFile.CopyToAsync(stream);
+                }
+                var FileURL = Url.Content($"~/uploads/{newAssignment.TeacherAssignmentFile.FileName}");
+                newAssignment.assignment!.TeacherAssignmentFilePath = FileURL.ToString();
+            }
+            _assignmentRepository.Add(newAssignment.assignment!);
+            return View("AssignmentList");
         }
     }
 }

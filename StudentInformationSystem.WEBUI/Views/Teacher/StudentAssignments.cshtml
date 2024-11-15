@@ -4,6 +4,78 @@
     @await Html.PartialAsync("_navbarTSA.cshtml");
 }
 
-<form method="POST" asp-controller="Teacher" asp-action="StudentAssessments">
+@model TeacherAssignmentViewModel
 
+<form method="POST" asp-controller="Teacher" asp-action="StudentAssignments" enctype="multipart/form-data">
+    <div class="row">
+        <div class="student-registration-div mb-5">
+            <img class="me-4" src="~/images/_SIS.png" width=100px; />
+            <h1><b>
+                New Student Assignment
+            </b></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <input type="hidden" asp-for="@Model.assignment.AssignmentID" />
+            <div class="input-group p-2">
+                <select class="form-select me-3" id="AssignmentType" 
+                asp-for="@Model.assignment.Type">
+                    <option selected disabled> Assignment Type </option>
+                    <option value="Homework">Homework</option>
+                    <option value="Project">Project</option>
+                    <option value="Quiz">Quiz</option>
+                    <option value="Exam">Exam</option>
+                </select>
+
+                <select class="form-select" asp-for="@Model.assignment.StudentID">
+                    <option selected disabled> Student </option>
+                   @{
+                        List<Student> TeacherStudents = new List<Student>();
+                    }
+                    @foreach (StudentTeacher privateLesson in Model.teacher.StudentTeachers)
+                    {
+                        int? studentID = privateLesson.StudentID;
+                        if(studentID != null)
+                        {
+                            Student student = Model.students.FirstOrDefault(i=>i.StudentID == studentID)!;
+                            Student? result = TeacherStudents.FirstOrDefault(i => i.StudentID == student.StudentID);
+                            if(result == null)
+                            {
+                                TeacherStudents.Add(student);
+                            }
+
+                            
+                        }
+
+                    }
+                    @foreach(Student st in TeacherStudents)
+                    {
+                        <option value="@st">
+                                @(st.Name + " " + st.Surname)
+
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="form-group p-2">
+                <label for="AssignmentSubject">
+                    Assignment Subject
+                </label>
+                <input id="AssignmentSubject" class="form-control" asp-for="@Model.assignment.Subject" />
+            </div>
+            <div class="form-group p-2">
+                <label for="AssignmentDetails">
+                    Assignment Details
+                </label>
+                <input id="AssignmentDetails" class="form-control" asp-for="@Model.assignment.Explanation" />
+            </div>
+            <div class="form-group p-2">
+                <label for="Assignment"
+            </div>
+        </div>
+        <div class="col-6">
+
+        </div>
+    </div>
 </form>

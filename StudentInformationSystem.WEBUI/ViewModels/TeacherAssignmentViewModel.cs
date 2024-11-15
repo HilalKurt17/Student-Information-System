@@ -2,12 +2,11 @@
 
 namespace StudentInformationSystem.WEBUI.ViewModels
 {
-    public class AssignmentViewModel
+    public class TeacherAssignmentViewModel
     {
         public Assignment? assignment { get; set; }
-        public List<Teacher>? teachers { get; set; }
-        public List<Student>? students { get; set; }
+        public Teacher? teacher { get; set; }
+        public List<Student> students { get; set; }
         public IFormFile? TeacherAssignmentFile { get; set; }
-        public IFormFile? StudentAssignmentFile { get; set; }
     }
 }

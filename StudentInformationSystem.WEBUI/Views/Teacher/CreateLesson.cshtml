@@ -26,6 +26,7 @@
             <input type="hidden" asp-for="@Model.privateLessonDetails.TeacherID" />
             <div class="form-group p-2">
                 <select class="form-select mt-4" id="Name" asp-for="@Model.privateLessonDetails.LessonName">
+                    <option selected disabled>Class Name</option>
                     @foreach (TeacherLesson _lesson in @Model.teacher.TeacherLessons)
                     {
                         LessonDTO? getLessonName = Model.allLessons.FirstOrDefault(i => i.LessonID == _lesson.LessonID);
