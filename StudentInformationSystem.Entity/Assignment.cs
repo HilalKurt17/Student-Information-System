@@ -29,6 +29,7 @@ namespace StudentInformationSystem.Entity
         public Teacher Teacher { get; set; }
         public int StudentID { get; set; }
         public Student Student { get; set; }
+        public int LessonID { get; set; }
 
     }
 }
