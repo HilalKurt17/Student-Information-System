@@ -24,13 +24,14 @@
         <div class="card m-4 cards-display">
             <div class="card-header lesson-card-header-color">
                 <h5 class="card-title"><b> @*show name of the private lesson*@
-                    @privateLesson.LessonName
+                    @(privateLesson.PrivateLessonID + " | " + privateLesson.LessonName)
                 </b></h5>
                 <a class="btn" asp-controller="Teacher" asp-action="LessonDetails" 
                 asp-route-id="@privateLesson.PrivateLessonID">Details</a> @*create button for lesson details page*@
             </div>
             <div class="body lesson-card-body-color">
                 <div class="container-teacher-summary">
+                    
                     <p><b>Education Level:</b> @*show required education level of students to take the lesson*@
                         @privateLesson.ELClassification    
                     </p>

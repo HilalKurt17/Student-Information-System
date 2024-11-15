@@ -8,17 +8,18 @@
 
 <form method="POST" asp-controller="Teacher" asp-action="StudentAssignments" enctype="multipart/form-data">
     <div class="row">
-        <div class="student-registration-div mb-5">
-            <img class="me-4" src="~/images/_SIS.png" width=100px; />
-            <h1><b>
+        <div class="student-registration-div mb-2">
+            <img class="me-4" src="~/images/_SIS.png" width=80px; />
+            <h3><b>
                 New Student Assignment
-            </b></h1>
+            </b></h3>
         </div>
     </div>
     <div class="row">
         <div class="col-6">
             <input type="hidden" asp-for="@Model.assignment.AssignmentID" />
-            <div class="input-group p-2">
+            <div class="input-group p-2 mt-4">
+                
                 <select class="form-select me-3" id="AssignmentType" 
                 asp-for="@Model.assignment.Type">
                     <option selected disabled> Assignment Type </option>
@@ -27,7 +28,8 @@
                     <option value="Quiz">Quiz</option>
                     <option value="Exam">Exam</option>
                 </select>
-
+             
+                
                 <select class="form-select" asp-for="@Model.assignment.StudentID">
                     <option selected disabled> Student </option>
                    @{
@@ -51,20 +53,24 @@
                     }
                     @foreach(Student st in TeacherStudents)
                     {
-                        <option value="@st">
+                        <option value="@st.StudentID">
                                 @(st.Name + " " + st.Surname)
 
                         </option>
                     }
                 </select>
+               
+                
+                
             </div>
             <div class="form-group p-2">
-                <label for="LessonID">
+                    <label for="LessonID">
+                        Lesson ID
+                    </label>
                     <input type="number" min="1"
                         id="LessonID" class="form-control" 
                     asp-for="@Model.assignment.LessonID" />
-                </label>
-            </div>
+                </div>
             <div class="form-group p-2">
                 <label for="AssignmentSubject">
                     Assignment Subject
@@ -76,14 +82,41 @@
                 <label for="AssignmentDetails">
                     Assignment Details
                 </label>
-                <input id="AssignmentDetails" class="form-control" asp-for="@Model.assignment.Explanation" />
+                <textarea style="height:100px;" id="AssignmentDetails" class="form-control" 
+                asp-for="@Model.assignment.Explanation"></textarea>
+            </div>
+            
+            
+        </div>
+        
+        <div class="col-6" style="margin-left:auto;">
+            <div class="form-group p-2">
+                <label for="AssignmentDueDate">
+                    Due Date
+                </label>
+                <input type="date" id="AssignmentDueDate" class="form-control" 
+                    asp-for="@Model.assignment.DueDate" />
             </div>
             <div class="form-group p-2">
-                <label for="Assignment"
+                <label for="AssignmentDueTime">
+                    Due Time
+                </label>
+                <input type="time" id="AssignmentDueTime" class="form-control"
+                asp-for="@Model.assignment.DueTime" />
             </div>
-        </div>
-        <div class="col-6">
-
+            <div class="form-group p-2">
+                <label for="TeacherAssignmentDocument">
+                   Assignment (Document)
+                </label>
+                <input type="file" itemid="TeacherAssignmentDocument" class="form-control" 
+                asp-for="@Model.TeacherAssignmentFile" />
+            </div>
+            <div class="form-group p-2 d-grid mt-4">
+                <button type="submit" class="btn btn-primary btn-features" 
+                style="display:block; width:auto;">
+                    Add Assignment 
+                </button> 
+            </div>
         </div>
     </div>
 </form>

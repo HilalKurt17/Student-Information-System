@@ -1,8 +1,10 @@
 ﻿
 .container{
     position: relative;
-    margin: 70px;
-    padding: 70px;
+    margin: 50px;
+    padding: 50px;
+    margin-left: auto !important;
+    margin-right: auto !important;
    
     align-content:center;
     align-items: center;

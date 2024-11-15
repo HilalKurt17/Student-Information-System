@@ -13,6 +13,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
         public void Add(Assignment entity)
         {
             _context.Add(entity);
+            _context.SaveChanges();
         }
 
         public void Delete(int id)

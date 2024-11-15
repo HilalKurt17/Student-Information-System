@@ -203,6 +203,9 @@ namespace StudentInformationSystem.WEBUI.Controllers
                 var FileURL = Url.Content($"~/uploads/{newAssignment.TeacherAssignmentFile.FileName}");
                 newAssignment.assignment!.TeacherAssignmentFilePath = FileURL.ToString();
             }
+            DateTime today = DateTime.Now;
+            newAssignment.assignment.CreatedDate = today.Date.ToString();
+            newAssignment.assignment.CreatedTime = today.TimeOfDay.ToString();
             _assignmentRepository.Add(newAssignment.assignment!);
             return View("AssignmentList");
         }
