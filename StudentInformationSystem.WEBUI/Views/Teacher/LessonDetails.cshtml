@@ -17,16 +17,38 @@
                 <b>LESSON DETAILS</b>
             </h1>
         </div>
+         
         
     </div>
     <div class="row">
+        <input type="hidden" id="isStudentEnrolled" value="@Model.student.StudentID" />
+        @if(Model.student.StudentID == null || Model.student.StudentID==0)
+        {
+            <div class="alert alert-info" role="alert">
+                There is no enrolled student in the lesson.
+            </div>
+            
+        }
         <div class="col-6">@*add Private Lesson ID, Student ID and Teacher ID for model binding*@
             <input type="hidden" asp-for="@Model.privateLessonDetails.PrivateLessonID" />
             <input type="hidden" asp-for="@Model.privateLessonDetails.StudentID" />
             <input type="hidden" asp-for="@Model.privateLessonDetails.TeacherID" />
+
+            @if(Model.student.StudentID != null && Model.student.StudentID !=0)
+            {
+               <div class="form-group p-2">
+                    <label for="StudentNameSurname">
+                        Student Name
+                    </label>
+                    <input disabled type="text" id="StudentNameSurname" class="form-control"
+                        value="@(Model.student.Name + " " + Model.student.Surname)"/>
+                </div> 
+            }
+            
             <div class="form-group p-2">
    
-                <select class="form-select mt-4" asp-for="@Model.privateLessonDetails.LessonName">
+                <select class="form-select mt-4" id="lessonName"
+                asp-for="@Model.privateLessonDetails.LessonName">
                 <option disabled selected>Lesson Name</option>
                 @foreach (TeacherLesson _lesson in Model.teacher.TeacherLessons)
                 {
@@ -42,7 +64,8 @@
             
             @*get lesson mode and education level using model binding*@
             <div class="input-group p-2 mt-4">
-                <select class="form-select me-3" asp-for="@Model.privateLessonDetails.ELClassification">
+                <select class="form-select me-3" id="educationLevel"
+                asp-for="@Model.privateLessonDetails.ELClassification">
                 <option disabled selected>Education Level</option>
                 <option value="Elementary School">Elementary School</option>
                 <option value="Middle School">Middle School</option>
@@ -75,6 +98,7 @@
                 <input type="time" id="LessonEndTime" 
                  class="form-control" asp-for="@Model.privateLessonDetails.LessonEndTime"> 
             </div>
+            
             <div class="form-group p-2">
                 <div class="form-check" >
                 
@@ -124,3 +148,15 @@
         
     </div>
 </form>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var isStudentEnrolled = document.getElementById("isStudentEnrolled").value;
+    if ((isStudentEnrolled != 0) && (isStudentEnrolled != null)) {
+        var educationLevel = document.getElementById("educationLevel");
+        var lessonName = document.getElementById("lessonName");
+        educationLevel.disabled = true;
+        lessonName.disabled = true;
+    }
+});
+</script>

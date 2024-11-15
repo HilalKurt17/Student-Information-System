@@ -140,13 +140,22 @@ namespace StudentInformationSystem.WEBUI.Controllers
             StudentTeacher? lessonDetails = _privateLessonRepository.GetById(id);
             List<LessonDTO> allLessonsList = _lessonRepository.GetAllT();
             Teacher teacher = _teacherRepository.GetById(lessonDetails!.TeacherID)!;
-
+            Student student;
+            if (lessonDetails.StudentID != null)
+            {
+                student = _studentRepository.GetById((int)lessonDetails.StudentID)!;
+            }
+            else
+            {
+                student = new Student();
+            }
 
             LessonDetailsViewModel model = new LessonDetailsViewModel
             {
                 allLessons = allLessonsList,
                 privateLessonDetails = lessonDetails,
-                teacher = teacher
+                teacher = teacher,
+                student = student
             };
             return View(model);
         }
