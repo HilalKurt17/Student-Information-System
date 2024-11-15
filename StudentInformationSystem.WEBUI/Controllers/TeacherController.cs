@@ -213,9 +213,9 @@ namespace StudentInformationSystem.WEBUI.Controllers
                 newAssignment.assignment!.TeacherAssignmentFilePath = FileURL.ToString();
             }
             DateTime today = DateTime.Now;
-            newAssignment.assignment.CreatedDate = today.Date.ToString();
-            newAssignment.assignment.CreatedTime = today.TimeOfDay.ToString();
-            _assignmentRepository.Add(newAssignment.assignment!);
+            newAssignment.assignment.CreatedDate = today.Date.ToString("yyyy-MM-dd");
+            newAssignment.assignment.CreatedTime = today.TimeOfDay.ToString(@"hh\:mm\:ss");
+            _assignmentRepository.Add(newAssignment.assignment);
             return View("AssignmentList");
         }
     }

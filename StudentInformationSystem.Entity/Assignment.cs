@@ -9,10 +9,10 @@ namespace StudentInformationSystem.Entity
         public string Type { get; set; }
         public string Subject { get; set; }
         public string Explanation { get; set; }
-        public int Grade { get; set; }
-        public string FailedTopics { get; set; }
-        public bool IsCompleted { get; set; }
-        public bool IsGraded { get; set; }
+        public int? Grade { get; set; }
+        public string? FailedTopics { get; set; }
+        public bool? IsCompleted { get; set; }
+        public bool? IsGraded { get; set; }
         // these parts are assigned as a string for model binding operation. These dates and times will be assigned automatically ---------------------------------------------------------
         public string? CreatedDate { get; set; }
         public string? CreatedTime { get; set; }
