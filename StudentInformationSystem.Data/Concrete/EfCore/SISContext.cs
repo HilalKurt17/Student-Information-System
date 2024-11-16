@@ -18,6 +18,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
         public DbSet<Payment> PaymentDetails { get; set; }
         public DbSet<References> TeacherReferences { get; set; }
         public DbSet<WorkExperience> WorkExperiences { get; set; }
+        public DbSet<Passwords> Passwords { get; set; }
 
 
         public DbSet<StudentTeacher> StudentTeachers { get; set; } // used to store private lessons
@@ -57,6 +58,9 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             modelBuilder.Entity<StudentTeacher>()
                 .Property(st => st.RemoveLesson)
                 .HasDefaultValue(false);
+            // define key of passwords
+            modelBuilder.Entity<Passwords>()
+                .HasKey(p => p.PasswordsID);
 
             // define relation between teacher and student
             modelBuilder.Entity<StudentTeacher>()
@@ -100,6 +104,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
                 .HasOne(sl => sl.Lesson)
                 .WithMany(s => s.StudentLessons)
                 .HasForeignKey(sl => sl.LessonID);
+
             // define relation between student and address
             modelBuilder.Entity<Student>()
                 .HasOne(s => s.Address)

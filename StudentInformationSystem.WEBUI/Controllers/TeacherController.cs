@@ -183,7 +183,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
         }
 
         [HttpGet]
-        public IActionResult NewAssignment() // assign new assessment to the students 
+        public IActionResult NewAssignment() // create new assignment to the students 
         {
             TeacherAssignmentViewModel model = new TeacherAssignmentViewModel
             {
@@ -194,7 +194,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
             return View("StudentAssignments", model);
         }
 
-        [HttpPost]
+        [HttpPost] // save the assignment
         public async Task<IActionResult> NewAssignment(TeacherAssignmentViewModel newAssignment)
         {
             if (newAssignment.TeacherAssignmentFile != null && newAssignment.TeacherAssignmentFile.Length > 0)
