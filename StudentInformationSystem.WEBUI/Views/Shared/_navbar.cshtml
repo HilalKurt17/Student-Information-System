@@ -1,4 +1,5 @@
 ﻿@*----------NAVBAR FOR HOME PAGE----------*@
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 <link href="@Url.Content("~/css/navbarHomeSheet.css")" rel="stylesheet" />
 
 <nav class="navbar navbar-expand-lg bg-navbar navbar-titles-color">
@@ -15,11 +16,11 @@
             </div>
             @*sign in and sign up links are added to the navbar*@
             <div class="navbar-items-right me-4">
-                <a class="sign-in-up" href="#">Sign In</a>
+                <a class="sign-in-up" asp-controller="Home" asp-action="SignIn">Sign In</a>
 
                 <span>/</span>
     
-                <a class="sign-in-up" href="#">Sign Up</a>
+                <a class="sign-in-up" asp-controller="Home" asp-action="SignUp">Sign Up</a>
             </div>
    </div>
 </nav>

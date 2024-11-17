@@ -20,6 +20,7 @@ builder.Services.AddScoped<IPaymentDetailsRepository, EfCorePaymentDetailsReposi
 builder.Services.AddScoped<IReferencesRepository, EfCoreReferencesRepository>();
 builder.Services.AddScoped<IWorkExperienceRepository, EfCoreWorkExperienceRepository>();
 builder.Services.AddScoped<IPrivateLessonRepository, EfCorePrivateLessonRepository>();
+builder.Services.AddScoped<IPasswordRepository, EfCorePasswordRepository>();
 
 
 var app = builder.Build();

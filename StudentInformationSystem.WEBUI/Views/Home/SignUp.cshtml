@@ -1,0 +1,69 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@section Navbar{
+    @await Html.PartialAsync("_navbar.cshtml")
+}
+@model Passwords
+
+<link href="~/css/TeacherDetailsPageDesign.css" rel="stylesheet"/>
+<form asp-controller="Home" asp-action="SignUp" method="post">
+    <div class="row">
+        <div class="student-registration-div mb-4" style="justify-content:center !important;">
+            <h1><b>
+                Sign Up
+            </b></h1>
+        </div>
+    </div>
+    <div class="row" style="justify-content:center !important;">
+        <div class="col-6">
+            @if (ViewBag.SignUp == "UnknownMail")
+            {
+                <div class="alert alert-danger" role="alert">
+                    Invalid Email/User
+                </div>
+            }
+            <input type="hidden" asp-for="@Model.PasswordsID" />
+            <div class="form-group p-2">
+                <label for="usermail">
+                    User Mail
+                </label>
+                <input class="form-control" type="email" asp-for="@Model.userMail" 
+                id="usermail" required/>
+            </div>
+            <div class="form-group p-2">
+               <label for="userPassword">
+                   Password
+               </label>
+               <input type="password" asp-for="@Model.Password" 
+               class="form-control" id="userPassword" required/>
+            </div>
+            <div class="form-group p-2">
+                <label for="userPasswordCheck">
+                    Confirm Password
+                </label>
+                <input type="password" id="userPasswordCheck" class="form-control" required/>
+            </div>
+            <div class="alert alert-danger" role="alert" style="display:none;" id="unmatchedPassword">
+                *Passwords are not matched.
+            </div>
+            <div class="form-group d-grid p-2 mt-3">
+                <button type="submit" class="btn btn-primary btn-features" style="display:block;">
+                    Sign Up
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+document.getElementById("userPasswordCheck").addEventListener("input", function() {
+    var firstPassword = document.getElementById("userPassword").value;
+    var confirmPassword = document.getElementById("userPasswordCheck").value;
+    var alertdiv = document.getElementById("unmatchedPassword");
+    if (firstPassword === confirmPassword) {
+        
+        alertdiv.style.display = "none";
+    }
+    else{
+        alertdiv.style.display = "block";
+    }
+});
+</script>
