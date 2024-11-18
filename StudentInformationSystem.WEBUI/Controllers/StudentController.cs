@@ -28,7 +28,8 @@ namespace StudentInformationSystem.WEBUI.Controllers
         [HttpGet] // show student profile in the index page
         public IActionResult Index()
         {
-            Student student = _studentRepository.GetById(5)!;
+            int studentID = Convert.ToInt32(Request.Cookies["userID"]);
+            Student student = _studentRepository.GetById(studentID)!;
             return View(student);
         }
         // get updated student information from index page and update student
@@ -42,13 +43,14 @@ namespace StudentInformationSystem.WEBUI.Controllers
 
         public IActionResult ListLessons() // list all private lessons according to education level of the student
         {
+            int studentID = Convert.ToInt32(Request.Cookies["userID"]);
             List<Teacher> allTeachers = _teacherRepository.GetAllT();
             List<LessonDTO> allLessons = _lessonRepository.GetAllT();
             StudentLessonListViewModel model = new StudentLessonListViewModel
             {
                 teachers = allTeachers,
                 lessons = allLessons,
-                student = _studentRepository.GetById(5)!
+                student = _studentRepository.GetById(studentID)!
             };
             return View(model);
         }
@@ -62,7 +64,8 @@ namespace StudentInformationSystem.WEBUI.Controllers
         [HttpPost]
         public IActionResult LessonDetails(StudentTeacher privateLesson)
         {
-            privateLesson.StudentID = 5;
+            int studentID = Convert.ToInt32(Request.Cookies["userID"]);
+            privateLesson.StudentID = studentID;
             _privateLessonRepository.NewEnrollment(privateLesson);
             return RedirectToAction("MyLessons");
         }
@@ -74,7 +77,8 @@ namespace StudentInformationSystem.WEBUI.Controllers
 
         public IActionResult MyLessons()
         {
-            Student student = _studentRepository.GetById(5);
+            int studentID = Convert.ToInt32(Request.Cookies["userID"]);
+            Student student = _studentRepository.GetById(studentID)!;
             StudentTeachersViewModel model = new StudentTeachersViewModel
             {
                 teachers = _teacherRepository.GetAllT(),

@@ -34,6 +34,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
         [HttpPost]
         public IActionResult SignIn(SignInViewModel model)
         {
+
             Passwords password = new Passwords()
             {
                 Password = model.password,
@@ -48,6 +49,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
                     Passwords userPasswordDetails = passwords.FirstOrDefault(i => i.userMail == teacher.Mail)!;
                     if (userPasswordDetails.Password == password.Password)
                     {
+                        AddUserInfoToCookies(teacher.TeacherID);
                         return RedirectToAction("Index", "Teacher");
                     }
 
@@ -61,6 +63,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
                     Passwords userPasswordDetails = passwords.FirstOrDefault(i => i.userMail == student.Mail)!;
                     if (userPasswordDetails.Password == password.userMail)
                     {
+                        AddUserInfoToCookies(student.StudentID);
                         return RedirectToAction("Index", "Student");
                     }
                 }
@@ -112,6 +115,19 @@ namespace StudentInformationSystem.WEBUI.Controllers
             }
             ViewBag.SignUp = "UnknownMail";
             return View(model);
+        }
+
+        public void AddUserInfoToCookies(int userID)
+        {
+            var options = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(1),
+                HttpOnly = true,
+                Secure = true
+            };
+
+            Response.Cookies.Append("UserID", userID.ToString(), options);
+
         }
     }
 }

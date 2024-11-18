@@ -30,8 +30,8 @@ namespace StudentInformationSystem.WEBUI.Controllers
         }
         public IActionResult Index() // home-profile get teacher information by teacher id
         {
-
-            Teacher _teacher = _teacherRepository.GetById(17)!;
+            int teacherID = Convert.ToInt32(Request.Cookies["userID"]);
+            Teacher _teacher = _teacherRepository.GetById(teacherID)!;
             List<LessonDTO> _lessons = _lessonRepository.GetAllT();
             TeacherDetailsViewModel teacherDetails = new TeacherDetailsViewModel
             {
@@ -102,11 +102,12 @@ namespace StudentInformationSystem.WEBUI.Controllers
         // new private lesson creation page
         public IActionResult CreateLesson()
         {
+            int teacherID = Convert.ToInt32(Request.Cookies["userID"]);
             StudentTeacher privateLesson = new StudentTeacher();
             LessonDetailsViewModel model = new LessonDetailsViewModel
             {
                 allLessons = _lessonRepository.GetAllT(),
-                teacher = _teacherRepository.GetById(17)!,
+                teacher = _teacherRepository.GetById(teacherID)!,
                 privateLessonDetails = privateLesson
 
             };
@@ -117,8 +118,8 @@ namespace StudentInformationSystem.WEBUI.Controllers
         [HttpPost]
         public IActionResult CreateLesson(LessonDetailsViewModel newPrivateLesson)
         {
-            int ID = 17;
-            Teacher _teacher = _teacherRepository.GetById(ID)!;
+            int teacherID = Convert.ToInt32(Request.Cookies["userID"]);
+            Teacher _teacher = _teacherRepository.GetById(teacherID)!;
             newPrivateLesson.privateLessonDetails.TeacherID = _teacher.TeacherID;
             _privateLessonRepository.Add(newPrivateLesson.privateLessonDetails);
             StudentTeacher pLesson = _privateLessonRepository.GetById(newPrivateLesson.privateLessonDetails.PrivateLessonID)!;
@@ -128,8 +129,8 @@ namespace StudentInformationSystem.WEBUI.Controllers
         // list all private lessons
         public IActionResult LessonList()
         {
-            int id = 17;
-            Teacher teacher = _teacherRepository.GetById(id)!;
+            int teacherID = Convert.ToInt32(Request.Cookies["userID"]);
+            Teacher teacher = _teacherRepository.GetById(teacherID)!;
             List<StudentTeacher> privateLessons = teacher.StudentTeachers;
             return View(privateLessons);
         }
@@ -185,9 +186,10 @@ namespace StudentInformationSystem.WEBUI.Controllers
         [HttpGet]
         public IActionResult NewAssignment() // create new assignment to the students 
         {
+            int teacherID = Convert.ToInt32(Request.Cookies["userID"]);
             TeacherAssignmentViewModel model = new TeacherAssignmentViewModel
             {
-                teacher = _teacherRepository.GetById(17),
+                teacher = _teacherRepository.GetById(teacherID),
                 students = _studentRepository.GetAllT(),
                 assignment = new Assignment()
             };
