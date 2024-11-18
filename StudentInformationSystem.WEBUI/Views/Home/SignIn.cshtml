@@ -29,13 +29,14 @@
                     User Mail
                 </label>
                 <input class="form-control" type="email"  asp-for="mail" 
-                id="userMail" />
+                id="userMail" required/>
             </div>
             <div class="form-group p-2">
                <label for="Password">
                    Password
                </label>
-               <input type="password" asp-for="password" class="form-control" id="Password"/>
+               <input type="password" asp-for="password" class="form-control" id="Password"
+               required/>
             </div>
 
             <div class="form-group d-grid p-2 mt-3">

@@ -2,7 +2,7 @@
 @section Navbar{
     @await Html.PartialAsync("_navbar.cshtml")
 }
-@model Passwords
+@model SignInViewModel
 
 <link href="~/css/TeacherDetailsPageDesign.css" rel="stylesheet"/>
 <form asp-controller="Home" asp-action="SignUp" method="post">
@@ -21,19 +21,19 @@
                     Invalid Email/User
                 </div>
             }
-            <input type="hidden" asp-for="@Model.PasswordsID" />
+          
             <div class="form-group p-2">
                 <label for="usermail">
                     User Mail
                 </label>
-                <input class="form-control" type="email" asp-for="@Model.userMail" 
+                <input class="form-control" type="email" asp-for="mail" 
                 id="usermail" required/>
             </div>
             <div class="form-group p-2">
                <label for="userPassword">
                    Password
                </label>
-               <input type="password" asp-for="@Model.Password" 
+               <input type="password" asp-for="password" 
                class="form-control" id="userPassword" required/>
             </div>
             <div class="form-group p-2">

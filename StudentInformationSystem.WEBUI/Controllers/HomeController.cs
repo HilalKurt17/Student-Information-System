@@ -79,14 +79,19 @@ namespace StudentInformationSystem.WEBUI.Controllers
         public IActionResult SignUp()
         {
             ViewBag.SignUp = "";
-            Passwords model = new Passwords();
+            SignInViewModel model = new SignInViewModel();
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult SignUp(Passwords password)
+        public IActionResult SignUp(SignInViewModel model)
         {
-            ViewBag.SignUp = "UnknownMail";
+            Passwords password = new Passwords()
+            {
+                Password = model.password,
+                userMail = model.mail
+            };
+
             List<Teacher> teachers = _teacherRepository.GetAllT();
             foreach (Teacher teacher in teachers)
             {
@@ -105,7 +110,8 @@ namespace StudentInformationSystem.WEBUI.Controllers
                     return RedirectToAction("SignIn");
                 }
             }
-            return View(password);
+            ViewBag.SignUp = "UnknownMail";
+            return View(model);
         }
     }
 }
