@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentInformationSystem.Data.Abstract;
 using StudentInformationSystem.Entity;
+using StudentInformationSystem.WEBUI.ViewModels;
 
 namespace StudentInformationSystem.WEBUI.Controllers
 {
@@ -26,13 +27,18 @@ namespace StudentInformationSystem.WEBUI.Controllers
         public IActionResult SignIn()
         {
             ViewBag.SignIn = "";
-            Passwords model = new Passwords();
+            SignInViewModel model = new SignInViewModel();
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult SignIn(Passwords password)
+        public IActionResult SignIn(SignInViewModel model)
         {
+            Passwords password = new Passwords()
+            {
+                Password = model.password,
+                userMail = model.mail
+            };
             List<Teacher> teachers = _teacherRepository.GetAllT();
             List<Passwords> passwords = _passwordRepository.GetAllT();
             foreach (Teacher teacher in teachers)
