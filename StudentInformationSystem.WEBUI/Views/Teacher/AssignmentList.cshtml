@@ -7,8 +7,16 @@
 @model TeacherAssignmentListViewModel
 
 <link href="~/css/assignmentList.css" rel="stylesheet" />
-<div class="table-responsive">
-<table class="table table-hover">
+<div class="row">
+    <div class="student-registration-div mb-4">
+        <img class="me-4" src="~/images/_SIS.png" width=60px/>
+        <h1>
+            <b>Assignment List</b>
+        </h1>
+    </div>
+</div>
+<div class="table-responsive pt-2">
+<table class="table table-hover" onload="assignmentColors()">
     <thead>
         <tr>
             <th scope="col">
@@ -49,50 +57,95 @@
             string assignmentType = assignment.Type;
             string assignmentSubject = assignment.Subject;
             string dueDate = assignment.DueDate!;
+            string dueTime = assignment.DueTime!;
             string? submissionDate = assignment.SubmittedDate;
             int assignmentID = assignment.AssignmentID;
-            <tr>
-                <td>
+            @*change color of the row to a red if the deadline is over*@
+                
+            DateTime datetime = DateTime.Now;
+            string date = datetime.Date.ToString("yyyy/MM/dd");
+            string time = datetime.ToString("hh:mm");
+
+            DateOnly dateNow = DateOnly.Parse(date);
+            DateOnly dueDateAssignment = DateOnly.Parse(dueDate);
+
+            TimeOnly timeNow = TimeOnly.Parse(time);
+            TimeOnly dueTimeAssignment = TimeOnly.Parse(dueTime);
+                
+            string colorOfAssignmentRow = "white";
+
+            if (dueDateAssignment < dateNow && 
+                (submissionDate == null || submissionDate == ""))
+            {
+                colorOfAssignmentRow = "#f1b3c0";
+            }
+            else if(dueDateAssignment == dateNow && dueTimeAssignment <= timeNow &&
+            (submissionDate == null || submissionDate == ""))
+            {
+                colorOfAssignmentRow = "#f1b3c0";
+            }
+            else if(dueDateAssignment < dateNow  &&
+            (submissionDate != null && submissionDate != ""))
+            {
+                colorOfAssignmentRow = "#d8e7d3";
+            }
+            else if(dueDateAssignment == dateNow && dueTimeAssignment <= timeNow)
+            {
+                colorOfAssignmentRow = "#d8e7d3";
+            }
+            
+            <tr id="assignment-tr"            
+            style="background-color:@colorOfAssignmentRow !important;
+                    border-top:thin;
+                    border-right:none;
+                    border-left:none;
+                    border-bottom:none;
+                    border-color:lightgray;
+                    border-width: 1px;">
+                <td style="background-color:inherit;">
                     @privateLessonID
                 </td>
-                <td>
+                <td style="background-color:inherit;">
                     @lessonName            
                 </td>
-                <td>
+                <td style="background-color:inherit;">
                     @assignmentType 
                 </td>
-                <td>
+                <td style="background-color:inherit;">
                     @assignmentSubject
                 </td>
-                <td>
+                <td style="background-color:inherit;">
                     @studentName
                 </td>
-                <td>
+                <td style="background-color:inherit;">
                     @dueDate            
                 </td>
                 @if(submissionDate==null || submissionDate == "")
                 {
-                    <td>
+                    <td style="background-color:inherit;">
                         -
                     </td>
                 }
                 else
                 {
-                    <td>
+                    <td style="background-color:inherit;">
                         @submissionDate
                     </td>
                 }
             
-                <td>
+                <td style="background-color:inherit;">
                     <a asp-controller="Teacher" asp-action="AssignmentDetails" asp-route-id="@assignmentID">
                         Details
                     </a>            
                 </td>
+                
+      
             </tr>
         }
     </tbody>
 </table>
 
 </div>
+
 
 
