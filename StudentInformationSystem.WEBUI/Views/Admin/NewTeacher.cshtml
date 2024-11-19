@@ -12,10 +12,10 @@
 *@
 <form method="POST" asp-controller="Admin" asp-action="NewTeacher" enctype="multipart/form-data">
     <div class="row">
-        <div class="student-registration-div mb-5">
-            <img class="me-4" src="~/images/_SIS.png" width=100px; />
+        <div class="student-registration-div mb-4">
+            <img class="me-4" src="~/images/_SIS.png" width=60px; />
             <h1><b>
-                TEACHER REGISTRATION PAGE
+                Teacher Registration Page
             </b></h1>
         </div>
     </div>
@@ -55,25 +55,22 @@
                 </select>
 
             </div>
+            
+            
+    </div>
+        <div class="col-6">
             <div class="form-group p-2 form-floating pt-4">
-              <textarea class="form-control"  
+              <textarea class="form-control"  style="height:123px;"
               id="TeacherExplanation"
               placeholder="Leave a comment here" asp-for="@Model.teacher.Details"></textarea>
               <label class="p-3 pt-4" for="TeacherExplanation">
                   Details
               </label>
             </div>
-            
-    </div>
-        <div class="col-6">
             <div class="form-group p-2">
                 <label for="IBAN">IBAN</label>
                 <input asp-for="@Model.teacher.IBAN" class="form-control" />
             </div>
-            
-           @await Component.InvokeAsync("ReferenceDetails",
-           new {referenceModel = Model.teacher.References, 
-               referenceUploadFile=Model.ReferenceLetterFile})
 
            <div class="input-group p-2 div-cv">
                <label class="form-control" for="TeacherCV">
@@ -82,7 +79,7 @@
                <input type="file" class="form-control" id="TeacherCV" 
                asp-for="@Model.CVFile"/>
            </div>
-            <div class="form-group p-2 mt-5 d-grid">
+            <div class="form-group p-2 mt-4 d-grid">
                 <button type="submit" class="btn btn-primary btn-features">
                 Add New Teacher </button>
             </div>
