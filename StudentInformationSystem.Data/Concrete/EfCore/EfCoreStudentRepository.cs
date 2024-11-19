@@ -36,6 +36,17 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             return _context.Students.ToList();
         }
 
+        public List<Student> GetSelectedStudents(List<int> studentIDs)
+        {
+            List<Student> students = new List<Student>();
+            foreach (int studentID in studentIDs)
+            {
+                Student student = _context.Students.FirstOrDefault(i => i.StudentID == studentID)!;
+                students.Add(student);
+            }
+            return students;
+        }
+
         public Student? GetById(int id) // get student by id
         {
             Student? student = _context.Students

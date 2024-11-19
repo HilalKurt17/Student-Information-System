@@ -218,7 +218,37 @@ namespace StudentInformationSystem.WEBUI.Controllers
             newAssignment.assignment.CreatedDate = today.Date.ToString("yyyy-MM-dd");
             newAssignment.assignment.CreatedTime = today.TimeOfDay.ToString(@"hh\:mm\:ss");
             _assignmentRepository.Add(newAssignment.assignment);
-            return View("AssignmentList");
+            return RedirectToAction("AssignmentList");
+        }
+
+        public IActionResult AssignmentList()
+        {
+            int teacherID = Convert.ToInt32(Request.Cookies["userID"]);
+            Teacher teacher = _teacherRepository.GetById(teacherID)!;
+            List<int> studentIDs = new List<int>();
+            foreach (StudentTeacher privateLesson in teacher.StudentTeachers)
+            {
+                if ((privateLesson.StudentID != null) && !(studentIDs.Contains((int)privateLesson.StudentID!)))
+                {
+                    studentIDs.Add((int)privateLesson.StudentID!);
+                }
+
+            };
+
+
+            TeacherAssignmentListViewModel model = new TeacherAssignmentListViewModel()
+            {
+                teacherID = teacherID,
+                students = _studentRepository.GetSelectedStudents(studentIDs),
+                privateLessons = _privateLessonRepository.GetAllT(),
+                assignments = teacher.Assignments
+            };
+            return View(model);
+        } // show all assignments as a list 
+
+        public IActionResult AssignmentDetails(int id)
+        {
+            return View();
         }
     }
 }

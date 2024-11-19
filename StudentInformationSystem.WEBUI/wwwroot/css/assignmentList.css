@@ -1,0 +1,47 @@
+﻿body {
+}
+table {
+    align-content: center;
+    justify-content: center;
+    vertical-align: middle;
+    text-align: center !important;
+}
+td{
+    margin-left:auto !important;
+    margin-right:auto !important;
+    
+    
+}
+div.assignment-list-header{
+    margin:3px;
+    padding: 3px;
+    margin-right: auto !important;
+    margin-left: 0px !important;
+    font-weight: bold;
+    font-size:medium;
+    display:inline-block !important;
+}
+
+div.assignment-list-container{
+    display:block !important;
+}
+
+div.assignment-list-header-container{
+    display:flex !important;
+    
+   
+}
+
+div.assignment-list-item {
+    margin: 3px;
+    padding: 3px;
+    margin-right: auto !important;
+    margin-left: 0px !important;
+    font-weight:normal;
+    font-size: medium;
+    display: inline-block !important;
+}
+
+div.assignment-list-body-container {
+    display: flex !important;
+}

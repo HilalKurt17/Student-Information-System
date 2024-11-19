@@ -1,5 +1,98 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+@section Navbar{
+    @await Html.PartialAsync("_navbarTSA.cshtml");
 }
+
+@model TeacherAssignmentListViewModel
+
+<link href="~/css/assignmentList.css" rel="stylesheet" />
+<div class="table-responsive">
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">
+                Lesson ID
+            </th>
+            <th scope="col">
+                Lesson Name
+            </th>
+            <th scope="col">
+                Assignment Type
+            </th>
+            <th scope="col">
+                Assignment Subject
+            </th>
+            <th scope="col">
+                Student Name
+            </th>
+            <th scope="col">
+                Due Date
+            </th>
+            <th scope="col">
+                Submission Date
+            </th>
+            <th scope="col">
+                Details
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Assignment assignment in Model.assignments)
+        {
+            int privateLessonID = assignment.privateLessonID;
+            int studentID = assignment.StudentID;
+            string studentName = Model.students.FirstOrDefault(i => i.StudentID == studentID)!.Name
+            + " " + Model.students.FirstOrDefault(i => i.StudentID == studentID)!.Surname;
+            string lessonName = Model.privateLessons
+            .FirstOrDefault(i => i.PrivateLessonID == privateLessonID)!.LessonName!;
+            string assignmentType = assignment.Type;
+            string assignmentSubject = assignment.Subject;
+            string dueDate = assignment.DueDate!;
+            string? submissionDate = assignment.SubmittedDate;
+            int assignmentID = assignment.AssignmentID;
+            <tr>
+                <td>
+                    @privateLessonID
+                </td>
+                <td>
+                    @lessonName            
+                </td>
+                <td>
+                    @assignmentType 
+                </td>
+                <td>
+                    @assignmentSubject
+                </td>
+                <td>
+                    @studentName
+                </td>
+                <td>
+                    @dueDate            
+                </td>
+                @if(submissionDate==null || submissionDate == "")
+                {
+                    <td>
+                        -
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @submissionDate
+                    </td>
+                }
+            
+                <td>
+                    <a asp-controller="Teacher" asp-action="AssignmentDetails" asp-route-id="@assignmentID">
+                        Details
+                    </a>            
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+</div>
+
+

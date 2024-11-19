@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Hp8YeANL2LxmhpzgEL0xa9ZaatfLiJfEIzXttDKkS1w=",
+  "Hash": "gwyuyThvch8de/XZlU4j3H4qf2HbO35EZLeOecs0O/c=",
   "Source": "StudentInformationSystem.WEBUI",
   "BasePath": "_content/StudentInformationSystem.WEBUI",
   "Mode": "Default",
@@ -16,6 +16,23 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\css\\assignmentList.css",
+      "SourceId": "StudentInformationSystem.WEBUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\",
+      "BasePath": "_content/StudentInformationSystem.WEBUI",
+      "RelativePath": "css/assignmentList.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\assignmentList.css"
+    },
     {
       "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\css\\navbarHomeSheet.css",
       "SourceId": "StudentInformationSystem.WEBUI",
@@ -185,6 +202,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\uploads\\DERIVATIVE QUESTIONS.pdf",
+      "SourceId": "StudentInformationSystem.WEBUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\",
+      "BasePath": "_content/StudentInformationSystem.WEBUI",
+      "RelativePath": "uploads/DERIVATIVE QUESTIONS.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\DERIVATIVE QUESTIONS.pdf"
     },
     {
       "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\uploads\\N_ILGINCV.pdf",

@@ -35,6 +35,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
                 .Include(r => r.References)
                 .Include(t => t.TeacherLessons)
                 .Include(st => st.StudentTeachers)
+                .Include(sta => sta.Assignments)
                 .ToList();
         }
 
@@ -45,6 +46,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
                                 .Include(r => r.References)
                                 .Include(t => t.TeacherLessons)
                                 .Include(st => st.StudentTeachers)
+                                .Include(sta => sta.Assignments)
                                 .FirstOrDefault(i => i.TeacherID == id);
             if (teacher.TeacherLessons == null || teacher.TeacherLessons.Count() == 0)
             {

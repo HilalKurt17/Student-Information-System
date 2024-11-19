@@ -117,7 +117,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
             return View(model);
         }
 
-        public void AddUserInfoToCookies(int userID)
+        public void AddUserInfoToCookies(int userID) // get user ID using Cookies
         {
             var options = new CookieOptions
             {
