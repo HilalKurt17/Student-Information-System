@@ -16,13 +16,11 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             _context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(int id) // delete the assignment
         {
-            Assignment? assignment = _context.Assignments.FirstOrDefault(i => i.AssignmentID == id);
-            if (assignment != null)
-            {
-                _context.Assignments.Remove(assignment);
-            }
+            Assignment assignment = _context.Assignments.FirstOrDefault(i => i.AssignmentID == id)!;
+            _context.Assignments.Remove(assignment);
+            _context.SaveChanges();
         }
 
         public List<Assignment> GetAllT()
@@ -37,7 +35,42 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
 
         public void Update(Assignment entity)
         {
-            _context.Assignments.Update(entity);
-        }
+            Assignment oldAssignment = _context.Assignments.FirstOrDefault(i => i.AssignmentID == entity.AssignmentID)!;
+            if (entity.Type != oldAssignment.Type)
+            {
+                oldAssignment.Type = entity.Type;
+            }
+            if (entity.StudentID != oldAssignment.StudentID)
+            {
+                oldAssignment.StudentID = entity.StudentID;
+            }
+            if (entity.privateLessonID != oldAssignment.privateLessonID)
+            {
+                oldAssignment.privateLessonID = entity.privateLessonID;
+            }
+            if (entity.Subject != oldAssignment.Subject)
+            {
+                oldAssignment.Subject = entity.Subject;
+            }
+            if (entity.Explanation != oldAssignment.Explanation)
+            {
+                oldAssignment.Explanation = entity.Explanation;
+            }
+            if (entity.DueDate != oldAssignment.DueDate)
+            {
+                oldAssignment.DueDate = entity.DueDate;
+            }
+            if (entity.DueTime != oldAssignment.DueTime)
+            {
+                oldAssignment.DueTime = entity.DueTime;
+            }
+            if (entity.TeacherAssignmentFilePath != oldAssignment.TeacherAssignmentFilePath && entity.TeacherAssignmentFilePath != null && entity.TeacherAssignmentFilePath != "")
+            {
+                oldAssignment.TeacherAssignmentFilePath = entity.TeacherAssignmentFilePath;
+            }
+            oldAssignment.UpdatedDate = entity.UpdatedDate;
+            oldAssignment.UpdatedTime = entity.UpdatedTime;
+            _context.SaveChanges();
+        } // update required fields in an assignment 
     }
 }

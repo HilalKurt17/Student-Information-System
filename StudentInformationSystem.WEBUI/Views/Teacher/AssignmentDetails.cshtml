@@ -8,7 +8,7 @@
 <form method="post" asp-controller="Teacher" asp-action="AssignmentDetails">
     <div class="row">
         <div class="student-registration-div mb-4">
-            <img src="~/images/_SIS.png" width=60px />
+            <img src="~/images/_SIS.png" class="me-4" width=60px />
             <h1>
                 <b>
                     Assignment Details
@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-6">
             <input type="hidden" asp-for="@Model.assignment.AssignmentID" />
-            <input type="hidden" asp-for="@Model.assignment.TeacherID" value="@Model.teacher.TeacherID"/>
+            <input type="hidden" asp-for="@Model.assignment.TeacherID"/>
             
             <div class="input-group p-2 mt-4">
                 
@@ -72,23 +72,31 @@
                     </label>
                     <input type="number" min="1"
                         id="LessonID" class="form-control" 
-                    asp-for="@Model.assignment.privateLessonID" />
+                    asp-for="@Model.assignment.privateLessonID" required/>
                 </div>
             <div class="form-group p-2">
                 <label for="AssignmentSubject">
                     Assignment Subject
                 </label>
                 <input type="text" id="AssignmentSubject" class="form-control" 
-                asp-for="@Model.assignment.Subject" />
+                asp-for="@Model.assignment.Subject" required/>
             </div>
             <div class="form-group p-2">
                 <label for="AssignmentDetails">
                     Assignment Details
                 </label>
                 <textarea style="height:100px;" id="AssignmentDetails" class="form-control" 
-                asp-for="@Model.assignment.Explanation"></textarea>
+                asp-for="@Model.assignment.Explanation" required></textarea>
             </div>
-            
+
+            <div class="form-check p-2" id="deleteAssignmentID">
+                <input class="form-check-input me-2" type="checkbox" 
+                id="deleteAssignment" asp-for="@Model.deleteAssignment"/>
+                <label for="deleteAssignment">
+                    Delete Assignment
+                </label>
+
+            </div>
         </div>
         <div class="col-6" style="margin-left:auto;">
             <div class="form-group p-2">
@@ -96,14 +104,14 @@
                     Due Date
                 </label>
                 <input type="date" id="AssignmentDueDate" class="form-control" 
-                    asp-for="@Model.assignment.DueDate" />
+                    asp-for="@Model.assignment.DueDate" required/>
             </div>
             <div class="form-group p-2">
                 <label for="AssignmentDueTime">
                     Due Time
                 </label>
                 <input type="time" id="AssignmentDueTime" class="form-control"
-                asp-for="@Model.assignment.DueTime" />
+                asp-for="@Model.assignment.DueTime" required/>
             </div>
             <div class="form-group p-2">
                 <label for="TeacherAssignmentDocument">
@@ -112,12 +120,72 @@
                 <input type="file" itemid="TeacherAssignmentDocument" class="form-control" 
                 asp-for="@Model.TeacherAssignmentFile" />
             </div>
+            <div class="form-group p-2" id="TeacherAssignmentPdf">
+            @*add a hidden input to send the Teacher assignment file path to the script*@
+                <input type="hidden"
+                    id="SendToScriptTeacherAssignmentFilePath" 
+                    value="@Model.assignment.TeacherAssignmentFilePath"/>
+
+                <a class="btn btn-primary me-3"  id="TeacherAssignmentFileOpenTag"  
+                    style="border-radius:5px;border-color:darkslategray !important; 
+                    color:darkslategray; background-color:white !important; "
+                    target="_blank" href="@((Model.assignment.TeacherAssignmentFilePath != null && 
+                    Model.assignment.TeacherAssignmentFilePath != "") 
+                   ? Model.assignment.TeacherAssignmentFilePath:"")"> Open Assignment </a>
+
+                <label>
+                    @((Model.assignment.TeacherAssignmentFilePath != null && 
+                    Model.assignment.TeacherAssignmentFilePath != "") 
+                   ? Model.assignment.TeacherAssignmentFilePath.Substring(9):"")
+                </label>
+            </div>
+            <div class="form-group p-2" id="StudentAssignmentPdf">
+            @*add a hidden input to send the student assignment file path to the script*@
+                <input type="hidden"
+                    id="SendToScriptStudentAssignmentFilePath" 
+                    value="@Model.assignment.StudentAssignmentFilePath"/>
+
+                <a class="btn btn-primary me-3"  id="StudentAssignmentFileOpenTag"  
+                    style="border-radius:5px;border-color:darkslategray !important; 
+                    color:darkslategray; background-color:white !important; "
+                    target="_blank" href="@((Model.assignment.StudentAssignmentFilePath != null && 
+                    Model.assignment.StudentAssignmentFilePath != "") 
+                   ? Model.assignment.StudentAssignmentFilePath:"")"> Student Assignment Answers </a>
+
+                <label>
+                    @((Model.assignment.StudentAssignmentFilePath != null && 
+                    Model.assignment.StudentAssignmentFilePath != "") 
+                   ? Model.assignment.StudentAssignmentFilePath.Substring(9):"")
+                </label>
+            </div>
             <div class="form-group p-2 d-grid mt-4">
                 <button type="submit" class="btn btn-primary btn-features" 
                 style="display:block; width:auto;">
-                    Add Assignment 
+                    Update Assignment 
                 </button> 
             </div>
         </div>
     </div>
 </form>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var StudentAssignmentFilePath = document.getElementById("SendToScriptStudentAssignmentFilePath").value;
+    var StudentAssignmentFileDiv = document.getElementById("StudentAssignmentPdf")
+    var TeacherAssignmentFilePath = document.getElementById("SendToScriptTeacherAssignmentFilePath").value;
+    var TeacherAssignmentFileDiv = document.getElementById("TeacherAssignmentPdf");
+
+    if (TeacherAssignmentFilePath !== null && TeacherAssignmentFilePath !== "") {
+        TeacherAssignmentFileDiv.style.display = "block";
+    }
+    else 
+    { 
+        TeacherAssignmentFileDiv.style.display = "none";
+    }
+    if (StudentAssignmentFilePath !== null && StudentAssignmentFilePath !== "") {
+        StudentAssignmentFileDiv.style.display = "block";
+    }
+    else {
+        StudentAssignmentFileDiv.style.display = "none";
+    }
+});
+</script>

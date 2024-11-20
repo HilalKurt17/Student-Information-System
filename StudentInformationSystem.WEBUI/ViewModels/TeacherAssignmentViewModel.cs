@@ -8,5 +8,6 @@ namespace StudentInformationSystem.WEBUI.ViewModels
         public Teacher? teacher { get; set; }
         public List<Student> students { get; set; }
         public IFormFile? TeacherAssignmentFile { get; set; }
+        public bool deleteAssignment { get; set; }
     }
 }

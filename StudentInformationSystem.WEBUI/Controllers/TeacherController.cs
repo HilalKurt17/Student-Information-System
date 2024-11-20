@@ -246,9 +246,52 @@ namespace StudentInformationSystem.WEBUI.Controllers
             return View(model);
         } // show all assignments as a list 
 
+        [HttpGet]
         public IActionResult AssignmentDetails(int id)
         {
-            return View();
+            int teacherID = Convert.ToInt32(Request.Cookies["userID"]);
+            Teacher teacher = _teacherRepository.GetById(teacherID)!;
+            TeacherAssignmentViewModel model = new TeacherAssignmentViewModel()
+            {
+                assignment = teacher.Assignments.FirstOrDefault(i => i.AssignmentID == id),
+                teacher = teacher,
+                students = _studentRepository.GetAllT(),
+                deleteAssignment = false
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AssignmentDetails(TeacherAssignmentViewModel model)
+        {
+            if (model.deleteAssignment == true)
+            {
+                _assignmentRepository.Delete(model.assignment.AssignmentID);
+            }
+            else
+            {
+                if (model.assignment.TeacherAssignmentFilePath != null && model.assignment.TeacherAssignmentFilePath.Length > 0)
+                {
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", model.TeacherAssignmentFile.FileName);
+
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.TeacherAssignmentFile.CopyToAsync(stream);
+                    }
+                    var FileURL = Url.Content($"~/uploads/{model.TeacherAssignmentFile.FileName}");
+                    model.assignment!.TeacherAssignmentFilePath = FileURL.ToString();
+                }
+                DateTime today = DateTime.Now;
+                model.assignment.UpdatedDate = today.Date.ToString("yyyy-MM-dd");
+                model.assignment.UpdatedTime = today.ToString(@"hh\:mm");
+
+                _assignmentRepository.Update(model.assignment);
+            }
+            return RedirectToAction("AssignmentList");
         }
     }
 }
