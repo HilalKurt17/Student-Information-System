@@ -1,7 +1,7 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @section Navbar{
-    @await Html.PartialAsync("_navbarTSA.cshtml");
+    @await Html.PartialAsync("_navbarTSA.cshtml")
 }
 @model TeacherAssignmentViewModel
 
@@ -16,7 +16,7 @@
             </h1>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="assignmentDiv">
         <div class="col-6">
             <input type="hidden" asp-for="@Model.assignment.AssignmentID" />
             <input type="hidden" asp-for="@Model.assignment.TeacherID"/>
@@ -89,7 +89,9 @@
                 asp-for="@Model.assignment.Explanation" required></textarea>
             </div>
 
-            <div class="form-check p-2" id="deleteAssignmentID">
+            <div class="form-check p-2" id="deleteAssignmentID"> @*if assignment is graded
+                teacher cannot delete the assignment*@
+                <input type="hidden" asp-for="@Model.assignment.IsGraded" id="isAssignmentGraded"/>
                 <input class="form-check-input me-2" type="checkbox" 
                 id="deleteAssignment" asp-for="@Model.deleteAssignment"/>
                 <label for="deleteAssignment">
@@ -158,6 +160,14 @@
                    ? Model.assignment.StudentAssignmentFilePath.Substring(9):"")
                 </label>
             </div>
+            <div class="form-group p-2" id="assignmentGradeDiv">
+                <label for="gradeAssignment">
+                    Assignment Grade
+                </label>
+                <input type="hidden" asp-for="@Model.assignment.IsCompleted" id="SendToScriptIsAssignmentCompleted"/>
+                <input type="number" min="0" max="100" class="form-control" id="gradeAssignment"
+                asp-for="@Model.assignment.Grade" required/>
+            </div>
             <div class="form-group p-2 d-grid mt-4">
                 <button type="submit" class="btn btn-primary btn-features" 
                 style="display:block; width:auto;">
@@ -174,18 +184,38 @@ document.addEventListener("DOMContentLoaded", function() {
     var TeacherAssignmentFilePath = document.getElementById("SendToScriptTeacherAssignmentFilePath").value;
     var TeacherAssignmentFileDiv = document.getElementById("TeacherAssignmentPdf");
 
-    if (TeacherAssignmentFilePath !== null && TeacherAssignmentFilePath !== "") {
+    var IsAssignmentCompleted = document.getElementById("SendToScriptIsAssignmentCompleted").value;
+    var assignmentGradeDiv = document.getElementById("assignmentGradeDiv");
+
+    var IsAssignmentGraded = document.getElementById("isAssignmentGraded").value;
+    const AssignmentDiv = document.getElementById("assignmentDiv");
+
+    if (TeacherAssignmentFilePath !== "") {
         TeacherAssignmentFileDiv.style.display = "block";
     }
     else 
     { 
         TeacherAssignmentFileDiv.style.display = "none";
     }
-    if (StudentAssignmentFilePath !== null && StudentAssignmentFilePath !== "") {
+    if (StudentAssignmentFilePath !== "") {
         StudentAssignmentFileDiv.style.display = "block";
     }
     else {
         StudentAssignmentFileDiv.style.display = "none";
     }
+
+    if (IsAssignmentCompleted !== "false" && IsAssignmentCompleted !=="") {
+        assignmentGradeDiv.style.display = "block";
+    }
+    else{
+        assignmentGradeDiv.style.display = "none";
+    }
+    if (IsAssignmentGraded !== "false" && IsAssignmentGraded !== "") {
+       const assignmentDivElements = assignmentDiv.querySelectorAll("input,button,select,textarea");
+        assignmentDivElements.forEach(element => {
+            element.disabled = true;
+        });
+    }
+     
 });
 </script>

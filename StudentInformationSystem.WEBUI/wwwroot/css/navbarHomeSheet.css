@@ -13,7 +13,7 @@
     height: 70px;
 }
 .bg-navbar { /* change background color of the navbar*/
-    background-color:darkslategray !important;
+    background-color: #005a6a !important;
 }
 
 .navbar-titles-color { /*change text colors in the navbar*/
