@@ -27,7 +27,11 @@ namespace StudentInformationSystem.WEBUI.Controllers
         public IActionResult SignIn()
         {
             ViewBag.SignIn = "";
-            SignInViewModel model = new SignInViewModel();
+            SignInViewModel model = new SignInViewModel()
+            {
+                password = "",
+                mail = ""
+            };
             return View(model);
         }
 
@@ -47,7 +51,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
                 if (teacher.Mail == password.userMail)
                 {
                     Passwords userPasswordDetails = passwords.FirstOrDefault(i => i.userMail == teacher.Mail)!;
-                    if (userPasswordDetails.Password == password.Password)
+                    if (userPasswordDetails != null && userPasswordDetails.Password == password.Password)
                     {
                         AddUserInfoToCookies(teacher.TeacherID);
                         return RedirectToAction("Index", "Teacher");
@@ -60,8 +64,9 @@ namespace StudentInformationSystem.WEBUI.Controllers
             {
                 if (student.Mail == password.userMail)
                 {
-                    Passwords userPasswordDetails = passwords.FirstOrDefault(i => i.userMail == student.Mail)!;
-                    if (userPasswordDetails.Password == password.userMail)
+                    Passwords? userPasswordDetails = passwords.FirstOrDefault(i => i.userMail == student.Mail);
+
+                    if (userPasswordDetails != null && userPasswordDetails.Password == password.Password)
                     {
                         AddUserInfoToCookies(student.StudentID);
                         return RedirectToAction("Index", "Student");
@@ -74,7 +79,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
                 return RedirectToAction("Index", "Admin");
             }
             ViewBag.SignIn = "Failed";
-            return View(password);
+            return View(model);
         }
 
 
