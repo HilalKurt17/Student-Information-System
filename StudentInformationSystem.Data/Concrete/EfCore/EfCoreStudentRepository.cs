@@ -33,7 +33,10 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
 
         public List<Student> GetAllT() // list all student
         {
-            return _context.Students.ToList();
+            return _context.Students
+                            .Include(p => p.StudentTeachers)
+                            .Include(s => s.Assignments)
+                            .ToList();
         }
 
         public List<Student> GetSelectedStudents(List<int> studentIDs)
@@ -53,6 +56,7 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
                 .Include(i => i.Address)
                 .Include(i => i.PaymentDetails)
                 .Include(i => i.StudentTeachers)
+                .Include(i => i.Assignments)
                 .FirstOrDefault(i => i.StudentID == id);
             return student;
         }

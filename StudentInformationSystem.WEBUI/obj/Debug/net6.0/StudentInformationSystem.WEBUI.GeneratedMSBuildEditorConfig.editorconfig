@@ -87,8 +87,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxMaXN0TGVzc29ucy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Student/MyAssessments.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxNeUFzc2Vzc21lbnRzLmNzaHRtbA==
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Student/MyAssignmentDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxNeUFzc2lnbm1lbnREZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Student/MyAssignmentList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxNeUFzc2lnbm1lbnRMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/VS_ASP.NET/SIS/StudentInformationSystem.WEBUI/Views/Student/MyLessons.cshtml]

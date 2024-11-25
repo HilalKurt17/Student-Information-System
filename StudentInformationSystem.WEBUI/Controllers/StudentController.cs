@@ -70,7 +70,29 @@ namespace StudentInformationSystem.WEBUI.Controllers
             return RedirectToAction("MyLessons");
         }
 
-        public IActionResult MyAssessments()
+        [HttpGet]
+        public IActionResult MyAssignmentList()
+        {
+            int studentID = Convert.ToInt32(Request.Cookies["userID"]);
+            Student student = _studentRepository.GetById(studentID)!;
+            StudentAssignmentListViewModel model = new StudentAssignmentListViewModel()
+            {
+                assignments = student.Assignments,
+                teachers = _teacherRepository.GetAllT(),
+                StudentID = studentID,
+                privateLessons = _privateLessonRepository.GetAllT()
+            };
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult MyAssignmentDetails()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult MyAssignmentDetails(StudentAssignmentListViewModel model)
         {
             return View();
         }

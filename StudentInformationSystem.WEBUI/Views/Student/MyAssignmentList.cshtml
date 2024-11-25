@@ -1,10 +1,8 @@
-﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
-
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @section Navbar{
     @await Html.PartialAsync("_navbarTSA.cshtml")
 }
-
-@model TeacherAssignmentListViewModel
+@model StudentAssignmentListViewModel
 
 <link href="~/css/assignmentList.css" rel="stylesheet" />
 <div class="row">
@@ -26,13 +24,13 @@
                 Lesson Name
             </th>
             <th scope="col">
+                Teacher Name
+            </th>
+            <th scope="col">
                 Assignment Type
             </th>
             <th scope="col">
                 Assignment Subject
-            </th>
-            <th scope="col">
-                Student Name
             </th>
             <th scope="col">
                 Due Date
@@ -49,9 +47,9 @@
         @foreach (Assignment assignment in Model.assignments)
         {
             int privateLessonID = assignment.privateLessonID;
-            int studentID = assignment.StudentID;
-            string studentName = Model.students.FirstOrDefault(i => i.StudentID == studentID)!.Name
-            + " " + Model.students.FirstOrDefault(i => i.StudentID == studentID)!.Surname;
+            int teacherID = assignment.TeacherID;
+            string teacherName = Model.teachers.FirstOrDefault(i => i.TeacherID == teacherID)!.Name
+            + " " + Model.teachers.FirstOrDefault(i => i.TeacherID == teacherID)!.Surname;
             string lessonName = Model.privateLessons
             .FirstOrDefault(i => i.PrivateLessonID == privateLessonID)!.LessonName!;
             string assignmentType = assignment.Type;
@@ -109,13 +107,13 @@
                     @lessonName            
                 </td>
                 <td style="background-color:inherit;">
-                    @assignmentType 
+                    @teacherName
+                </td>
+                <td style="background-color:inherit;">
+                    @assignmentType
                 </td>
                 <td style="background-color:inherit;">
                     @assignmentSubject
-                </td>
-                <td style="background-color:inherit;">
-                    @studentName
                 </td>
                 <td style="background-color:inherit;">
                     @dueDate            
@@ -134,7 +132,7 @@
                 }
             
                 <td style="background-color:inherit;">
-                    <a asp-controller="Teacher" asp-action="AssignmentDetails" asp-route-id="@assignmentID">
+                    <a asp-controller="Student" asp-action="MyAssignmentDetails" asp-route-id="@assignmentID">
                         Details
                     </a>            
                 </td>
@@ -146,6 +144,3 @@
 </table>
 
 </div>
-
-
-
