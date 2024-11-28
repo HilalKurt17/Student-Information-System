@@ -72,5 +72,37 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             oldAssignment.UpdatedTime = entity.UpdatedTime;
             _context.SaveChanges();
         } // update required fields in an assignment 
+
+        // update assignment when student submit the assignment solution
+        public void SubmitAssignment(Assignment assignment)
+        {
+            Assignment oldAssignment = GetById(assignment.AssignmentID)!;
+
+            if (assignment.StudentAssignmentFilePath != null && assignment.StudentAssignmentFilePath != "")
+            {
+                oldAssignment.StudentAssignmentFilePath = assignment.StudentAssignmentFilePath;
+            }
+            if (assignment.SubmittedDate != null && assignment.SubmittedDate != oldAssignment.SubmittedDate && assignment.SubmittedDate != "")
+            {
+                oldAssignment.SubmittedDate = assignment.SubmittedDate;
+            }
+            if (assignment.SubmittedTime != null && assignment.SubmittedTime != oldAssignment.SubmittedTime && assignment.SubmittedDate != "")
+            {
+                oldAssignment.SubmittedTime = assignment.SubmittedTime;
+            }
+            oldAssignment.IsCompleted = true;
+            _context.SaveChanges();
+
+        }
+
+        // update assignment when teacher grade it 
+        public void GradeAssignment(Assignment assignment)
+        {
+            Assignment oldAssignment = GetById(assignment.AssignmentID)!;
+            oldAssignment.Grade = assignment.Grade;
+            oldAssignment.FailedTopics = assignment.FailedTopics;
+            oldAssignment.IsGraded = true;
+            _context.SaveChanges();
+        }
     }
 }

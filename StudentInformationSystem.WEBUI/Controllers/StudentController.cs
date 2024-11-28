@@ -12,12 +12,14 @@ namespace StudentInformationSystem.WEBUI.Controllers
         private ITeacherRepository _teacherRepository;
         private ILessonRepository _lessonRepository;
         private IPrivateLessonRepository _privateLessonRepository;
-        public StudentController(IStudentRepository studentRepository, ITeacherRepository teacherRepository, ILessonRepository lessonRepository, IPrivateLessonRepository privateLessonRepository)
+        private IAssignmentRepository _assignmentRepository;
+        public StudentController(IStudentRepository studentRepository, ITeacherRepository teacherRepository, ILessonRepository lessonRepository, IPrivateLessonRepository privateLessonRepository, IAssignmentRepository assignmentRepository)
         {
             _studentRepository = studentRepository;
             _teacherRepository = teacherRepository;
             _lessonRepository = lessonRepository;
             _privateLessonRepository = privateLessonRepository;
+            _assignmentRepository = assignmentRepository;
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
@@ -86,15 +88,45 @@ namespace StudentInformationSystem.WEBUI.Controllers
         }
 
         [HttpGet]
-        public IActionResult MyAssignmentDetails()
+        public IActionResult MyAssignmentDetails(int id)
         {
-            return View();
+            int studentID = Convert.ToInt32(Request.Cookies["userID"]);
+            Student student = _studentRepository.GetById(studentID)!;
+            StudentAssignmentDetailsViewModel model = new StudentAssignmentDetailsViewModel()
+            {
+                assignment = student.Assignments.FirstOrDefault(i => i.AssignmentID == id)!,
+                teachers = _teacherRepository.GetAllT(),
+                studentID = studentID,
+                privateLessons = _privateLessonRepository.GetAllT()
+            };
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult MyAssignmentDetails(StudentAssignmentListViewModel model)
+        public async Task<IActionResult> MyAssignmentDetails(StudentAssignmentDetailsViewModel model)
         {
-            return View();
+            int studentID = Convert.ToInt32(Request.Cookies["userID"]);
+            Student student = _studentRepository.GetById(studentID)!;
+
+            if (model.studentAssignmentSolution != null && model.studentAssignmentSolution.Length > 0)
+            {
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", model.studentAssignmentSolution.FileName);
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await model.studentAssignmentSolution.CopyToAsync(stream);
+                }
+                var FileURL = Url.Content($"~/uploads/{model.studentAssignmentSolution.FileName}");
+                model.assignment.StudentAssignmentFilePath = FileURL;
+            }
+            DateTime today = DateTime.Now;
+            model.assignment.SubmittedDate = today.Date.ToString("yyyy-MM-dd");
+            model.assignment.SubmittedTime = today.TimeOfDay.ToString(@"hh\:mm\:ss");
+            _assignmentRepository.Update(model.assignment);
+            return RedirectToAction("MyAssignmentList");
         }
 
         public IActionResult MyLessons()

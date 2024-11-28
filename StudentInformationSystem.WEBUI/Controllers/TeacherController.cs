@@ -270,7 +270,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
             }
             else
             {
-                if (model.assignment.TeacherAssignmentFilePath != null && model.assignment.TeacherAssignmentFilePath.Length > 0)
+                if (model.TeacherAssignmentFile != null && model.TeacherAssignmentFile.Length > 0)
                 {
                     var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", model.TeacherAssignmentFile.FileName);
 
@@ -286,8 +286,8 @@ namespace StudentInformationSystem.WEBUI.Controllers
                     model.assignment!.TeacherAssignmentFilePath = FileURL.ToString();
                 }
                 DateTime today = DateTime.Now;
-                model.assignment.UpdatedDate = today.Date.ToString("yyyy-MM-dd");
-                model.assignment.UpdatedTime = today.ToString(@"hh\:mm");
+                model.assignment!.UpdatedDate = today.Date.ToString("yyyy-MM-dd");
+                model.assignment.UpdatedTime = today.TimeOfDay.ToString(@"hh\:mm");
 
                 _assignmentRepository.Update(model.assignment);
             }
