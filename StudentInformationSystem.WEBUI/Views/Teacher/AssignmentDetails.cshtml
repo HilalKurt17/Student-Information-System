@@ -14,6 +14,21 @@
                     Assignment Details
                 </b>
             </h1>
+             @if(Model.assignment.UpdatedDate != null && Model.assignment.UpdatedDate != "")
+            {
+                <div  id="LastUpdatedDiv" style="margin-left:auto;">
+                    <input type="hidden" asp-for="@Model.assignment.UpdatedDate" 
+                    id="IsAssignmentUpdated"/>
+                    <label for="UpdatedDate" style="color:gray;">
+
+                        Last Updated: @(Model.assignment.UpdatedDate.Substring(5,2) + "/" + 
+                        Model.assignment.UpdatedDate.Substring(8) + "/" + 
+                        Model.assignment.UpdatedDate.Substring(0,4)
+                        + " " + Model.assignment.UpdatedTime)
+                    </label>
+                
+                </div>
+            }
         </div>
     </div>
     <div class="row" id="assignmentDiv">
@@ -88,7 +103,14 @@
                 <textarea style="height:100px;" id="AssignmentDetails" class="form-control" 
                 asp-for="@Model.assignment.Explanation" required></textarea>
             </div>
-
+            <div class="form-group p-2" id="AssignmentFailedTopicsDiv">
+                <label for="FailedTopics">
+                    Assignment Failed Topic(s)
+                </label>
+                <textarea style="height: 100px;" id="FailedTopics" class="form-control"
+                asp-for="@Model.assignment.FailedTopics"></textarea>
+            </div>
+           
             <div class="form-check p-2" id="deleteAssignmentID"> @*if assignment is graded
                 teacher cannot delete the assignment*@
                 <input type="hidden" asp-for="@Model.assignment.IsGraded" id="isAssignmentGraded"/>
@@ -99,6 +121,7 @@
                 </label>
 
             </div>
+            
         </div>
         <div class="col-6" style="margin-left:auto;">
             <div class="form-group p-2">
@@ -114,6 +137,20 @@
                 </label>
                 <input type="time" id="AssignmentDueTime" class="form-control"
                 asp-for="@Model.assignment.DueTime" required/>
+            </div>
+            <div class="form-group p-2">
+                <label for="AssignmentSubmissionDate">
+                    Submitted Date
+                </label>
+                <input disabled type="date" class="form-control" id="AssignmentSubmissionDate" 
+                    asp-for="@Model.assignment.SubmittedDate" />
+            </div>
+            <div class="form-group p-2" id="AssignmentSubmissionTimeDiv">
+                <label for="AssignmentSubmissionTime">
+                    Submission Time
+                </label>
+                <input disabled type="time" class="form-control" id="AssignmentSubmissionTime" 
+                    asp-for="@Model.assignment.SubmittedTime"/>
             </div>
             <div class="form-group p-2">
                 <label for="TeacherAssignmentDocument">
@@ -190,27 +227,42 @@ document.addEventListener("DOMContentLoaded", function() {
     var IsAssignmentGraded = document.getElementById("isAssignmentGraded").value;
     const AssignmentDiv = document.getElementById("assignmentDiv");
 
-    if (TeacherAssignmentFilePath !== "") {
+    var AssignmentFailedTopicsDiv = document.getElementById("AssignmentFailedTopicsDiv");
+    var DeleteAssignmentDiv = document.getElementById("deleteAssignmentID");
+
+    if (TeacherAssignmentFilePath) {
         TeacherAssignmentFileDiv.style.display = "block";
     }
     else 
     { 
         TeacherAssignmentFileDiv.style.display = "none";
     }
-    if (StudentAssignmentFilePath !== "") {
+    if (StudentAssignmentFilePath) {
         StudentAssignmentFileDiv.style.display = "block";
     }
     else {
         StudentAssignmentFileDiv.style.display = "none";
     }
 
-    if (IsAssignmentCompleted !== "false" && IsAssignmentCompleted !=="") {
+    if (IsAssignmentCompleted && IsAssignmentCompleted !== "false") 
+    {     
         assignmentGradeDiv.style.display = "block";
+        AssignmentFailedTopicsDiv.style.display = "block";
+
+
     }
-    else{
+    else
+    
+    {
+        AssignmentFailedTopicsDiv.style.display = "none";
         assignmentGradeDiv.style.display = "none";
     }
-    if (IsAssignmentGraded !== "false" && IsAssignmentGraded !== "") {
+    if (IsAssignmentGraded !== "false" && IsAssignmentGraded) {
+
+       assignmentGradeDiv.style.display = "block";
+       AssignmentFailedTopicsDiv.style.display = "block";
+        DeleteAssignmentDiv.style.display = "none";
+
        const assignmentDivElements = assignmentDiv.querySelectorAll("input,button,select,textarea");
         assignmentDivElements.forEach(element => {
             element.disabled = true;
