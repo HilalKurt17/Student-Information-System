@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using StudentInformationSystem.Data.Abstract;
 using StudentInformationSystem.Entity;
@@ -6,6 +7,7 @@ using StudentInformationSystem.WEBUI.ViewModels;
 
 namespace StudentInformationSystem.WEBUI.Controllers
 {
+    [Authorize]
     public class TeacherController : Controller
     {
         IStudentRepository _studentRepository;
@@ -299,6 +301,12 @@ namespace StudentInformationSystem.WEBUI.Controllers
                 _assignmentRepository.Update(model.assignment);
             }
             return RedirectToAction("AssignmentList");
+        }
+
+        public IActionResult SignOut()
+        {
+            Response.Cookies.Delete("userID");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

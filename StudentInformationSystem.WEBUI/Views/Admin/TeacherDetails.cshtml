@@ -12,7 +12,7 @@
 
 <link href="~/css/TeacherDetailsPageDesign.css" rel="stylesheet"/>
 @*show teacher details and update if required. To get IFormFile from the form, add enctype*@
-<form asp-controller="Admin" asp-action="TeacherDetails" method="POST" enctype="multipart/form-data">
+<form method="POST" asp-controller="Admin" asp-action="TeacherDetails" enctype="multipart/form-data">
     <div class="row">
         <div class="student-registration-div mb-4">
             <img class="me-4" src="~/images/_SIS.png" width=60px; />
@@ -206,9 +206,8 @@
                asp-for="@Model.CVFile"/>
                @*add a hidden input to send CV file path to the script*@
                <input type="hidden" value="@Model.teacher.CVFilePath" id="SendToScriptCVFilePath"/>
-               <a class="btn btn-primary me-3" style="border-radius:5px; 
-                border-color:darkslategray !important; color:darkslategray; background-color:white !important;" 
-               target="_blank"  id="CVFileOpenTag"> Open CV </a>
+               <a class="btn btn-primary me-3" style="border-radius:5px;border-color:darkslategray !important; color:darkslategray; background-color:white !important;" 
+                target="_blank" id="CVFileOpenTag"> Open CV </a>
                <label>@((Model.teacher.CVFilePath != null && Model.teacher.CVFilePath != "") 
                    ? Model.teacher.CVFilePath.Substring(9):"")</label>
            </div>
@@ -221,6 +220,9 @@
         </div>
     </div>
 </form>
+    
+    
+
 
 
 <script>

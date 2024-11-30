@@ -126,12 +126,14 @@ namespace StudentInformationSystem.WEBUI.Controllers
         {
             var options = new CookieOptions
             {
+                SameSite = SameSiteMode.None,
                 Expires = DateTime.Now.AddDays(1),
                 HttpOnly = true,
                 Secure = true
+
             };
 
-            Response.Cookies.Append("UserID", userID.ToString(), options);
+            Response.Cookies.Append("userID", userID.ToString(), options);
 
         }
     }

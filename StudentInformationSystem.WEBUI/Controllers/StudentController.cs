@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using StudentInformationSystem.Data.Abstract;
 using StudentInformationSystem.Entity;
@@ -6,6 +7,7 @@ using StudentInformationSystem.WEBUI.ViewModels;
 
 namespace StudentInformationSystem.WEBUI.Controllers
 {
+    [Authorize]
     public class StudentController : Controller
     {
         private IStudentRepository _studentRepository;
@@ -139,6 +141,12 @@ namespace StudentInformationSystem.WEBUI.Controllers
                 student = student
             };
             return View(model);
+        }
+
+        public IActionResult SignOut()
+        {
+            Response.Cookies.Delete("userID");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

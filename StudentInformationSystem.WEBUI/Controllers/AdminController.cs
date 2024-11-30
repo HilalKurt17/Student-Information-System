@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using StudentInformationSystem.Data.Abstract;
 using StudentInformationSystem.Entity;
@@ -6,7 +7,7 @@ using StudentInformationSystem.WEBUI.ViewModels;
 
 namespace StudentInformationSystem.WEBUI.Controllers
 {
-
+    [Authorize]
     public class AdminController : Controller
     {
         private IStudentRepository _studentRepository;

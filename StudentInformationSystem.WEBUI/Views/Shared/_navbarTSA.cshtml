@@ -49,11 +49,18 @@ bg-navbar-container  offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                     @*assign related links to the offcanvas for each user type*@
                     @if (ViewBag.UserType == "teacher")
                     {
-                        
                         <li class="nav-item">
                             <hr>
+                                <a class="nav-link" href="@Url.Action("GettingStarted", "Teacher")">
+                                    Getting Started
+                                </a>
+                            <hr>
+                        
+                        </li>
+                        <li class="nav-item">
+                            
                                 <a class="nav-link" href="@Url.Action("Index", "Teacher")">
-                                    Your Profile
+                                    My Profile
                                 </a>
                             <hr>
                         
@@ -89,7 +96,12 @@ bg-navbar-container  offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                             </a>
                             <hr>
                         </li>
-                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("SignOut","Teacher")">
+                                Sign Out
+                            </a>
+                            <hr>
+                        </li>
                         
                     }
                     @if (ViewBag.UserType == "admin")
@@ -98,7 +110,7 @@ bg-navbar-container  offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                              <hr>
                             <a class="nav-link" href="@Url.Action("Index", "Admin")">
                               
-                                    Your Profile
+                                    Getting Started
                                
                             </a>
                             <hr>
@@ -133,27 +145,40 @@ bg-navbar-container  offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                             </a>
                             <hr>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("SignOut","Admin")">
+                                Sign Out
+                            </a>
+                            <hr>
+                        </li>
                     }
                     @if(ViewBag.UserType == "student")
                     {
                         <li class="nav-item">
                             <hr>
+                            <a class="nav-link" href="@Url.Action("GettingStarted","Student")">
+                                Getting Started
+                            </a>
+                            <hr>
+                        </li>
+                        <li class="nav-item">
+                           
                             <a class="nav-link" href="@Url.Action("Index","Student")">
-                                Your Profile
+                                My Profile
                             </a>
                             <hr>
                         </li>
                         <li class="nav-item">
                            
                             <a class="nav-link" href="@Url.Action("MyAssignmentList","Student")">
-                                Your Assignments
+                                My Assignments
                             </a>
                             <hr>
                         </li> 
                         <li class="nav-item">
                           
                             <a class="nav-link" href="@Url.Action("MyLessons","Student")">
-                                Your Lessons
+                                My Lessons
                             </a>
                             <hr>
                         </li> 
@@ -164,6 +189,12 @@ bg-navbar-container  offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                             </a>
                             <hr>
                         </li> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("SignOut","Student")">
+                                Sign Out
+                            </a>
+                            <hr>
+                        </li>
                     }
                 </ul> 
 
