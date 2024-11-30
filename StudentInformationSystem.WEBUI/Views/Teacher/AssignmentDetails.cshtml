@@ -5,7 +5,9 @@
 }
 @model TeacherAssignmentViewModel
 
-<form method="post" asp-controller="Teacher" asp-action="AssignmentDetails">
+
+
+<form method="POST" asp-controller="Teacher" asp-action="AssignmentDetails" enctype="multipart/form-data">
     <div class="row">
         <div class="student-registration-div mb-4">
             <img src="~/images/_SIS.png" class="me-4" width=60px />
@@ -111,7 +113,7 @@
                 asp-for="@Model.assignment.FailedTopics"></textarea>
             </div>
            
-            <div class="form-check p-2" id="deleteAssignmentID"> @*if assignment is graded
+            <div class="form-group p-2" id="deleteAssignmentID"> @*if assignment is graded
                 teacher cannot delete the assignment*@
                 <input type="hidden" asp-for="@Model.assignment.IsGraded" id="isAssignmentGraded"/>
                 <input class="form-check-input me-2" type="checkbox" 
@@ -138,7 +140,7 @@
                 <input type="time" id="AssignmentDueTime" class="form-control"
                 asp-for="@Model.assignment.DueTime" required/>
             </div>
-            <div class="form-group p-2">
+            <div class="form-group p-2" id="AssignmentSubmissionDateDiv">
                 <label for="AssignmentSubmissionDate">
                     Submitted Date
                 </label>
@@ -205,7 +207,7 @@
                 <input type="number" min="0" max="100" class="form-control" id="gradeAssignment"
                 asp-for="@Model.assignment.Grade" required/>
             </div>
-            <div class="form-group p-2 d-grid mt-4">
+            <div class="form-group p-2 d-grid" id="UpdateAssignmentDiv">
                 <button type="submit" class="btn btn-primary btn-features" 
                 style="display:block; width:auto;">
                     Update Assignment 
@@ -230,6 +232,11 @@ document.addEventListener("DOMContentLoaded", function() {
     var AssignmentFailedTopicsDiv = document.getElementById("AssignmentFailedTopicsDiv");
     var DeleteAssignmentDiv = document.getElementById("deleteAssignmentID");
 
+    var AssignmentSubmissionDateDiv = document.getElementById("AssignmentSubmissionDateDiv");
+    var AssignmentSubmissionTimeDiv = document.getElementById("AssignmentSubmissionTimeDiv");
+
+    var UpdateAssignmentButtonDiv = document.getElementById("UpdateAssignmentDiv");
+
     if (TeacherAssignmentFilePath) {
         TeacherAssignmentFileDiv.style.display = "block";
     }
@@ -248,7 +255,9 @@ document.addEventListener("DOMContentLoaded", function() {
     {     
         assignmentGradeDiv.style.display = "block";
         AssignmentFailedTopicsDiv.style.display = "block";
-
+        AssignmentSubmissionDateDiv.style.display = "block";
+        AssignmentSubmissionTimeDiv.style.display = "block";
+        UpdateAssignmentButtonDiv.style.marginTop = "40px";
 
     }
     else
@@ -256,12 +265,15 @@ document.addEventListener("DOMContentLoaded", function() {
     {
         AssignmentFailedTopicsDiv.style.display = "none";
         assignmentGradeDiv.style.display = "none";
+        AssignmentSubmissionDateDiv.style.display = "none";
+        AssignmentSubmissionTimeDiv.style.display = "none";
+        UpdateAssignmentButtonDiv.style.marginTop = "150px";
     }
     if (IsAssignmentGraded !== "false" && IsAssignmentGraded) {
 
        assignmentGradeDiv.style.display = "block";
        AssignmentFailedTopicsDiv.style.display = "block";
-        DeleteAssignmentDiv.style.display = "none";
+       DeleteAssignmentDiv.style.display = "none";
 
        const assignmentDivElements = assignmentDiv.querySelectorAll("input,button,select,textarea");
         assignmentDivElements.forEach(element => {

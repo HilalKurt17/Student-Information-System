@@ -6,7 +6,7 @@
 
 @model StudentAssignmentDetailsViewModel
 
-<form method="post" asp-controller="Teacher" asp-action="AssignmentDetails">
+<form method="post" asp-controller="Student" asp-action="MyAssignmentDetails" enctype="multipart/form-data">
     <div class="row">
         <div class="student-registration-div mb-4">
             <img src="~/images/_SIS.png" class="me-4" width=60px />
@@ -15,14 +15,30 @@
                     Assignment Details
                 </b>
             </h1>
-        </div>
+            @if(Model.assignment.UpdatedDate != null && Model.assignment.UpdatedDate != "")
+          {
+            <div  id="LastUpdatedDiv" style="margin-left:auto;">
+                <input type="hidden" asp-for="@Model.assignment.UpdatedDate" 
+                id="IsAssignmentUpdated"/>
+                <label for="UpdatedDate" style="color:gray;">
+
+                    Last Updated: @(Model.assignment.UpdatedDate.Substring(5,2) + "/" + 
+                    Model.assignment.UpdatedDate.Substring(8) + "/" + 
+                    Model.assignment.UpdatedDate.Substring(0,4)
+                    + " " + Model.assignment.UpdatedTime)
+                </label>
+                
+            </div>
+          }
+        </div> 
     </div>
+
     <div class="row" id="assignmentDiv">
         <div class="col-6">
             <input type="hidden" asp-for="@Model.assignment.AssignmentID" />
             <input type="hidden" asp-for="@Model.assignment.TeacherID"/>
             <input type="hidden" asp-for="@Model.assignment.StudentID" />
-            
+            <input type="hidden" asp-for="@Model.studentID" />
             <div class="form-group p-2">
                 <label for="AssignmentType">
                     Assignment Type
@@ -89,23 +105,7 @@
                 </label>
                 <textarea disabled style="height: 100px;" id="FailedTopics" class="form-control"
                 asp-for="@Model.assignment.FailedTopics"></textarea>
-            </div>
-            @if(Model.assignment.UpdatedDate != null && Model.assignment.UpdatedDate != "")
-            {
-                <div class="form-group p-2" id="LastUpdatedDiv">
-                    <input type="hidden" asp-for="@Model.assignment.UpdatedDate" 
-                    id="IsAssignmentUpdated"/>
-                    <label for="UpdatedDate" style="color:gray;">
-
-                        Last Updated: @(Model.assignment.UpdatedDate.Substring(5,2) + "/" + 
-                        Model.assignment.UpdatedDate.Substring(8) + "/" + 
-                        Model.assignment.UpdatedDate.Substring(0,4)
-                        + " " + Model.assignment.UpdatedTime)
-                    </label>
-                
-                </div>
-            }
-            
+            </div>        
         </div>
         <div class="col-6" style="margin-left:auto;">
             <div class="form-group p-2">
@@ -139,7 +139,7 @@
                 <input disabled type="time" class="form-control" id="AssignmentSubmissionTime" 
                     asp-for="@Model.assignment.SubmittedTime"/>
             </div>
-             <div class="form-group p-2" id="TAPdf">
+             <div class="form-group p-2" id="TAPdf"style="margin-top:21px;">
             @*add a hidden input to send the Teacher assignment file path to the script*@
                 <input type="hidden"
                     id="TAFilePath" 
@@ -160,10 +160,11 @@
             </div>
 
             <div class="form-group p-2">
-                <label for="StudentAssignmentDocument">
+                <label for="studentAssignmentSolution">
                    Student Assignment Solution (Document)
                 </label>
-                <input type="file" id="StudentAssignmentDocument" class="form-control" 
+                
+                <input type="file" id="studentAssignmentSolution" class="form-control" 
                 asp-for="@Model.studentAssignmentSolution" required/>
             </div>
            
@@ -194,11 +195,16 @@
                 <input disabled type="number" min="0" max="100" class="form-control" id="gradeAssignment"
                 asp-for="@Model.assignment.Grade"/>
             </div>
-            <div class="form-group p-2 d-grid mt-4">
-                <button type="submit" class="btn btn-primary btn-features" 
-                style="display:block; width:auto;">
-                    Submit Assignment 
-                </button> 
+            
+        </div>
+        <div class="row" style="align-content:center; justify-content:center;">
+            <div class="col-6">
+                <div class="form-group p-2 d-grid mt-5">
+                    <button type="submit" class="btn btn-primary btn-features" 
+                    style="display:block;">
+                        Submit Assignment 
+                    </button> 
+                </div>
             </div>
         </div>
     </div>
@@ -218,6 +224,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var AssignmentSubmissionDateDiv = document.getElementById("AssignmentSubmissionDateDiv");
     var AssignmentSubmissionTimeDiv = document.getElementById("AssignmentSubmissionTimeDiv");
     var AssignmentFailedTopicsDiv = document.getElementById("AssignmentFailedTopicsDiv");
+    
 
 
 
@@ -238,10 +245,12 @@ document.addEventListener("DOMContentLoaded", function() {
     if (IsAssignmentCompleted.value && IsAssignmentCompleted.value !== "false") {
         AssignmentSubmissionDateDiv.style.display = "block";
         AssignmentSubmissionTimeDiv.style.display = "block";
+      
     }
     else{
         AssignmentSubmissionDateDiv.style.display = "none";
         AssignmentSubmissionTimeDiv.style.display = "none";
+       
     }
   
     if (IsAssignmentGraded.value && IsAssignmentGraded.value !== "false") {

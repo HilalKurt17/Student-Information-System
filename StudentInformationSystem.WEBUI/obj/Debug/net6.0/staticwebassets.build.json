@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "gwyuyThvch8de/XZlU4j3H4qf2HbO35EZLeOecs0O/c=",
+  "Hash": "6v5sun+P/Ibk1/pwgbKsMqMoDU0L7T1usI6xpcFnW7Q=",
   "Source": "StudentInformationSystem.WEBUI",
   "BasePath": "_content/StudentInformationSystem.WEBUI",
   "Mode": "Default",
@@ -219,6 +219,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\DERIVATIVE QUESTIONS.pdf"
+    },
+    {
+      "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\uploads\\MeteTanıkAssignment1Answers.pdf",
+      "SourceId": "StudentInformationSystem.WEBUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\",
+      "BasePath": "_content/StudentInformationSystem.WEBUI",
+      "RelativePath": "uploads/MeteTanıkAssignment1Answers.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\MeteTanıkAssignment1Answers.pdf"
     },
     {
       "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\uploads\\N_ILGINCV.pdf",

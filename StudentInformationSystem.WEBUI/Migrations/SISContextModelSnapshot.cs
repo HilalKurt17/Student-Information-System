@@ -74,7 +74,7 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<string>("FailedTopics")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("Grade")
+                    b.Property<int>("Grade")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool?>("IsCompleted")

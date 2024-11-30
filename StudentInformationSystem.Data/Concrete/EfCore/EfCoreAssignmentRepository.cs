@@ -102,6 +102,8 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             oldAssignment.Grade = assignment.Grade;
             oldAssignment.FailedTopics = assignment.FailedTopics;
             oldAssignment.IsGraded = true;
+            oldAssignment.UpdatedTime = assignment.UpdatedTime;
+            oldAssignment.UpdatedDate = assignment.UpdatedDate;
             _context.SaveChanges();
         }
     }

@@ -9,7 +9,7 @@ namespace StudentInformationSystem.Entity
         public string Type { get; set; }
         public string Subject { get; set; }
         public string Explanation { get; set; }
-        public int? Grade { get; set; }
+        public int Grade { get; set; }
         public string? FailedTopics { get; set; }
         public bool? IsCompleted { get; set; }
         public bool? IsGraded { get; set; }

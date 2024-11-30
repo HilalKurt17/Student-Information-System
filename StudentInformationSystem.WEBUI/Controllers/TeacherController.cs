@@ -268,6 +268,13 @@ namespace StudentInformationSystem.WEBUI.Controllers
             {
                 _assignmentRepository.Delete(model.assignment.AssignmentID);
             }
+            else if (model.assignment.IsCompleted == true)
+            {
+                DateTime today = DateTime.Now;
+                model.assignment!.UpdatedDate = today.Date.ToString("yyyy-MM-dd");
+                model.assignment.UpdatedTime = today.TimeOfDay.ToString(@"hh\:mm");
+                _assignmentRepository.GradeAssignment(model.assignment);
+            }
             else
             {
                 if (model.TeacherAssignmentFile != null && model.TeacherAssignmentFile.Length > 0)

@@ -132,9 +132,19 @@
                 }
             
                 <td style="background-color:inherit;">
-                    <a asp-controller="Student" asp-action="MyAssignmentDetails" asp-route-id="@assignmentID">
+                    @if(((dueDateAssignment < dateNow) ||
+                        (dueDateAssignment == dateNow && dueTimeAssignment <= timeNow))&&
+                        (assignment.IsCompleted == false || assignment.IsCompleted == null)){
+                        <a disabled href="#">Missed</a>
+                    }
+                    else
+                    {
+                          <a asp-controller="Student"
+                    asp-action="MyAssignmentDetails" asp-route-id="@assignmentID">
                         Details
-                    </a>            
+                            </a>  
+                    }
+
                 </td>
                 
       

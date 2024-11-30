@@ -125,7 +125,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
             DateTime today = DateTime.Now;
             model.assignment.SubmittedDate = today.Date.ToString("yyyy-MM-dd");
             model.assignment.SubmittedTime = today.TimeOfDay.ToString(@"hh\:mm\:ss");
-            _assignmentRepository.Update(model.assignment);
+            _assignmentRepository.SubmitAssignment(model.assignment);
             return RedirectToAction("MyAssignmentList");
         }
 
