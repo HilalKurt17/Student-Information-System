@@ -21,7 +21,11 @@ builder.Services.AddScoped<IReferencesRepository, EfCoreReferencesRepository>();
 builder.Services.AddScoped<IWorkExperienceRepository, EfCoreWorkExperienceRepository>();
 builder.Services.AddScoped<IPrivateLessonRepository, EfCorePrivateLessonRepository>();
 builder.Services.AddScoped<IPasswordRepository, EfCorePasswordRepository>();
-
+builder.Services.AddAuthentication("AuthorizationCookie").AddCookie("AuthorizationCookie",
+    options =>
+    {
+        options.LoginPath = "/Home/UnauthorizedUser";
+    });
 
 var app = builder.Build();
 

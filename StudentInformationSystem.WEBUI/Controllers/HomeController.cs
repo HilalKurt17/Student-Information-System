@@ -18,9 +18,20 @@ namespace StudentInformationSystem.WEBUI.Controllers
             _passwordRepository = passwordRepository;
         }
 
+        public IActionResult UnauthorizedUser()
+        {
+            return View();
+        }
+
+
         public IActionResult Index()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult ReturnToHome()
+        {
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
