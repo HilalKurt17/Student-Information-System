@@ -143,7 +143,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
             return View(model);
         }
 
-        public IActionResult SignOut()
+        public IActionResult SignOutSystem()
         {
             Response.Cookies.Delete("userID");
             return RedirectToAction("Index", "Home");

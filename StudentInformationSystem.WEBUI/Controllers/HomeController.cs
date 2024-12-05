@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using StudentInformationSystem.Data.Abstract;
 using StudentInformationSystem.Entity;
 using StudentInformationSystem.WEBUI.ViewModels;
+using System.Security.Claims;
 
 namespace StudentInformationSystem.WEBUI.Controllers
 {
@@ -47,7 +49,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult SignIn(SignInViewModel model)
+        public async Task<IActionResult> SignIn(SignInViewModel model)
         {
 
             Passwords password = new Passwords()
@@ -65,6 +67,17 @@ namespace StudentInformationSystem.WEBUI.Controllers
                     if (userPasswordDetails != null && userPasswordDetails.Password == password.Password)
                     {
                         AddUserInfoToCookies(teacher.TeacherID);
+                        // add claims for user authentication
+                        var claims = new List<Claim>
+                        {
+                            new Claim("userID", teacher.TeacherID.ToString())
+                        };
+                        var claimsIdentity = new ClaimsIdentity(claims, "userID");
+                        await HttpContext.SignInAsync("userID", new ClaimsPrincipal(claimsIdentity), new AuthenticationProperties
+                        {
+                            IsPersistent = true,
+                            ExpiresUtc = DateTimeOffset.UtcNow.AddDays(1)
+                        });
                         return RedirectToAction("Index", "Teacher");
                     }
 
@@ -80,6 +93,17 @@ namespace StudentInformationSystem.WEBUI.Controllers
                     if (userPasswordDetails != null && userPasswordDetails.Password == password.Password)
                     {
                         AddUserInfoToCookies(student.StudentID);
+                        // add claims for user authentication
+                        var claims = new List<Claim>
+                        {
+                            new Claim("userID", student.StudentID.ToString())
+                        };
+                        var claimsIdentity = new ClaimsIdentity(claims, "userID");
+                        await HttpContext.SignInAsync("userID", new ClaimsPrincipal(claimsIdentity), new AuthenticationProperties
+                        {
+                            IsPersistent = true,
+                            ExpiresUtc = DateTimeOffset.UtcNow.AddDays(1)
+                        });
                         return RedirectToAction("Index", "Student");
                     }
                 }
@@ -87,6 +111,18 @@ namespace StudentInformationSystem.WEBUI.Controllers
 
             if (password.userMail == "hiz.rka389@gmail.com" && password.Password == "1")
             {
+                AddUserInfoToCookies(0); // use 0 as admin ID
+                                         // add claims for user authentication
+                var claims = new List<Claim>
+                        {
+                            new Claim("userID", "0")
+                        };
+                var claimsIdentity = new ClaimsIdentity(claims, "userID");
+                await HttpContext.SignInAsync("userID", new ClaimsPrincipal(claimsIdentity), new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddDays(1)
+                });
                 return RedirectToAction("Index", "Admin");
             }
             ViewBag.SignIn = "Failed";

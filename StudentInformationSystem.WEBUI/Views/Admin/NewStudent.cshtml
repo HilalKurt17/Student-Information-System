@@ -11,46 +11,31 @@
 <form method="POST">
 
     <div class="student row">
-        <div class="student-registration-div mb-4">
+        <div class="student-registration-div mb-4" style="align-content:center; justify-content:center;">
             <img class="me-4" src="~/images/_SIS.png" width=60px; />
             <h1><b>
                 Student Registration Page
             </b></h1>
         </div>
     </div>
-    <div class="row">
-        <div class="col-6">
+    <div class="row" style="align-content:center; justify-content:center;">
+        <div class="col-6 mt-3">
             <div class="form-group p-2">
                 <label for="Name">Name</label> 
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" required/>
             </div>
             <div class="form-group p-2">
                 <label for="Surname">Surname</label>
-                <input asp-for="Surname" class="form-control" />
-            </div>
-            <div class="form-group p-2">
-                <label for="Mail">Mail</label>
-                <input asp-for="Mail" class="form-control" />
-            </div>
-            
-        </div>
-        <div class="col-6">
-            <div class="form-group p-2">
-                <label for="Phone">Phone</label>
-                <input asp-for="Phone" class="form-control" />
-            </div>
-            <div class="form-group p-2">
-                <label for="ParentPhone">Parent Phone</label>
-                <input asp-for="ParentPhone" class="form-control" />
+                <input asp-for="Surname" class="form-control" required />
             </div>
             <div class="input-group p-2 mt-4">
 
-                <select class="form-select me-3" id="GenderSelection" asp-for="Gender">
+                <select class="form-select me-3" id="GenderSelection" asp-for="Gender" required>
                     <option selected disabled> Gender </option>
                     <option value="F">Female</option>
                     <option value="M">Male</option>
                 </select>
-                <select class="form-select" id="EducationLevel" asp-for="EducationLevel">
+                <select class="form-select" id="EducationLevel" asp-for="EducationLevel" required>
                     <option selected disabled> Education Level </option>
                     <option value="Primary School">Primary School</option>
                     <option value="Middle School">Middle School</option>
@@ -58,14 +43,28 @@
                 </select>
 
             </div>
-            <div class="form-group p-2 mt-4 d-grid">
-                <button type="submit" class="btn btn-primary btn-features">
-                Add New Student </button>
-            </div>
             
-                
+         
+            <div class="form-group p-2">
+                <label for="Mail">Mail</label>
+                <input asp-for="Mail" class="form-control"  required/>
+            </div>
+            <div class="form-group p-2">
+                <label for="Phone">Phone</label>
+                <input asp-for="Phone" class="form-control"  required/>
+            </div>
+            <div class="form-group p-2">
+                <label for="ParentPhone">Parent Phone</label>
+                <input asp-for="ParentPhone" class="form-control"  required/>
+            </div>
+            <div class="form-group p-2 d-grid mt-5">
+                <button type="submit" class="btn btn-primary btn-features" 
+                style="display:block;">
+                    Add New Student
+                </button> 
+            </div>  
         </div>
-        
+
     </div>
      
 </form>

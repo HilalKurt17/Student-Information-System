@@ -140,6 +140,12 @@ namespace StudentInformationSystem.WEBUI.Controllers
             }
             return RedirectToAction("ListStudents");
         }
+
+        public IActionResult SignOutSystem()
+        {
+            Response.Cookies.Delete("userID");
+            return RedirectToAction("Index", "Home");
+        }
     }
 
 }
