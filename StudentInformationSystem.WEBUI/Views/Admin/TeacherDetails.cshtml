@@ -21,7 +21,7 @@
             </b></h1>
         </div>
     </div>
-    <div class="row">
+    <div class="row mt-3">
         <div class="col-6"> @*add teacher id as a hidden layer for model binding operation*@
             <input type="hidden" asp-for="@Model.teacher.TeacherID" />
             <div class="form-group p-2">
@@ -34,16 +34,7 @@
                 @*show teacher surname (using model binding with asp-for)*@
                 <input disabled asp-for="@Model.teacher.Surname" class="form-control" />
             </div>
-            <div class="form-group p-2">
-                <label for="Mail">Mail</label>
-                @*show teacher mail (using model binding with asp-for)*@
-                <input disabled asp-for="@Model.teacher.Mail" class="form-control" />
-            </div>
-            <div class="form-group p-2">
-                <label for="Phone">Phone</label>
-                @*show teacher phone (using model binding with asp-for)*@
-                <input disabled asp-for="@Model.teacher.Phone" class="form-control" />
-            </div>
+            
             <div class="input-group p-2 mt-4">
                 @*show teacher gender (using model binding with asp-for)*@
                 <select disabled class="form-select me-3" asp-for="@Model.teacher.Gender"
@@ -62,6 +53,16 @@
                     <option value="PhD">PhD Tutor</option>
                 </select>
 
+            </div>
+            <div class="form-group p-2">
+                <label for="Mail">Mail</label>
+                @*show teacher mail (using model binding with asp-for)*@
+                <input disabled asp-for="@Model.teacher.Mail" class="form-control" />
+            </div>
+            <div class="form-group p-2">
+                <label for="Phone">Phone</label>
+                @*show teacher phone (using model binding with asp-for)*@
+                <input disabled asp-for="@Model.teacher.Phone" class="form-control" />
             </div>
             <div class="form-group p-2 form-floating pt-4">
                 @*show teacher details (using model binding with asp-for)*@
@@ -106,7 +107,7 @@
                 id="dismissed"
                 asp-for="@Model.teacher.UnenrollmentState"/>
                 <label class="form-check-label" for="dismissed">
-                    Dismissed
+                    Terminated
                 </label>
             </div>
             
@@ -211,12 +212,15 @@
                <label>@((Model.teacher.CVFilePath != null && Model.teacher.CVFilePath != "") 
                    ? Model.teacher.CVFilePath.Substring(9):"")</label>
            </div>
-            <div class="form-group p-2 mt-5 d-grid">
-                <button type="submit" class="btn btn-primary btn-features">
-                Update </button>
+             
+        </div>
+        <div class="row" style="align-content:center; justify-content: center;">
+            <div class="col-6">
+                <div class="form-group p-2 mt-5 d-grid">
+                    <button type="submit" class="btn btn-primary btn-features">
+                    Update Teacher </button>
+                </div> 
             </div>
-            
-                
         </div>
     </div>
 </form>
@@ -242,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var CVhrefATag = document.getElementById("CVFileOpenTag");
     var RLhrefATag = document.getElementById("ReferenceFileOpenTag");
-
+    
     if (!ReferenceLetterFilePath) {
         
         RLInput.disabled = false;
@@ -270,7 +274,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     var isApprovedStatusInput = document.getElementById("IsApprovedStatusSendToScript");
     var isApprovedCheckbox = document.getElementById("isApproved");
-
+    if (!ReferenceLetterFilePath && !CVFilePath) {
+        isApprovedCheckbox.disabled = true;
+    }
     if (isApprovedStatusInput.value == "true") {
         isApprovedCheckbox.disabled = true;
     };
