@@ -121,6 +121,25 @@ h1{
     margin-bottom: 0px !important;
 }
 
-
-
+.carousel-control-prev-icon,
+.carousel-control-next-icon,
+,
+.carousel-control-next {
+   
+  
+}
+.carousel-indicators {
+    bottom: 5px !important;
+    padding-bottom: 0px !important;
+    
+}
+.carousel-inner{
+    height: 600px !important;
+}
+button.carousel-control-prev.carousel-fade:active,
+button.carousel-control-prev.carousel-fade:focus,
+button.carousel-control-next.carousel-fade:active,
+button.carousel-control-next.carousel-fade:focus {
+    box-shadow: none !important;
+}
 

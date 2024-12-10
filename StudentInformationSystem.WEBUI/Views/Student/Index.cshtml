@@ -52,11 +52,11 @@
             </div>
             <div class="form-group p-2"> @*show student phone - updatable*@
                 <label for="Phone">Phone</label>
-                <input asp-for="Phone" class="form-control" />
+                <input asp-for="Phone" class="form-control" required/>
             </div>
             <div class="form-group p-2"> @*show student parent phone - updatable*@
                 <label for="ParentPhone">Parent Phone</label>
-                <input asp-for="ParentPhone" class="form-control" />
+                <input asp-for="ParentPhone" class="form-control" required />
             </div>
             
         </div>
@@ -66,33 +66,33 @@
             <div class="form-group p-2">
                 <label>Address Details</label> @* get address details of the student*@
                 <div class="card-div">
-                    <input type="hidden" asp-for="@Model.Address.AddressID" /> @*add address id for model binding operation*@
+                    <input type="hidden" asp-for="@Model.Address.AddressID"/> @*add address id for model binding operation*@
                     <div class="form-group p-2">
                         <label for="country">
                             Country
                         </label> @*show country of the student - updatable*@
-                        <input class="form-control" id="country" asp-for="@Model.Address.Country" />
+                        <input class="form-control" id="country" asp-for="@Model.Address.Country" required />
                        
                     </div>
                     <div class="form-group p-2">
                         <label for="city">
                             City
                         </label> @*show city of the student - updatable*@
-                        <input class="form-control" id="city" asp-for="@Model.Address.City" />
+                        <input class="form-control" id="city" asp-for="@Model.Address.City" required />
                         
                     </div>
                     <div class="form-group p-2">
                         <label for="zipCode">
                             ZipCode
                         </label> @*show zip code of the student address - updatable*@
-                        <input class="form-control" id="zipCode" asp-for="@Model.Address.ZipCode"/>
+                        <input class="form-control" id="zipCode" asp-for="@Model.Address.ZipCode" required/>
                         
                     </div>
                     <div class="form-group p-2 mb-2 mt-2">
                         <div class="form-floating">  @*show address details of the student - updatable*@
                             <textarea class="form-control address-div-height"  
                             id="StudentAddress" asp-for="@Model.Address.AddressDetails"
-                            placeholder="Leave a comment here"></textarea>
+                            placeholder="Leave a comment here" required></textarea>
                             <label for="StudentAddress">
                                 Address
                             </label>
@@ -114,13 +114,13 @@
                             Cardholder Name
                         </label> @*show cardholder name - updatable*@
                         <input asp-for="@Model.PaymentDetails.CardholderName" 
-                        class="form-control"/>
+                        class="form-control" required/>
                     </div>
                     <div class="form-group p-2">
                         <label for="CardNumber">
                             Card Number
                         </label> @*show card number - updatable*@
-                        <input asp-for="@Model.PaymentDetails.CardNumber" class="form-control"/>
+                        <input asp-for="@Model.PaymentDetails.CardNumber" class="form-control" required/>
                     </div>
                     <div class="creditCard-div">
                         <div class="form-group p-2 me-auto mb-2">
@@ -133,14 +133,14 @@
                                 placeholder="MM/YY"
                                 maxlength="5"
                                 pattern="(0[1-9]|1[0-2])\/\d{2}"
-                                class="form-control" />
+                                class="form-control"  required/>
                         </div>
                         <div class="form-group p-2 mb-2">
                             <label for="SecurityCode">
                                 CVV
                             </label> @*show CVV - updatable*@
                             <input asp-for="@Model.PaymentDetails.CVVSecurityCode" 
-                            class="form-control" />
+                            class="form-control"  required/>
                         </div>
                     </div>
                 </div>

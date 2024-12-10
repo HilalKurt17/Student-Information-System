@@ -43,7 +43,7 @@
             <div class="form-group p-2">
                 <label for="Phone">Phone</label>
                 @*show teacher phone - updatable (using model binding with asp-for)*@
-                <input asp-for="@Model.teacher.Phone" class="form-control" />
+                <input asp-for="@Model.teacher.Phone" class="form-control" required/>
             </div>
             <div class="input-group p-2 mt-4">
                 @*show teacher gender (using model binding with asp-for)*@
@@ -68,7 +68,7 @@
                 @*show teacher details - updatable (using model binding with asp-for)*@
               <textarea class="form-control"  
               id="TeacherExplanation" asp-for="@Model.teacher.Details"
-              placeholder="Leave a comment here"></textarea>
+              placeholder="Leave a comment here" required></textarea>
               <label class="p-3 pt-4" for="TeacherExplanation">
                   Details
               </label>
@@ -115,7 +115,7 @@
             <div class="form-group p-2">
                 @*add teacher IBAN for student payments for private lessons.*@
                 <label for="IBAN">IBAN</label>
-                <input asp-for="@Model.teacher.IBAN" class="form-control" />
+                <input asp-for="@Model.teacher.IBAN" class="form-control" required/>
             </div>
             
            <div class="form-group p-2">
@@ -127,32 +127,32 @@
                         <label for="ReferenceName">
                             Name 
                         </label>
-                        <input asp-for="@Model.teacher.References[0].Name" class="form-control" id="referenceName"/>
+                        <input asp-for="@Model.teacher.References[0].Name" class="form-control" id="referenceName" required/>
                     </div>
                     
                     <div class="form-group p-2">
                         <label for="ReferenceCompany">
                             Reference Company 
                         </label>
-                        <input asp-for="@Model.teacher.References[0].CompanyName" class="form-control" id="referenceCompany" />
+                        <input asp-for="@Model.teacher.References[0].CompanyName" class="form-control" id="referenceCompany" required/>
                     </div>
                     <div class="form-group p-2">
                         <label for="ReferenceJobTitle">
                             Job Title 
                         </label>
-                        <input asp-for="@Model.teacher.References[0].CurrentPosition" class="form-control" id="referenceJobTitle"/>
+                        <input asp-for="@Model.teacher.References[0].CurrentPosition" class="form-control" id="referenceJobTitle" required/>
                     </div>
                     <div class="form-group p-2">
                         <label for="ReferenceMail" >
                             Mail
                         </label>
-                        <input asp-for="@Model.teacher.References[0].Mail" class="form-control" id="referenceMail"/>
+                        <input asp-for="@Model.teacher.References[0].Mail" class="form-control" id="referenceMail" required/>
                     </div>
                     <div class="form-group p-2">
                         <label for="ReferencePhone" >
                             Phone
                         </label>
-                        <input asp-for="@Model.teacher.References[0].Phone" class="form-control" id="referencePhone"/>
+                        <input asp-for="@Model.teacher.References[0].Phone" class="form-control" id="referencePhone" required/>
                     </div>
                     <div class="input-group p-2 pt-4 pb-3" id="ReferenceLetterDiv">
                         <label class="form-control" for="ReferenceLetter">
@@ -161,7 +161,7 @@
                         <input type="hidden" value="@Model.teacher.References[0].ReferenceLetterFilePath" 
                         id="SendToScriptReferenceLetterFilePath"/>
                         <input type="file" class="form-control" 
-                        id="ReferenceLetter" asp-for="@Model.ReferenceLetterFile"/>
+                        id="ReferenceLetter" asp-for="@Model.ReferenceLetterFile" required/>
                         
                     </div>
                     @*teacher can open reference letter file*@
@@ -186,7 +186,7 @@
                @* teacher can upload cv file*@
                <input type="hidden" value="@Model.teacher.CVFilePath" id="SendToScriptCVFilePath"/>
                <input type="file" class="form-control" id="TeacherCV"
-               asp-for="@Model.CVFile"/>
+               asp-for="@Model.CVFile" required/>
                
            </div>
            <div class="form-group p-2" id="CVFileExists">

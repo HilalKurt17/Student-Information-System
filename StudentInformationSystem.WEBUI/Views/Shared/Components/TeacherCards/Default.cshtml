@@ -20,10 +20,27 @@
     @foreach (var teacher in Model.teachers) @*create card for each teacher*@
     {
         var isTeacherApproved = teacher.IsApproved;
+        var isTeacherCVTaken = (teacher.CVFilePath != null) && (teacher.CVFilePath != "");
+        var isTeacherReferenceLetterTaken = false;
+        if (teacher.References.Count != 0)
+        {
+
+            isTeacherReferenceLetterTaken = (teacher.References[0].ReferenceLetterFilePath != null) &&
+                                            (teacher.References[0].ReferenceLetterFilePath != "");
+        }
+       
         var cardColorClass = "approved";
         if(isTeacherApproved == false)
         {
-            cardColorClass = "notApproved";
+            if(isTeacherCVTaken && isTeacherReferenceLetterTaken)
+            {
+                cardColorClass = "pendingApprovement";
+            }
+            else
+            {
+                cardColorClass = "notApproved";
+            }
+            
         }
  
         <div class="card m-4 cards-display">

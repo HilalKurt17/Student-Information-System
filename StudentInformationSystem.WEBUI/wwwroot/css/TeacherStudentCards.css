@@ -67,6 +67,17 @@ div.progress-bar.approved, div.card-header.approved {
 div.body.approved {
     background-color: #A7C7E7;
 }
+
+/*if teacher is not approved but pending approvement show teacher cards in yellow*/
+div.progress-bar.pendingApprovement, div.card-header.pendingApprovement {
+    background-color: #f06100;
+    color: white;
+}
+
+div.body.pendingApprovement {
+    background-color: #ffbb8e;
+}
+
 /*if teacher is not approved show teacher cards in red*/
 div.progress-bar.notApproved, div.card-header.notApproved {
     background-color: #A42A04;
