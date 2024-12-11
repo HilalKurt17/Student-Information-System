@@ -6,8 +6,9 @@
 
 <link href="~/css/TeacherDetailsPageDesign.css" rel="stylesheet"/>
 <form asp-controller="Home" asp-action="SignUp" method="post">
+    <div class="container-in">
     <div class="row">
-        <div class="student-registration-div mb-4" style="justify-content:center !important;">
+        <div class="student-registration-div mb-4 mt-5" style="justify-content:center !important;">
             <h1><b>
                 Sign Up
             </b></h1>
@@ -45,12 +46,13 @@
             <div class="alert alert-danger" role="alert" style="display:none;" id="unmatchedPassword">
                 *Passwords are not matched.
             </div>
-            <div class="form-group d-grid p-2 mt-3">
+            <div class="form-group d-grid p-2 mt-3 mb-5">
                 <button type="submit" class="btn btn-primary btn-features" style="display:block;">
                     Sign Up
                 </button>
             </div>
         </div>
+    </div>
     </div>
 </form>
 <script>
