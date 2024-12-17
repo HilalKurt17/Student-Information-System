@@ -81,6 +81,8 @@ button#offcanvasNavbarToggleButton.navbar-toggler.gap.navbar-text-color.me-4 {
     border-width: 1px;
     box-shadow: none !important;
 }
+
+
 button#offcanvasNavbarToggleButton.navbar-toggler.gap.navbar-text-color.me-4:focus {
     border-color: #803427 !important;
     box-shadow: 0 0 0 0.25rem rgba(128, 52, 39, 0.5) !important;
@@ -121,20 +123,24 @@ h1{
     margin-bottom: 0px !important;
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon,
-,
-.carousel-control-next {
-   
-  
-}
 .carousel-indicators {
     bottom: 5px !important;
     padding-bottom: 0px !important;
-    
 }
-.carousel-inner{
+
+.carousel-inner {
     height: 600px !important;
+}
+button.noShadow:active,
+button.noShadow:focus{
+    box-shadow: none !important;
+    position: relative;
+    margin-right: 3px;
+}
+.carousel-indicators button{
+    box-sizing:initial !important;
+    border: none !important;
+    background-color:black;
 }
 button.carousel-control-prev.carousel-fade:active,
 button.carousel-control-prev.carousel-fade:focus,
@@ -147,6 +153,7 @@ div.carousel-caption {
     border-radius: 15px;
     box-shadow: inset 0px 0px 20px 5px rgba(67,66,66,0.6) !important;
     z-index: 1;
+    margin-bottom: 50px !important;
 }
 
 div.container-in {
@@ -182,4 +189,23 @@ div.container-in-details {
     margin-right: auto;
     border-radius: 10px;
     box-shadow: 0px 4px 20px 3px rgba(0, 90, 106, 0.7);
+}
+
+div#carouselExample {
+    box-shadow: 0px 4px 20px 3px rgba(0, 90, 106, 0.7);
+}
+
+li.adminGS::marker {
+    content: "✓";
+    color:darkred;
+    font-size: larger;
+    font-weight: bolder;
+}
+li.adminGS{
+    text-indent: 7px;
+    
+}
+
+p{
+    text-align:justify;
 }
