@@ -1,0 +1,72 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@section Navbar{
+    @await Html.PartialAsync("_navbarTSA.cshtml")
+}
+
+@model TeacherAssignmentListViewModel
+
+<link href="~/css/assignmentList.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="student-registration-div mb-4">
+        <img class="me-4" src="~/images/_SIS.png" width=60px />
+        <h1>
+            <b>Private Lesson - Student List</b>
+        </h1>
+    </div>
+    <div class="table-responsive pt-2">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        Lesson ID
+                    </th>
+                    <th scope="col">
+                        Lesson Name
+                    </th>
+                    <th scope="col">
+                        Student ID
+                    </th>
+                    <th scope="col">
+                        Student Name
+                    </th>
+                    <th scope="col">
+                        Lesson End Date
+                    </th>
+                    <th scope="col">
+                        Details
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                    @foreach(StudentTeacher privateLesson in Model.privateLessons)
+                {
+                    if(privateLesson.StudentID != null)
+                    {
+                        Student student = Model.students.FirstOrDefault(i => i.StudentID == privateLesson.StudentID)!;
+                        string lessonEndDate = privateLesson.LessonEndDate!;
+                        <tr>
+                        <td>@privateLesson.PrivateLessonID</td>
+                        <td>@privateLesson.LessonName</td>
+                        <td>@privateLesson.StudentID</td>
+                        <td>@(student.Name + " " + student.Surname)</td>
+                        <td>
+                            @lessonEndDate
+                        </td>
+                        <td>
+                            <a asp-controller="Teacher" asp-action="PLSDetails"
+                            asp-route-id="@privateLesson.PrivateLessonID">
+                                Details
+                            </a>
+                        </td>
+                        </tr>
+                    }
+                    
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

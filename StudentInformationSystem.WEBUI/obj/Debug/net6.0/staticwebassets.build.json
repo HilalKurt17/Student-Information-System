@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "cry+QZx1EPMGAG480kEsO/KVKuyehI7xwKAXuuKMffM=",
+  "Hash": "kgN6ikUf7GiZTDkIrzprlOyiMMgQnDN8bmttW4w1M6Q=",
   "Source": "StudentInformationSystem.WEBUI",
   "BasePath": "_content/StudentInformationSystem.WEBUI",
   "Mode": "Default",
@@ -321,23 +321,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\AdminGettingStarted\\adminTeacherList.png"
-    },
-    {
-      "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\images\\SIS.png",
-      "SourceId": "StudentInformationSystem.WEBUI",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\",
-      "BasePath": "_content/StudentInformationSystem.WEBUI",
-      "RelativePath": "images/SIS.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\SIS.png"
     },
     {
       "Identity": "C:\\VS_ASP.NET\\SIS\\StudentInformationSystem.WEBUI\\wwwroot\\js\\site.js",

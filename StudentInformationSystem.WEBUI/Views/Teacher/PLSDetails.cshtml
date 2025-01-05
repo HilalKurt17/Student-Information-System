@@ -1,0 +1,64 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model PLSDetailsViewModel
+
+@section Navbar{
+    @await Html.PartialAsync("_navbarTSA.cshtml")
+}
+
+<div class="row">
+    <div class="student-registration-div mb-4">
+        <img class="me-4" src="~/images/_SIS.png" width=60px />
+        <h1>
+            <b>Private Lesson - Student List</b>
+        </h1>
+    </div>
+    
+        <div class="mb-2" style="display:flex;">
+            <h6 class="me-2" style="margin:0px;padding:0px;align-content:center;"><b>Student Name: </b></h6>
+            <p style="margin:0px;padding:0px;align-content:center;">@(Model.student.Name + " " + Model.student.Surname)</p>
+        </div>
+        <div class="mb-2" style="display:flex;">
+            <h6 class="me-2" style="margin:0px;padding:0px;align-content:center;"><b>Education Level: </b></h6>
+            <p style="margin:0px;padding:0px;align-content:center;">@Model.student.EducationLevel</p>
+        </div>
+        <div class="mb-2" style="display:flex;">
+            <h6 class="me-2" style="margin:0px;padding:0px;align-content:center;"><b>Lesson Name: </b></h6>
+            <p style="margin:0px;padding:0px;align-content:center;">@Model.privateLesson.LessonName</p>
+        </div>
+        <br />
+        <div class="table-responsive pt-2">
+            <table class="table table-hover">
+                <thead>
+                    <tr scope="row">
+                        <th scope="col" >Assignment ID</td>
+                        <th scope="col" >Assignment Type</td>
+                        <th scope="col" >Assignment Subject</td>
+                        <th scope="col" >Assignment Status</td>
+                        <th scope="col" >Assignment Grade</td>
+                        <th scope="col" >Assignment Details</td>
+                    </tr>
+                </thead>
+                <tbody>
+                        @foreach(Assignment assignment in Model.assignments)
+                    {
+                        <tr>
+                            <td>@assignment.AssignmentID</td>
+                            <td>@assignment.Type</td>
+                            <td>@assignment.Subject</td>
+                            @if(assignment.SubmittedDate != null && assignment.SubmittedDate != "")
+                            {
+                                <td>1</td>
+                            }
+                            else
+                            {
+                                <td>0</td>
+                            }
+                            <td>@assignment.Grade</td>
+                            <td><a>Details</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+</div>

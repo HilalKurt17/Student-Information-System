@@ -14,7 +14,7 @@
             }
             @if (ViewBag.UserType == "teacher")
             {
-                <span style="margin-left: 20px;">PERSONNEL PANEL</span>
+                <span style="margin-left: 20px;">@ViewBag.UserFullName</span>
             }
             @if (ViewBag.UserType == "student")
             {
@@ -58,51 +58,54 @@ bg-navbar-container  offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                         
                         </li>
                         <li class="nav-item">
-                            
+
                                 <a class="nav-link" href="@Url.Action("Index", "Teacher")">
                                     My Profile
                                 </a>
-                            <hr>
-                        
-                        </li>
-                        <li class="nav-item">
-                       
+                                <hr>
+
+                            </li>
+                        @if (ViewBag.UserApproved)
+                        {
+                            
+
+                            <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("CreateLesson","Teacher")">
                                     New Private Lesson
                                 </a>
-                            <hr>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("LessonList","Teacher")">
-                                List Private Lessons
-                            </a>
-                            <hr>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("ListStudents","Teacher")">
-                                List Students
-                            </a>
-                            <hr>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("NewAssignment","Teacher")">
-                                New Assignment
-                            </a>
-                            <hr>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("AssignmentList","Teacher")">
-                                List Assignments
-                            </a>
-                            <hr>
-                        </li>
+                                <hr>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("LessonList","Teacher")">
+                                    List Private Lessons
+                                </a>
+                                <hr>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("PrivateLessonStudentList","Teacher")">
+                                    Private Lesson - Student List
+                                </a>
+                                <hr>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("NewAssignment","Teacher")">
+                                    New Assignment
+                                </a>
+                                <hr>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("AssignmentList","Teacher")">
+                                    List Assignments
+                                </a>
+                                <hr>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("SignOutSystem","Teacher")">
                                 Sign Out
                             </a>
                             <hr>
                         </li>
-                        
                     }
                     @if (ViewBag.UserType == "admin")
                     {

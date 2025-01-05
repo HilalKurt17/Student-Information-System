@@ -27,9 +27,20 @@ namespace StudentInformationSystem.WEBUI.Controllers
         }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
+            int teacherID = Convert.ToInt32(Request.Cookies["userID"]);
+            Teacher _teacher = _teacherRepository.GetById(teacherID)!;
+
+            ViewBag.userFullName = _teacher.Name + " " + _teacher.Surname;
+            ViewBag.userApproved = _teacher.IsApproved;
             ViewBag.UserType = "teacher"; // define user type for navbar
             base.OnActionExecuting(context);
         }
+
+        public IActionResult GettingStarted()
+        {
+            return View();
+        }
+
         public IActionResult Index() // home-profile get teacher information by teacher id
         {
             int teacherID = Convert.ToInt32(Request.Cookies["userID"]);
@@ -180,9 +191,44 @@ namespace StudentInformationSystem.WEBUI.Controllers
             return RedirectToAction("LessonList");
         }
 
-        public IActionResult ListStudents() // list all students 
+        public IActionResult PrivateLessonStudentList() // list all students 
         {
-            return View();
+            int teacherID = Convert.ToInt32(Request.Cookies["userID"]);
+            Teacher teacher = _teacherRepository.GetById(teacherID)!;
+            List<int> studentIDs = new List<int>();
+            foreach (StudentTeacher privateLesson in teacher.StudentTeachers)
+            {
+                if ((privateLesson.StudentID != null) && !(studentIDs.Contains((int)privateLesson.StudentID!)))
+                {
+                    studentIDs.Add((int)privateLesson.StudentID!);
+                }
+
+            };
+
+
+            TeacherAssignmentListViewModel model = new TeacherAssignmentListViewModel()
+            {
+                teacherID = teacherID,
+                students = _studentRepository.GetSelectedStudents(studentIDs),
+                privateLessons = _privateLessonRepository.GetAllT(),
+                assignments = teacher.Assignments
+            };
+            return View(model);
+        }
+
+        public IActionResult PLSDetails(int id) // private lesson - student details 
+        {
+            StudentTeacher privateLesson = _privateLessonRepository.GetById(id)!;
+            Student student = _studentRepository.GetById((int)privateLesson.StudentID!)!;
+            List<Assignment> assignments = student.Assignments.FindAll(i => i.privateLessonID == privateLesson.PrivateLessonID);
+            PLSDetailsViewModel model = new PLSDetailsViewModel
+            {
+                student = student,
+                assignments = assignments,
+                privateLesson = privateLesson
+
+            };
+            return View(model);
         }
 
         [HttpGet]
@@ -303,6 +349,11 @@ namespace StudentInformationSystem.WEBUI.Controllers
             return RedirectToAction("AssignmentList");
         }
 
+        [HttpGet]
+        public IActionResult PrivateLessonDetails(int id)
+        {
+            return View();
+        }
         public IActionResult SignOutSystem()
         {
             Response.Cookies.Delete("userID");

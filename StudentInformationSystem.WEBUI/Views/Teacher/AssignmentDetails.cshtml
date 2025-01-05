@@ -207,13 +207,15 @@
                 <input type="number" min="0" max="100" class="form-control" id="gradeAssignment"
                 asp-for="@Model.assignment.Grade" required/>
             </div>
-            <div class="form-group p-2 d-grid" id="UpdateAssignmentDiv">
-                <button type="submit" class="btn btn-primary btn-features" 
-                style="display:block; width:auto;">
-                    Update Assignment 
-                </button> 
-            </div>
         </div>
+            <div class="row" style="align-content:center; justify-content:center;">
+                <div class="col-6">
+                    <div class="form-group p-2 mt-4 d-grid mb-5" id="UpdateAssignmentDiv">
+                        <button type="submit" class="btn btn-primary btn-features">
+                        Update Profile </button>
+                    </div>
+                </div>
+            </div>
     </div>
 </form>
 <script>
