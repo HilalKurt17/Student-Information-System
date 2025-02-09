@@ -300,6 +300,11 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<bool>("EnrollmentState")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("GetScoreComment")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("LessonDate")
                         .IsRequired()
                         .HasColumnType("TEXT");

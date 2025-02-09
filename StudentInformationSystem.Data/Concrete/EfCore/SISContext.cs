@@ -58,6 +58,10 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             modelBuilder.Entity<StudentTeacher>()
                 .Property(st => st.RemoveLesson)
                 .HasDefaultValue(false);
+            //assign false to get score and comment state 
+            modelBuilder.Entity<StudentTeacher>()
+                .Property(st => st.GetScoreComment)
+                .HasDefaultValue(false);
             // define key of passwords
             modelBuilder.Entity<Passwords>()
                 .HasKey(p => p.PasswordsID);

@@ -179,9 +179,16 @@ namespace StudentInformationSystem.WEBUI.Controllers
         [HttpPost]
         public IActionResult LessonDetails(LessonDetailsViewModel updatedLesson)
         {
+            DateTime now = DateTime.Now;
+            DateTime DateNow = now.Date;
+            TimeSpan TimeNow = now.TimeOfDay;
             if (updatedLesson.privateLessonDetails.RemoveLesson == true)
             {
                 _privateLessonRepository.Delete(updatedLesson.privateLessonDetails.PrivateLessonID); // delete the lesson
+            }
+            else if ((Convert.ToDateTime(updatedLesson.privateLessonDetails.LessonEndDate) < DateNow) || (Convert.ToDateTime(updatedLesson.privateLessonDetails.LessonEndDate) == DateNow && TimeSpan.Parse(updatedLesson.privateLessonDetails.LessonEndTime) <= TimeNow))
+            {
+                updatedLesson.privateLessonDetails.GetScoreComment = true;
             }
             else
             {

@@ -5,7 +5,7 @@
 @section Navbar{
     @await Html.PartialAsync("_navbarTSA.cshtml")
 }
-
+<link href="~/css/assignmentList.css" rel="stylesheet" />
 <div class="row">
     <div class="student-registration-div mb-4">
         <img class="me-4" src="~/images/_SIS.png" width=60px />
@@ -55,7 +55,11 @@
                                 <td>0</td>
                             }
                             <td>@assignment.Grade</td>
-                            <td><a>Details</a></td>
+                            <td>
+                                <a asp-controller="Teacher" asp-action="AssignmentDetails"
+                                asp-route-id="@assignment.AssignmentID">
+                                Details
+                                </a></td>
                         </tr>
                     }
                 </tbody>
