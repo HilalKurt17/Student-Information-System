@@ -27,6 +27,9 @@ namespace StudentInformationSystem.WEBUI.Controllers
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             ViewBag.UserType = "student";
+            int studentID = Convert.ToInt32(Request.Cookies["userID"]);
+            Student student = _studentRepository.GetById(studentID);
+            ViewBag.UserFullName = student.Name + " " + student.Surname;
             base.OnActionExecuting(context);
         }
         [HttpGet] // show student profile in the index page
@@ -34,8 +37,39 @@ namespace StudentInformationSystem.WEBUI.Controllers
         {
             int studentID = Convert.ToInt32(Request.Cookies["userID"]);
             Student student = _studentRepository.GetById(studentID)!;
+            foreach (StudentTeacher privateLesson in student.StudentTeachers)
+            {
+                if (privateLesson.GetScoreComment == true)
+                {
+                    GetScoreCommentPLViewModel model = new GetScoreCommentPLViewModel()
+                    {
+                        student = student,
+                        teacherScore = 0,
+                        privateLessonID = privateLesson.PrivateLessonID
+                    };
+                    return View("GetStudentScoreCommentPL", model);
+                }
+            }
             return View(student);
         }
+
+
+        [HttpPost] // update private lesson student score and student comment
+        public IActionResult GetScoreCommentPL(GetScoreCommentPLViewModel model)
+        {
+            StudentTeacher privateLesson = _privateLessonRepository.GetAllT().FirstOrDefault(i => i.PrivateLessonID == model.privateLessonID)!;
+            Teacher teacher = _teacherRepository.GetById(privateLesson.TeacherID)!;
+            if (teacher.TeacherScore == null)
+            {
+                teacher.TeacherScore = 0;
+
+            }
+            teacher.TeacherScore += model.teacherScore;
+            teacher.votedStudentsCount += 1;
+            _teacherRepository.UpdateTeacherScore(teacher);
+            return RedirectToAction("Index");
+        }
+
         // get updated student information from index page and update student
         [HttpPost]
         public IActionResult Index(Student updatedStudent)

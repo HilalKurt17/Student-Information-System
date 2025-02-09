@@ -189,6 +189,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
             else if ((Convert.ToDateTime(updatedLesson.privateLessonDetails.LessonEndDate) < DateNow) || (Convert.ToDateTime(updatedLesson.privateLessonDetails.LessonEndDate) == DateNow && TimeSpan.Parse(updatedLesson.privateLessonDetails.LessonEndTime) <= TimeNow))
             {
                 updatedLesson.privateLessonDetails.GetScoreComment = true;
+                _privateLessonRepository.Update(updatedLesson.privateLessonDetails);
             }
             else
             {

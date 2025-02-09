@@ -11,10 +11,10 @@
 
 <form method="post" asp-controller="Student" asp-action="LessonDetails">
     <div class="row">
-        <div class="student-registration-div mb-5">
-            <img class="me-4" src="~/images/_SIS.png" width=100px/>
+        <div class="student-registration-div mb-4">
+            <img class="me-4" src="~/images/_SIS.png" width=60px/>
             <h1>
-                <b>LESSON DETAILS</b>
+                <b>Lesson Details</b>
             </h1>
         </div>
         
@@ -101,14 +101,24 @@
                 placeholder="Lesson Details" class="form-control" style="height:120px">
                 </textarea>
             </div>
-            <div class="form-group p-2 mt-4 d-grid">
-                <button class="btn btn-primary btn-features"  type="submit" 
-                style="display:block; width:auto">
-                    Enroll Lesson
-                </button>
-            </div>
+            
             
         </div>
-        
+        <div class="row" style="align-content:center; justify-content:center;">
+            <div class="col-6">
+                <div class="form-group p-2 mt-4 d-grid mb-5">
+                        @{
+                        if ((Model.StudentID == null)||(Model.StudentID == 0))
+                        {
+                            <button class="btn btn-primary btn-features"  type="submit" 
+                            style="display:block; width:auto">
+                                Enroll Lesson
+                            </button>
+                        }
+                    }
+                
+                </div>
+            </div>
+        </div>
     </div>
 </form>

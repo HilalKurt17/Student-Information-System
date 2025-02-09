@@ -176,5 +176,16 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
 
             _context.SaveChanges();
         }
+
+        public void UpdateTeacherScore(Teacher teacher)
+        {
+            Teacher existingTeacher = _context
+                                    .Teachers
+                                    .Include(t => t.StudentTeachers)
+                                    .FirstOrDefault(t => t.TeacherID == teacher.TeacherID)!;
+            existingTeacher.votedStudentsCount = teacher.votedStudentsCount;
+            existingTeacher.TeacherScore = teacher.TeacherScore;
+            _context.SaveChanges();
+        }
     }
 }

@@ -46,6 +46,9 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             modelBuilder.Entity<Teacher>()
                 .Property(t => t.TeacherScore)
                 .HasDefaultValue(0);
+            modelBuilder.Entity<Teacher>()
+                .Property(t => t.votedStudentsCount)
+                .HasDefaultValue(0);
             // assign false to teacher unenrollment state
             modelBuilder.Entity<Teacher>()
                 .Property(t => t.UnenrollmentState)

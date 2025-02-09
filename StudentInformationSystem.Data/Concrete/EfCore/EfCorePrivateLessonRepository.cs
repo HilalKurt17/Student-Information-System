@@ -45,9 +45,54 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
 
         public void Update(StudentTeacher updatedEntity) // update private lesson information
         {
-            _context.StudentTeachers.Update(updatedEntity);
+            StudentTeacher oldEntity = _context.StudentTeachers.FirstOrDefault(i => i.PrivateLessonID == updatedEntity.PrivateLessonID)!;
+            if (updatedEntity.StudentID != null && updatedEntity.StudentID != oldEntity.StudentID)
+            {
+                oldEntity.StudentID = updatedEntity.StudentID;
+            }
+            if (updatedEntity.ELClassification != null && updatedEntity.ELClassification != oldEntity.ELClassification)
+            {
+                oldEntity.ELClassification = updatedEntity.ELClassification;
+            }
+            if (updatedEntity.LessonMode != null && updatedEntity.LessonMode != oldEntity.LessonMode)
+            {
+                oldEntity.LessonMode = updatedEntity.LessonMode;
+            }
+            if (updatedEntity.LessonDate != null && updatedEntity.LessonDate != oldEntity.LessonDate)
+            {
+                oldEntity.LessonDate = updatedEntity.LessonDate;
+            }
+            if (updatedEntity.LessonName != null && updatedEntity.LessonName != oldEntity.LessonName)
+            {
+                oldEntity.LessonName = updatedEntity.LessonName;
+            }
+            if (updatedEntity.LessonEndDate != null && updatedEntity.LessonEndDate != oldEntity.LessonEndDate)
+            {
+                oldEntity.LessonEndDate = updatedEntity.LessonEndDate;
+            }
+            if (updatedEntity.LessonStartDate != null && updatedEntity.LessonStartDate != oldEntity.LessonStartDate)
+            {
+                oldEntity.LessonStartDate = updatedEntity.LessonStartDate;
+            }
+            if (updatedEntity.LessonEndTime != null && updatedEntity.LessonEndTime != oldEntity.LessonEndTime)
+            {
+                oldEntity.LessonEndTime = updatedEntity.LessonEndTime;
+            }
+            if (updatedEntity.LessonStartTime != null && updatedEntity.LessonStartTime != oldEntity.LessonStartTime)
+            {
+                oldEntity.LessonStartTime = updatedEntity.LessonStartTime;
+            }
+            if (updatedEntity.LessonDetails != null && updatedEntity.LessonDetails != oldEntity.LessonDetails)
+            {
+                oldEntity.LessonDetails = updatedEntity.LessonDetails;
+            }
+            if (updatedEntity.LessonPrice != null && updatedEntity.LessonPrice != oldEntity.LessonPrice)
+            {
+                oldEntity.LessonPrice = updatedEntity.LessonPrice;
+            }
             _context.SaveChanges();
         }
+
 
 
     }

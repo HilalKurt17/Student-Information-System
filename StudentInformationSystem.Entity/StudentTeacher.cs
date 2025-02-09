@@ -19,9 +19,7 @@ namespace StudentInformationSystem.Entity
         public double LessonPrice { get; set; }
         public string? LessonDetails { get; set; }
         public bool EnrollmentState { get; set; }
-        public bool GetScoreComment { get; set; }
-        public int? TeacherLessonScore { get; set; }
-        public string? StudentTeacherComment { get; set; }
+        public bool GetScoreComment { get; set; } // comment is not exist for now
         public bool RemoveLesson { get; set; }
         public Teacher? Teacher { get; set; }
         public Student? Student { get; set; }

@@ -12,6 +12,7 @@ namespace StudentInformationSystem.Entity
         public string Phone { get; set; }
         public string EducationLevel { get; set; }
         public char Gender { get; set; }
+        public int votedStudentsCount { get; set; }
         public int TeacherScore { get; set; }
         public string? IBAN { get; set; }
         public string? CVFilePath { get; set; }
@@ -27,6 +28,7 @@ namespace StudentInformationSystem.Entity
         public List<TeacherLesson> TeacherLessons { get; } = new List<TeacherLesson>();
         public List<Assignment> Assignments { get; } = new List<Assignment>();
         public List<References> References { get; } = new List<References>();
+        // work experience is not exist for now.
         public List<WorkExperience> WorkExperiences { get; } = new List<WorkExperience>();
 
     }
