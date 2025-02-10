@@ -26,6 +26,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
+            ViewBag.BlockAccess = "0"; // if student has to score any lesson block student access to navbar
             ViewBag.UserType = "student";
             int studentID = Convert.ToInt32(Request.Cookies["userID"]);
             Student student = _studentRepository.GetById(studentID);
@@ -47,6 +48,7 @@ namespace StudentInformationSystem.WEBUI.Controllers
                         teacherScore = 0,
                         privateLessonID = privateLesson.PrivateLessonID
                     };
+                    ViewBag.BlockAccess = "1";
                     return View("GetStudentScoreCommentPL", model);
                 }
             }
@@ -57,15 +59,24 @@ namespace StudentInformationSystem.WEBUI.Controllers
         [HttpPost] // update private lesson student score and student comment
         public IActionResult GetScoreCommentPL(GetScoreCommentPLViewModel model)
         {
+            ViewBag.BlockAccess = "0";
             StudentTeacher privateLesson = _privateLessonRepository.GetAllT().FirstOrDefault(i => i.PrivateLessonID == model.privateLessonID)!;
             Teacher teacher = _teacherRepository.GetById(privateLesson.TeacherID)!;
             if (teacher.TeacherScore == null)
             {
                 teacher.TeacherScore = 0;
-
+                teacher.TeacherScore += model.teacherScore * 20;
+                teacher.votedStudentsCount += 1;
             }
-            teacher.TeacherScore += model.teacherScore;
-            teacher.votedStudentsCount += 1;
+            else
+            {
+                teacher.TeacherScore = teacher.TeacherScore * teacher.votedStudentsCount;
+                teacher.TeacherScore += model.teacherScore * 20;
+                teacher.votedStudentsCount += 1;
+                teacher.TeacherScore = teacher.TeacherScore / teacher.votedStudentsCount;
+            }
+            _privateLessonRepository.Delete(privateLesson.PrivateLessonID);
+
             _teacherRepository.UpdateTeacherScore(teacher);
             return RedirectToAction("Index");
         }

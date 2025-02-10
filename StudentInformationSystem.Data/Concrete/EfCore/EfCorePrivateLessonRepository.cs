@@ -1,4 +1,5 @@
-﻿using StudentInformationSystem.Data.Abstract;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentInformationSystem.Data.Abstract;
 using StudentInformationSystem.Entity;
 
 namespace StudentInformationSystem.Data.Concrete.EfCore
@@ -20,9 +21,17 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
         public void Delete(int id) // delete private lesson by id
         {
             StudentTeacher? privateLesson = _context.StudentTeachers.FirstOrDefault(i => i.PrivateLessonID == id);
+            List<Assignment> assignments = _context.Assignments.Where(i => i.privateLessonID == id).ToList();
             if (privateLesson != null)
             {
                 _context.StudentTeachers.Remove(privateLesson);
+            }
+            if (assignments.Count > 0)
+            {
+                foreach (Assignment assignment in assignments)
+                {
+                    _context.Assignments.Remove(assignment);
+                }
             }
             _context.SaveChanges();
         }
@@ -45,7 +54,10 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
 
         public void Update(StudentTeacher updatedEntity) // update private lesson information
         {
+            _context.Entry(updatedEntity).State = EntityState.Detached;
+
             StudentTeacher oldEntity = _context.StudentTeachers.FirstOrDefault(i => i.PrivateLessonID == updatedEntity.PrivateLessonID)!;
+
             if (updatedEntity.StudentID != null && updatedEntity.StudentID != oldEntity.StudentID)
             {
                 oldEntity.StudentID = updatedEntity.StudentID;
@@ -90,6 +102,9 @@ namespace StudentInformationSystem.Data.Concrete.EfCore
             {
                 oldEntity.LessonPrice = updatedEntity.LessonPrice;
             }
+            oldEntity.GetScoreComment = updatedEntity.GetScoreComment;
+
+            _context.StudentTeachers.Update(oldEntity);
             _context.SaveChanges();
         }
 

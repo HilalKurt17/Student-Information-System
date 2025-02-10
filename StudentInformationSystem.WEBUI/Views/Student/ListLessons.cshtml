@@ -63,9 +63,21 @@
                             <b>Lesson Price:</b>
                             @privateLesson.LessonPrice TL
                         </p>
+                         <p>
+                             <b>Teacher Score:</b>
+                            <div class="progress">
+                                <div class="progress-bar 
+                                progress-bar-striped
+                                progress-bar-animated" role="progressbar"
+                                style="width:@privateLesson.Teacher.TeacherScore%" 
+                                aria-valuenow="@privateLesson.Teacher.TeacherScore" 
+                                aria-valuemin="0" aria-valuemax="100"></div> 
+                            </div>
+                            </p>
                         </div>
                    </div>
                 </div> 
+
             }  
               
         }

@@ -1,0 +1,19 @@
+﻿input[type=radio]{
+    display:none;
+}
+
+.star{
+    font-size: 50px;
+    color: gray;
+    transition: color 0.3s;
+}
+
+input[type=radio]:hover ~ label {
+    color:gold;
+    cursor: pointer;
+}
+
+input[type=radio]:checked ~ label {
+    color: gold;
+    cursor: pointer;
+}
