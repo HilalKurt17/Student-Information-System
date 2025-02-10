@@ -10,21 +10,30 @@
     
     <div class="container" style="margin-top:6% !important; border:dashed; border-style:double; border-color:maroon;">
         <div class="row" style="justify-content:center;align-content:center; display:grid !important;">
-            <div class="col-12" style="justify-self:center !important;">
-                <h2 >
+            <div class="col-12" style="justify-self:center !important; display:block;">
+                <h4>
+                    Please evaluate the teacher and the lesson:
+                </h4>
+                <div style="justify-content:center;justify-self:center;">
+                    <h4 >
                         @{
                         StudentTeacher privateLesson = Model.student.StudentTeachers.FirstOrDefault(i => i.PrivateLessonID ==
             Model.privateLessonID)!;
+                       
                         
                     }
-                    @(Convert.ToString(privateLesson.PrivateLessonID) + " " + "| " + 
-                    privateLesson.LessonName  + ":"
+                    @( privateLesson.Teacher.Name + " " + privateLesson.Teacher.Surname + " - " +
+                    privateLesson.LessonName  
                     )
-                </h2>
+
+                </h4>
+                </div>
                 
+               
             </div>
-            <div class="col-12" style="justify-self:center !important; display:flex;flex-wrap:nowrap;
-            flex-direction:row-reverse;">
+            <div class="col-12" style="justify-self:center !important; 
+            align-content: center; display:flex;flex-wrap:nowrap;
+            flex-direction:row-reverse; justify-content: center;">
                 <input type="radio" name="StudentScore" id="Score5" value="5" />
                 <label for="Score5" class="star" id="star5">★</label>
 

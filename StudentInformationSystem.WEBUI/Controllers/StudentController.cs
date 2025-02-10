@@ -38,14 +38,17 @@ namespace StudentInformationSystem.WEBUI.Controllers
         {
             int studentID = Convert.ToInt32(Request.Cookies["userID"]);
             Student student = _studentRepository.GetById(studentID)!;
+
             foreach (StudentTeacher privateLesson in student.StudentTeachers)
             {
                 if (privateLesson.GetScoreComment == true)
                 {
+                    Teacher teacher = _teacherRepository.GetById(privateLesson.TeacherID)!;
                     GetScoreCommentPLViewModel model = new GetScoreCommentPLViewModel()
                     {
                         student = student,
                         teacherScore = 0,
+                        teacher = teacher,
                         privateLessonID = privateLesson.PrivateLessonID
                     };
                     ViewBag.BlockAccess = "1";
